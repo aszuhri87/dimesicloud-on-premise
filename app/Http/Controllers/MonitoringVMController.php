@@ -68,7 +68,6 @@ class MonitoringVMController extends Controller
                             $ip = explode('=', $ipconfig[0])[1];
                         }
 
-
                         $_data = array(
                             'name' => $virtual_machine['name'],
                             'status' => $virtual_machine['status'],
