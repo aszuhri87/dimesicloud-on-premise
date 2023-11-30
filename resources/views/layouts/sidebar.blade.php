@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-      <a href="index.html" class="app-brand-link">
+      <a href="#" class="app-brand-link">
         <img src="../../assets/svg/icons/dimensi-blue.svg" alt="" height="100%" width="85%">
       </a>
     </div>
@@ -15,8 +15,8 @@
           <div data-i18n="Dashboard">Dashboard</div>
         </a>
       </li>
-      <li class="menu-item @if (Request::is('virtual_machine')) active @endif">
-        <a href="/virtual_machine" class="menu-link">
+      <li class="menu-item @if (Request::is('virtual-machine')) active @endif">
+        <a href="/virtual-machine" class="menu-link">
           <i class="menu-icon tf-icons ti ti-device-imac"></i>
           <div data-i18n="Virtual Machine">Virtual Machine</div>
         </a>

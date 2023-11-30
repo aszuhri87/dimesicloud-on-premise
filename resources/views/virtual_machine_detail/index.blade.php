@@ -278,9 +278,6 @@
                 </div>
             </div>
             <!-- /Line Area Chart -->
-
-
-
             <div class="content-backdrop fade"></div>
         </div>
     @endsection

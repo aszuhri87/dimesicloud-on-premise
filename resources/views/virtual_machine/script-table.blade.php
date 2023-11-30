@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    var DocsCategoryTable = function() {
+    var vmTable = function() {
         var init_table;
 
         $(document).ready(function() {
@@ -11,7 +11,7 @@
             init_table = $('#init-table').DataTable({
                 ajax: {
                     type: 'POST',
-                    url: "{{ url('virtual_machine/dt') }}",
+                    url: "{{ url('virtual-machine/dt') }}",
                     headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             }
@@ -36,7 +36,7 @@
 				data:'id',
 				render : function(data, type, full, meta){
 					return `
-						<a href="{{ url('virtual_machine-graph') }}/${full['node']}/${full['vmid']}">
+						<a href="{{ url('virtual-machine-graph') }}/${full['node']}/${full['vmid']}">
 							<p class="font-weight-bold text-primary-75 text-hover-primary font-size-lg mb-1">${ full['name'].toUpperCase() }</p>
 						</a>
 					`
@@ -62,28 +62,28 @@
                     return `
                         <div class="d-flex" role="group" aria-label="Basic example">
                             <div class="p-1">
-                                <a href="{{ url('power-start') }}/${full['node']}/${full['vmid']}" title="Start" class="btn  btn-start btn-sm btn-clean btn-icon p-1" title="Start">
+                                <a href="{{ url('/power') }}/${full['node']}/${full['vmid']}/start" title="Start" class="btn  btn-start btn-sm btn-clean btn-icon p-1" title="Start">
                                     <span class="svg-icon svg-icon-md">
                                         <i class="menu-icon tf-icons ti ti-player-play text-primary p-1" style="background-color: #0073C029; border-radius: 4px;"></i>
                                     </span>
                                 </a>
                             </div>
                             <div class="p-1">
-                                <a href="{{ url('power-shutdown') }}/${full['node']}/${full['vmid']}" title="Shutdown" class="btn  btn-shutdown btn-sm btn-clean btn-icon p-1" title="Shutdown">
+                                <a href="{{ url('/power') }}/${full['node']}/${full['vmid']}/shutdown" title="Shutdown" class="btn  btn-shutdown btn-sm btn-clean btn-icon p-1" title="Shutdown">
                                     <span class="svg-icon svg-icon-md">
                                         <i class="menu-icon tf-icons ti ti-power text-primary p-1" style="background-color: #0073C029; border-radius: 4px;"></i>
                                     </span>
                                 </a>
                             </div>
                             <div class="p-1">
-                                <a href="{{ url('power-reboot') }}/${full['node']}/${full['vmid']}" title="Reboot" class="btn btn-reboot btn-sm btn-clean btn-icon p-1" data-toggle="tooltip">
+                                <a href="{{ url('/power') }}/${full['node']}/${full['vmid']}/reboot" title="Reboot" class="btn btn-reboot btn-sm btn-clean btn-icon p-1" data-toggle="tooltip">
                                     <span class="svg-icon svg-icon-md">
                                         <i class="menu-icon tf-icons ti ti-refresh-dot text-primary p-1" style="background-color: #0073C029; border-radius: 4px;"></i>
                                     </span>
                                 </a>
                             </div>
                             <div class="p-1">
-                                <a href="{{ url('power-force-shutdown') }}/${full['node']}/${full['vmid']}" title="Force Shutdown" class="btn btn-force-shutdown btn-sm btn-clean btn-icon p-1" data-toggle="tooltip">
+                                <a href="{{ url('/power') }}/${full['node']}/${full['vmid']}/force-shutdown" title="Force Shutdown" class="btn btn-force-shutdown btn-sm btn-clean btn-icon p-1" data-toggle="tooltip">
                                     <span class="svg-icon svg-icon-md">
                                         <i class="menu-icon tf-icons ti ti-recharging text-primary p-1" style="background-color: #0073C029; border-radius: 4px;"></i>
                                     </span>

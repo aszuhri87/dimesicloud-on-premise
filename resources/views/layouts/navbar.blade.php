@@ -7,8 +7,9 @@ id="layout-navbar">
     </a>
   </div>
 <div class="fw-bolder" style="overflow: none; white-space: nowrap">
-    @if (Request::is('virtual_machine')) Virtual Machine
+    @if (Request::is('virtual-machine')) Virtual Machine
     @elseif (Request::is('dashboard')) Dashboard
+    @else Virtual Machine Details
 
     @endif
 </div>
