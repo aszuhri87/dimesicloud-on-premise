@@ -34,6 +34,13 @@
         .w-90 {
             width: 90%;
         }
+        .date-semi-radial{
+            position: absolute;
+            bottom: 17%;
+            left: 50%;
+            translate: -50%;
+            white-space: nowrap;
+        }
     </style>
 @endpush
 
@@ -53,7 +60,8 @@
                         <div class="col-md-2 col-lg-2 col-sm-6 vm-detail-profile">
 
                         </div>
-                        <div class="col-md-10 col-lg-10 col-sm-6 mt-sm-5 mt-lg-0">
+                        <div class="d-block d-sm-none mt-5"></div>
+                        <div class="col-md-10 col-lg-10 col-sm-6">
                             <div class="t-profile">
                                 <div class="d-flex flex-row justify-content-between">
                                     <div class="flex-grow-1 w-100">
@@ -151,7 +159,10 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5>CPU Usage</h5>
-                                        <div class="chart no-ws" id="cpuRadial"></div>
+                                        <p class="date-semi-radial w-100 text-center"> 23/23/23 | 9:14</p>
+                                        <div class="w-100">
+                                            <div class="chart no-ws" id="cpuRadial"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +170,10 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5>Memory Usage</h5>
-                                        <div class="chart" id="memoryRadial"></div>
+                                        <p class="date-semi-radial w-100 text-center"> 23/23/23 | 9:14</p>
+                                        <div class="text-center w-100">
+                                             <div class="chart" id="memoryRadial"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +181,10 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5>Disk Size</h5>
-                                        <div class="chart" id="diskRadial"></div>
+                                        <p class="date-semi-radial w-100 text-center"> 23/23/23 | 9:14</p>
+                                        <div class="text-center w-100">
+                                            <div class="chart" id="diskRadial"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

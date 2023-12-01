@@ -34,7 +34,7 @@
             });
         });
 
-        $(document).on('click', '.btn-restart', function(event){
+        $(document).on('click', '.btn-reboot', function(event){
             event.preventDefault();
             let url = $(this).attr('href')
             Swal.fire({

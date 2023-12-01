@@ -9,31 +9,31 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboards -->
-      <li class="menu-item @if (Request::is('dashboard')) active @endif">
+      <li class="menu-item @if (strpos(Request::url(), 'dashboard')) active @endif">
         <a href="/dashboard" class="menu-link">
           <i class="menu-icon tf-icons ti ti-smart-home"></i>
           <div data-i18n="Dashboard">Dashboard</div>
         </a>
       </li>
-      <li class="menu-item @if (Request::is('virtual-machine')) active @endif">
+      <li class="menu-item @if (strpos(Request::url(), 'virtual-machine')) active @endif">
         <a href="/virtual-machine" class="menu-link">
           <i class="menu-icon tf-icons ti ti-device-imac"></i>
           <div data-i18n="Virtual Machine">Virtual Machine</div>
         </a>
       </li>
-      <li class="menu-item @if (Request::is('ceph')) active @endif">
+      <li class="menu-item @if (strpos(Request::url(), 'ceph')) active @endif">
         <a href="/monitoring-vm" class="menu-link">
           <i class="menu-icon tf-icons ti ti-device-imac"></i>
           <div data-i18n="CEPH">CEPH</div>
         </a>
       </li>
-      <li class="menu-item @if (Request::is('management-alert')) active @endif">
+      <li class="menu-item @if (strpos(Request::url(), 'management-alert')) active @endif">
         <a href="/monitoring-vm" class="menu-link">
           <i class="menu-icon tf-icons ti ti-device-imac"></i>
           <div data-i18n="Management Alert">Management Alert</div>
         </a>
       </li>
-      <li class="menu-item @if (Request::is('object-storage')) active @endif">
+      <li class="menu-item @if (strpos(Request::url(), 'object-storage')) active @endif">
         <a href="/monitoring-vm" class="menu-link">
           <i class="menu-icon tf-icons ti ti-device-imac"></i>
           <div data-i18n="Object Storage">Object Storage</div>

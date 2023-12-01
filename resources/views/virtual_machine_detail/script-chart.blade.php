@@ -15,8 +15,7 @@
             sparkline: {
                 enabled: true
             },
-            width: '100%',
-            height: 'auto'
+
         },
         plotOptions: {
             radialBar: {
@@ -41,7 +40,7 @@
         },
         grid: {
             padding: {
-                top: -40
+                top: -20
             }
         },
         fill: {
@@ -49,12 +48,12 @@
             colors: ['#62D6C5']
         },
         labels: ['Average Results'],
-        subtitle: {
-            offsetY: 110,
-            text: d + '/' + m + '/' + y + ' | ' + h + ':' + mn,
-            align: 'center',
-            fontSize: '15px'
-        },
+        // subtitle: {
+        //     offsetY: 110,
+        //     text: d + '/' + m + '/' + y + ' | ' + h + ':' + mn,
+        //     align: 'center',
+        //     fontSize: '15px'
+        // },
     };
 
     var chart = new ApexCharts(document.querySelector("#cpuRadial"), options);
@@ -69,8 +68,7 @@
             sparkline: {
                 enabled: true
             },
-            width: '100%',
-            height: 'auto'
+
         },
         plotOptions: {
             radialBar: {
@@ -95,7 +93,7 @@
         },
         grid: {
             padding: {
-                top: -40
+                top: -20
             }
         },
         fill: {
@@ -103,12 +101,12 @@
             colors: ['#62D6C5']
         },
         labels: ['Average Results'],
-        subtitle: {
-            offsetY: 110,
-            text: d + '/' + m + '/' + y + ' | ' + h + ':' + mn,
-            align: 'center',
-            fontSize: '15px'
-        },
+        // subtitle: {
+        //     offsetY: 110,
+        //     text: d + '/' + m + '/' + y + ' | ' + h + ':' + mn,
+        //     align: 'center',
+        //     fontSize: '15px'
+        // },
     };
 
     var chart = new ApexCharts(document.querySelector("#memoryRadial"), options);
@@ -124,8 +122,7 @@
             sparkline: {
                 enabled: true
             },
-            width: '100%',
-            height: 'auto'
+
         },
         plotOptions: {
             radialBar: {
@@ -150,7 +147,7 @@
         },
         grid: {
             padding: {
-                top: -40
+                top: -20
             }
         },
         fill: {
@@ -158,12 +155,12 @@
             colors: ['#62D6C5']
         },
         labels: ['Average Results'],
-        subtitle: {
-            offsetY: 110,
-            text: d + '/' + m + '/' + y + ' | ' + h + ':' + mn,
-            align: 'center',
-            fontSize: '15px'
-        },
+        // subtitle: {
+        //     offsetY: 110,
+        //     text: d + '/' + m + '/' + y + ' | ' + h + ':' + mn,
+        //     align: 'center',
+        //     fontSize: '15px'
+        // },
     };
 
     var chart = new ApexCharts(document.querySelector("#diskRadial"), options);
