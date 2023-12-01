@@ -1,24 +1,27 @@
-<nav class="layout-navbar navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme container-fluid" id="layout-navbar">
-    <!-- <div class="fw-bolder" style="overflow: none; white-space: nowrap">
-    @if (Request::is('virtual_machine')) Virtual Machine
-    @elseif (Request::is('dashboard')) Dashboard
-
-    @endif
-</div> -->
-
+<nav class="layout-navbar navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme container-fluid"
+    id="layout-navbar">
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
             <i class="ti ti-menu-2 ti-sm"></i>
         </a>
     </div>
+    <div class="fw-bolder" style="margin-top: 3px; white-space: nowrap">
+        @if (strpos(Request::url(), 'virtual-machine'))
+            Virtual Machine
+        @elseif (strpos(Request::url(), 'dashboard'))
+            Dashboard
+        @else
 
+        @endif
+    </div>
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
             <!-- Notification -->
             <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
+                    data-bs-auto-close="outside" aria-expanded="false">
                     <i class="ti ti-bell ti-md"></i>
                     <span class="badge bg-danger rounded-pill badge-notifications">5</span>
                 </a>
@@ -26,7 +29,9 @@
                     <li class="dropdown-menu-header border-bottom">
                         <div class="dropdown-header d-flex align-items-center py-3">
                             <h5 class="text-body mb-0 me-auto">Notification</h5>
-                            <a href="javascript:void(0)" class="dropdown-notifications-all text-body" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i class="ti ti-mail-opened fs-4"></i></a>
+                            <a href="javascript:void(0)" class="dropdown-notifications-all text-body"
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i
+                                    class="ti ti-mail-opened fs-4"></i></a>
                         </div>
                     </li>
                     <li class="dropdown-notifications-list scrollable-container">
@@ -35,7 +40,8 @@
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <img src="../../assets/img/avatars/1.png" alt class="h-auto rounded-circle" />
+                                            <img src="../../assets/img/avatars/1.png" alt
+                                                class="h-auto rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -44,8 +50,10 @@
                                         <small class="text-muted">1h ago</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                class="badge badge-dot"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                class="ti ti-x"></span></a>
                                     </div>
                                 </div>
                             </li>
@@ -62,16 +70,20 @@
                                         <small class="text-muted">12hr ago</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                class="badge badge-dot"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                class="ti ti-x"></span></a>
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                            <li
+                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <img src="../../assets/img/avatars/2.png" alt class="h-auto rounded-circle" />
+                                            <img src="../../assets/img/avatars/2.png" alt
+                                                class="h-auto rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -80,8 +92,10 @@
                                         <small class="text-muted">1h ago</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                class="badge badge-dot"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                class="ti ti-x"></span></a>
                                     </div>
                                 </div>
                             </li>
@@ -89,7 +103,8 @@
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <span class="avatar-initial rounded-circle bg-label-success"><i class="ti ti-shopping-cart"></i></span>
+                                            <span class="avatar-initial rounded-circle bg-label-success"><i
+                                                    class="ti ti-shopping-cart"></i></span>
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -98,16 +113,20 @@
                                         <small class="text-muted">1 day ago</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                class="badge badge-dot"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                class="ti ti-x"></span></a>
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                            <li
+                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <img src="../../assets/img/avatars/9.png" alt class="h-auto rounded-circle" />
+                                            <img src="../../assets/img/avatars/9.png" alt
+                                                class="h-auto rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -116,16 +135,20 @@
                                         <small class="text-muted">2 days ago</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                class="badge badge-dot"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                class="ti ti-x"></span></a>
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                            <li
+                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <span class="avatar-initial rounded-circle bg-label-success"><i class="ti ti-chart-pie"></i></span>
+                                            <span class="avatar-initial rounded-circle bg-label-success"><i
+                                                    class="ti ti-chart-pie"></i></span>
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -134,16 +157,20 @@
                                         <small class="text-muted">3 days ago</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                class="badge badge-dot"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                class="ti ti-x"></span></a>
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                            <li
+                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <img src="../../assets/img/avatars/5.png" alt class="h-auto rounded-circle" />
+                                            <img src="../../assets/img/avatars/5.png" alt
+                                                class="h-auto rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -152,8 +179,10 @@
                                         <small class="text-muted">4 days ago</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                class="badge badge-dot"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                class="ti ti-x"></span></a>
                                     </div>
                                 </div>
                             </li>
@@ -161,7 +190,8 @@
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <img src="../../assets/img/avatars/6.png" alt class="h-auto rounded-circle" />
+                                            <img src="../../assets/img/avatars/6.png" alt
+                                                class="h-auto rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -170,16 +200,20 @@
                                         <small class="text-muted">5 days ago</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                class="badge badge-dot"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                class="ti ti-x"></span></a>
                                     </div>
                                 </div>
                             </li>
-                            <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+                            <li
+                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <span class="avatar-initial rounded-circle bg-label-warning"><i class="ti ti-alert-triangle"></i></span>
+                                            <span class="avatar-initial rounded-circle bg-label-warning"><i
+                                                    class="ti ti-alert-triangle"></i></span>
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -188,15 +222,18 @@
                                         <small class="text-muted">5 days ago</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
-                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span class="badge badge-dot"></span></a>
-                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span class="ti ti-x"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-read"><span
+                                                class="badge badge-dot"></span></a>
+                                        <a href="javascript:void(0)" class="dropdown-notifications-archive"><span
+                                                class="ti ti-x"></span></a>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </li>
                     <li class="dropdown-menu-footer border-top">
-                        <a href="javascript:void(0);" class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center">
+                        <a href="javascript:void(0);"
+                            class="dropdown-item d-flex justify-content-center text-primary p-2 h-px-40 mb-1 align-items-center">
                             View all notifications
                         </a>
                     </li>
@@ -247,7 +284,12 @@
                             <span class="d-flex align-items-center align-middle">
                                 <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
                                 <span class="flex-grow-1 align-middle">Billing</span>
+<<<<<<< HEAD
                                 <span class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20">2</span>
+=======
+                                <span
+                                    class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20">2</span>
+>>>>>>> 94f295a74467da075f9f34419702a65e44411edc
                             </span>
                         </a>
                     </li>

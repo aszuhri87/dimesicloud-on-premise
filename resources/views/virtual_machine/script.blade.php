@@ -1,41 +1,100 @@
-<script type="text/javascript">
-    var Page = function() {
-        $(document).ready(function() {
-            formSubmit();
-            initAction();
+<script>
+    $(document).ready(function() {
+        initAction();
+    });
 
-        const initAction = () => {
+    const initAction = () => {
+        $(document).on('click', '.btn-start', function(event){
+            event.preventDefault();
+            let url = $(this).attr('href')
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will start virtual machine!",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonText: "Start!",
+                reverseButtons: true
+            }).then(function(result) {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                    })
+                    .done(function(res, xhr, meta) {
+                        toastr.success(res.message);
+                    })
+                    .fail(function(res, error) {
 
-        },
-        formSubmit = () => {
-            $('#form-doc-category').submit(function(event){
-                event.preventDefault();
+                    })
+                    .always(function() {
 
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: $(this).attr('method'),
-                    data: $(this).serialize(),
-                })
-                .done(function(res, xhr, meta) {
-                    toastr.success(res.message, 'Success')
-                    Swal.fire({
-                            title: 'Berhasil!',
-                            text: "Berhasil menyimpan!",
-                        })
+                    });
 
-                    DocsCategoryTable.table().draw(false);
-                    hideModal('modal-docs-category');
-                })
-                .fail(function(res, error) {
-                    toastr.error(res.responseJSON.message, 'Gagal')
-                    Swal.fire({
-                            title: 'Gagal!',
-                            text: "Gagal menyimpan!",
-                        })
-                })
-                .always(function() { });
+                }
             });
-        }
-    }();
-)};
+        });
+
+        $(document).on('click', '.btn-reboot', function(event){
+            event.preventDefault();
+            let url = $(this).attr('href')
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will restart virtual machine!",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonText: "Restart!",
+                reverseButtons: true
+            }).then(function(result) {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                    })
+                    .done(function(res, xhr, meta) {
+                        toastr.success(res.message);
+                    })
+                    .fail(function(res, error) {
+
+                    })
+                    .always(function() {
+
+                    });
+
+                }
+            });
+        });
+
+
+
+
+        $(document).on('click', '.btn-shutdown', function(event){
+            event.preventDefault();
+            let url = $(this).attr('href')
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You will shutdown virtual machine!",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonText: "Shutdown!",
+                reverseButtons: true
+            }).then(function(result) {
+                if (result.value) {
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                    })
+                    .done(function(res, xhr, meta) {
+                        toastr.success(res.message);
+                    })
+                    .fail(function(res, error) {
+
+                    })
+                    .always(function() {
+
+                    });
+
+                }
+            });
+        });
+    };
 </script>

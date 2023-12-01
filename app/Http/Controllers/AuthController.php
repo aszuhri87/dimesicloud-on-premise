@@ -56,6 +56,6 @@ class AuthController extends Controller
             Session::flush();
         }
 
-        return redirect('/dashboard');
+        return redirect('/');
     }
 }

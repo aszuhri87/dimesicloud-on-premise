@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MonitoringVMController;
+use App\Http\Controllers\PowerManagementController;
 use Illuminate\Support\Facades\Route;
 use App\Library\Influx;
 use InfluxDB2\Model\WritePrecision;
@@ -24,10 +25,19 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => ['auth-middleware']], function () {
-    Route::get('virtual_machine', [MonitoringVMController::class, 'index']);
-    Route::post('virtual_machine/dt', [MonitoringVMController::class, 'dt']);
+    Route::get('virtual-machine', [MonitoringVMController::class, 'index']);
+    Route::post('virtual-machine/dt', [MonitoringVMController::class, 'dt']);
     Route::get('dashboard', [DashboardController::class, 'index']);
-    // Route::get('virtual_machine/{node}/{vmid}/graph', [MonitoringVMController::class, 'detail']);
-    Route::get('virtual_machine-graph/{node}/{vmid}', [MonitoringVMController::class, 'detail']);
+    // Route::get('virtual-machine/{node}/{vmid}/graph', [MonitoringVMController::class, 'detail']);
+    Route::get('virtual-machine-graph/{node}/{vmid}', [MonitoringVMController::class, 'detail']);
+    Route::get('/resources/{virtual_machine_id}','DashboardController@resources');
+
+    Route::post('/power/{node}/{vmid}/start',[PowerManagementController::class, 'start']);
+    Route::post('/power/{node}/{vmid}/reboot',[PowerManagementController::class, 'reboot']);
+    Route::post('/power/{node}/{vmid}/shutdown',[PowerManagementController::class, 'shutdown']);
+    Route::post('/power/{node}/{vmid}/force-shutdown',[PowerManagementController::class, 'force-shutdown']);
 
 });
+
+
+include base_path('routes/module/dashboard.php');
