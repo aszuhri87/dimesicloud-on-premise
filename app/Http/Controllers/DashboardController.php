@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Library\PMXConnect;
 
 
 class DashboardController extends Controller
@@ -13,21 +14,7 @@ class DashboardController extends Controller
     public function statistic_resources()
 	{
 		try {
-			$client = new \GuzzleHttp\Client([
-			    'verify' => false
-			]);
-
-            $headers = [
-                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
-            ];
-
-			$response = $client->request(
-                'GET',
-                env('PMX_HOST').'/api2/json/cluster/resources',
-                [
-                    'headers' => $headers
-                ]
-            );
+            $response = PMXConnect::connection(env('PMX_HOST').'/api2/json/cluster/resources', 'GET');
 
             if($response->getStatusCode() == 200){
                 $resources = json_decode($response->getBody(), true);

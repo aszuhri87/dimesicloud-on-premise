@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Library\Influx;
+use App\Library\PMXConnect;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\ClientException;
 use Session;
@@ -24,22 +25,7 @@ class MonitoringVMController extends Controller
 
     public function dt()
     {
-        $headers = [
-            "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
-        ];
-
-        $auth_data = Session::get('data');
-        $client = new \GuzzleHttp\Client([
-            'verify' => false
-        ]);
-
-        $response = $client->request(
-            'GET',
-            env('PROXMOX_BASE') . '/api2/json/cluster/resources',
-            [
-                'headers' => $headers
-            ]
-        );
+        $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/cluster/resources', 'GET');
 
         if ($response->getStatusCode() == 200) {
             $virtual_machines = json_decode($response->getBody(), true);
@@ -48,13 +34,8 @@ class MonitoringVMController extends Controller
 
             foreach ($virtual_machines['data'] as $key => $virtual_machine) {
                 if ($virtual_machine['type'] == 'qemu') {
-                    $response = $client->request(
-                        'GET',
-                        env('PROXMOX_BASE') . '/api2/json/nodes/' . $virtual_machine['node'] . '/qemu/' . $virtual_machine['vmid'] . '/config',
-                        [
-                            'headers' => $headers
-                        ]
-                    );
+
+                    $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/nodes/' . $virtual_machine['node'] . '/qemu/' . $virtual_machine['vmid'] . '/config', 'GET');
 
                     if ($response->getStatusCode() == 200) {
                         $config = json_decode($response->getBody(), true);
@@ -161,23 +142,7 @@ class MonitoringVMController extends Controller
 
     public function network($node, $vmid){
         try {
-            $headers = [
-                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
-            ];
-
-            $auth_data = Session::get('data');
-            $client = new \GuzzleHttp\Client([
-                'verify' => false
-            ]);
-
-            $response = $client->request(
-                            'GET',
-                            config('app.proxmox').'/api2/json/nodes/'.$node.'/qemu/'.$vmid.'/config',
-                            [
-                                'headers' => $headers
-
-                            ]
-                        );
+            $response = PMXConnect::connection(config('app.proxmox').'/api2/json/nodes/'.$node.'/qemu/'.$vmid.'/config', 'GET');
 
             if($response->getStatusCode() == 200){
                 $config = json_decode($response->getBody(), true);
@@ -208,24 +173,7 @@ class MonitoringVMController extends Controller
     public function current($node, $vmid)
     {
         try {
-
-            $headers = [
-                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
-            ];
-
-            $auth_data = Session::get('data');
-            $client = new \GuzzleHttp\Client([
-                'verify' => false
-            ]);
-
-            $response = $client->request(
-                'GET',
-                config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/status/current',
-                [
-                    'headers' => $headers
-
-                ]
-            );
+            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/status/current', 'GET');
 
             if ($response->getStatusCode() == 200) {
                 $data = json_decode($response->getBody(), true);
@@ -246,23 +194,7 @@ class MonitoringVMController extends Controller
     public function os_info($node, $vmid)
     {
         try {
-            $headers = [
-                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
-            ];
-
-            $auth_data = Session::get('data');
-            $client = new \GuzzleHttp\Client([
-                'verify' => false
-            ]);
-
-            $response = $client->request(
-                'GET',
-                config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/agent/get-osinfo',
-                [
-                    'headers' => $headers
-
-                ]
-            );
+            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/agent/get-osinfo', 'GET');
 
             $data = json_decode($response->getBody(), true);
 
@@ -291,23 +223,7 @@ class MonitoringVMController extends Controller
         try {
             date_default_timezone_set('Asia/Jakarta');
 
-            $headers = [
-                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
-            ];
-
-            $auth_data = Session::get('data');
-            $client = new \GuzzleHttp\Client([
-                'verify' => false
-            ]);
-
-            $response = $client->request(
-                'GET',
-                config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/rrddata?timeframe=' . $unit . '&cf=' . $type,
-                [
-                    'headers' => $headers
-
-                ]
-            );
+            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/rrddata?timeframe=' . $unit . '&cf=' . $type, 'GET');
 
             $data = json_decode($response->getBody(), true);
 
