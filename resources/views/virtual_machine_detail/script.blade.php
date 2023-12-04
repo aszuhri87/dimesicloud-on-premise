@@ -329,7 +329,7 @@
                         enabled: false
                     },
                     stroke: {
-                        show: true,
+                        show: false,
                         curve: 'straight'
                     },
                     legend: {

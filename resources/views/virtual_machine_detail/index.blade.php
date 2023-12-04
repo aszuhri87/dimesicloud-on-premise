@@ -196,7 +196,7 @@
                                     <div>
                                         <h5 class="card-title mb-0">Network Traffic</h5>
                                         <small class="text-muted">Commercial networks</small>
-                                    </div>false
+                                    </div>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-2 btn-label-secondary mt-4"
                                             data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
