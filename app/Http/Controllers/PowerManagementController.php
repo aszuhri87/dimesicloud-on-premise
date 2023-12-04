@@ -13,6 +13,10 @@ class PowerManagementController extends Controller
     public function start($node, $vmid)
     {
         try {
+            $headers = [
+                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
+            ];
+
             $auth_data = Session::get('data');
 
             $client = new \GuzzleHttp\Client([
@@ -23,12 +27,7 @@ class PowerManagementController extends Controller
                 'POST',
                 config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/status/start',
                 [
-                    'headers' => [
-                        'CSRFPreventionToken' => $auth_data['CSRFPreventionToken'],
-                        'Cookie' => 'PVEAuthCookie=' . $auth_data['ticket'],
-                        "Authorization" => "PVEAPIToken=" . env('PMX_USER') . "!" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN'),
-                        "User-Agent" => "DimensiCloud",
-                    ]
+                    'headers' => $headers
                 ]
             );
 
@@ -53,6 +52,10 @@ class PowerManagementController extends Controller
     public function reboot($node, $vmid)
     {
         try {
+            $headers = [
+                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
+            ];
+
             $auth_data = Session::get('data');
 
             $client = new \GuzzleHttp\Client([
@@ -63,12 +66,7 @@ class PowerManagementController extends Controller
                 'POST',
                 config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/status/reboot',
                 [
-                    'headers' => [
-                        'CSRFPreventionToken' => $auth_data['CSRFPreventionToken'],
-                        'Cookie' => 'PVEAuthCookie=' . $auth_data['ticket'],
-                        "Authorization" => "PVEAPIToken=" . env('PMX_USER') . "!" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN'),
-                        "User-Agent" => "DimensiCloud",
-                    ]
+                    'headers' => $headers
                 ]
             );
 
@@ -92,6 +90,10 @@ class PowerManagementController extends Controller
     public function shutdown($node, $vmid)
     {
         try {
+            $headers = [
+                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
+            ];
+
             $auth_data = Session::get('data');
 
             $client = new \GuzzleHttp\Client([
@@ -102,12 +104,7 @@ class PowerManagementController extends Controller
                 'POST',
                 config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/status/stop',
                 [
-                    'headers' => [
-                        'CSRFPreventionToken' => $auth_data['CSRFPreventionToken'],
-                        'Cookie' => 'PVEAuthCookie=' . $auth_data['ticket'],
-                        "Authorization" => "PVEAPIToken=" . env('PMX_USER') . "!" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN'),
-                        "User-Agent" => "DimensiCloud",
-                    ]
+                    'headers' => $headers
                 ]
             );
 
@@ -131,6 +128,10 @@ class PowerManagementController extends Controller
     public function force_shutdown($node, $vmid)
     {
         try {
+            $headers = [
+                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
+            ];
+
             $auth_data = Session::get('data');
 
             $client = new \GuzzleHttp\Client([
@@ -141,12 +142,7 @@ class PowerManagementController extends Controller
                 'POST',
                 config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/status/stop',
                 [
-                    'headers' => [
-                        'CSRFPreventionToken' => $auth_data['CSRFPreventionToken'],
-                        'Cookie' => 'PVEAuthCookie=' . $auth_data['ticket'],
-                        "Authorization" => "PVEAPIToken=" . env('PMX_USER') . "!" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN'),
-                        "User-Agent" => "DimensiCloud",
-                    ]
+                    'headers' => $headers
                 ]
             );
 

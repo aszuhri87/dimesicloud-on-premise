@@ -13,6 +13,10 @@ use DataTables;
 class MonitoringVMController extends Controller
 {
 
+    public function __construct() {
+        date_default_timezone_set("Asia/Jakarta");
+    }
+
     public function index(Request $request)
     {
         return view('virtual_machine.index');
@@ -21,8 +25,7 @@ class MonitoringVMController extends Controller
     public function dt()
     {
         $headers = [
-            "Authorization" => "PVEAPIToken=" . env('PMX_USER') . "!" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN'),
-            "User-Agent" => "DimensiCloud",
+            "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
         ];
 
         $auth_data = Session::get('data');
@@ -34,11 +37,7 @@ class MonitoringVMController extends Controller
             'GET',
             env('PROXMOX_BASE') . '/api2/json/cluster/resources',
             [
-                'headers' => [
-                    'Cookie' => 'PVEAuthCookie=' . $auth_data['ticket'],
-                    "Authorization" => "PVEAPIToken=" . env('PMX_USER') . "!" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN'),
-                    "User-Agent" => "DimensiCloud",
-                ]
+                'headers' => $headers
             ]
         );
 
@@ -53,11 +52,7 @@ class MonitoringVMController extends Controller
                         'GET',
                         env('PROXMOX_BASE') . '/api2/json/nodes/' . $virtual_machine['node'] . '/qemu/' . $virtual_machine['vmid'] . '/config',
                         [
-                            'headers' => [
-                                'Cookie' => 'PVEAuthCookie=' . $auth_data['ticket'],
-                                "Authorization" => "PVEAPIToken=" . env('PMX_USER') . "!" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN'),
-                                "User-Agent" => "DimensiCloud",
-                            ]
+                            'headers' => $headers
                         ]
                     );
 
@@ -112,6 +107,9 @@ class MonitoringVMController extends Controller
             // $response = $client->request(
             //                 'GET',
             //                 config('app.proxmox').'/api2/json/nodes/'.$node.'/qemu/'.$vmid.'/status/current',
+            //                 // config('app.proxmox').'/api2/json/nodes/'.$node.'/qemu/'.$vmid.'/agent/get-osinfo',
+            //                 // config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/config',
+
             //                 [
             //                     'headers' => [
             //                         'Cookie' => 'PVEAuthCookie='.$auth_data['ticket'],
@@ -121,7 +119,7 @@ class MonitoringVMController extends Controller
             //                 ]
             //             );
             // $data = json_decode($response->getBody(), true);
-            // // dd($data['data']);
+            // dd($data);
 
             // if($response->getStatusCode() == 200){
             //     $data = json_decode($response->getBody(), true);
@@ -161,32 +159,32 @@ class MonitoringVMController extends Controller
         return view('pages.virtual_machine.power.index');
     }
 
-    public function network($node, $vmid)
-    {
+    public function network($node, $vmid){
         try {
             $headers = [
-                "Authorization" => "PVEAPIToken=" . env('PMX_USER') . "!" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN'),
-                "User-Agent" => "DimensiCloud",
+                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
             ];
+
             $auth_data = Session::get('data');
             $client = new \GuzzleHttp\Client([
                 'verify' => false
             ]);
 
             $response = $client->request(
-                'GET',
-                config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/config',
-                [
-                    $headers
-                ]
-            );
+                            'GET',
+                            config('app.proxmox').'/api2/json/nodes/'.$node.'/qemu/'.$vmid.'/config',
+                            [
+                                'headers' => $headers
 
-            if ($response->getStatusCode() == 200) {
+                            ]
+                        );
+
+            if($response->getStatusCode() == 200){
                 $config = json_decode($response->getBody(), true);
 
                 $ip = '-';
-                if (array_key_exists("ipconfig0", $config['data'])) {
-                    $ipconfig = explode('/', $config['data']['ipconfig0']);
+                if(array_key_exists("ipconfig0",$config['data'])){
+                    $ipconfig = explode('/',$config['data']['ipconfig0']);
                     $ip = explode('=', $ipconfig[0])[1];
                 }
 
@@ -196,13 +194,13 @@ class MonitoringVMController extends Controller
                     ]
                 ]);
             }
-        } catch (ClientException $e) {
+        } catch (ClientException $e){
             return response([
-                "message" => 'Token Expired'
+                "message"      => 'Token Expired'
             ], 401);
         } catch (Exception $e) {
             return response([
-                "message" => 'Internal Server Error'
+                "message"      => 'Internal Server Error'
             ], 500);
         }
     }
@@ -210,10 +208,11 @@ class MonitoringVMController extends Controller
     public function current($node, $vmid)
     {
         try {
+
             $headers = [
-                "Authorization" => "PVEAPIToken=" . env('PMX_USER') . "!" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN'),
-                "User-Agent" => "DimensiCloud",
+                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
             ];
+
             $auth_data = Session::get('data');
             $client = new \GuzzleHttp\Client([
                 'verify' => false
@@ -223,10 +222,8 @@ class MonitoringVMController extends Controller
                 'GET',
                 config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/status/current',
                 [
-                    // 'headers' => [
-                    //     'Cookie' => 'PVEAuthCookie='.$auth_data['ticket'],
-                    // ]
-                    $headers
+                    'headers' => $headers
+
                 ]
             );
 
@@ -249,6 +246,10 @@ class MonitoringVMController extends Controller
     public function os_info($node, $vmid)
     {
         try {
+            $headers = [
+                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
+            ];
+
             $auth_data = Session::get('data');
             $client = new \GuzzleHttp\Client([
                 'verify' => false
@@ -258,11 +259,12 @@ class MonitoringVMController extends Controller
                 'GET',
                 config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/agent/get-osinfo',
                 [
-                    'headers' => [
-                        'Cookie' => 'PVEAuthCookie=' . $auth_data['ticket'],
-                    ]
+                    'headers' => $headers
+
                 ]
             );
+
+            $data = json_decode($response->getBody(), true);
 
             if ($response->getStatusCode() == 200) {
                 $data = json_decode($response->getBody(), true);
@@ -270,6 +272,8 @@ class MonitoringVMController extends Controller
                 return response([
                     'data' => $data['data']['result']
                 ]);
+            } else {
+
             }
         } catch (ClientException $e) {
             return response([
@@ -277,7 +281,7 @@ class MonitoringVMController extends Controller
             ], 401);
         } catch (Exception $e) {
             return response([
-                "message" => 'Internal Server Error'
+                "message" => $e->getMessage()
             ], 500);
         }
     }
@@ -286,6 +290,10 @@ class MonitoringVMController extends Controller
     {
         try {
             date_default_timezone_set('Asia/Jakarta');
+
+            $headers = [
+                "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
+            ];
 
             $auth_data = Session::get('data');
             $client = new \GuzzleHttp\Client([
@@ -296,11 +304,12 @@ class MonitoringVMController extends Controller
                 'GET',
                 config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/rrddata?timeframe=' . $unit . '&cf=' . $type,
                 [
-                    'headers' => [
-                        'Cookie' => 'PVEAuthCookie=' . $auth_data['ticket'],
-                    ]
+                    'headers' => $headers
+
                 ]
             );
+
+            $data = json_decode($response->getBody(), true);
 
             if ($response->getStatusCode() == 200) {
                 $data = json_decode($response->getBody(), true);

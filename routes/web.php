@@ -36,8 +36,11 @@ Route::group(['middleware' => ['auth-middleware']], function () {
     Route::post('/power/{node}/{vmid}/reboot',[PowerManagementController::class, 'reboot']);
     Route::post('/power/{node}/{vmid}/shutdown',[PowerManagementController::class, 'shutdown']);
     Route::post('/power/{node}/{vmid}/force-shutdown',[PowerManagementController::class, 'force-shutdown']);
+    Route::get('/virtual-machine-current/{node}/{vmid}', [MonitoringVMController::class, 'current']);
+    Route::get('/virtual-machine-os/{node}/{vmid}',[MonitoringVMController::class, 'os_info']);
+    Route::get('/virtual-machine-network/{node}/{vmid}',[MonitoringVMController::class, 'network']);
+
+    Route::get('/virtual-machine-series/{node}/{vmid}/{unit}/{type}',[MonitoringVMController::class, 'series']);
 
 });
-
-
 include base_path('routes/module/dashboard.php');

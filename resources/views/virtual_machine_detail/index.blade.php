@@ -23,9 +23,6 @@
             width: 100%;
         }
 
-        /* .t-val{
-                padding-bottom: 12px;
-            } */
         .no-ws {
             margin: 0;
             white-space: nowrap;
@@ -34,13 +31,16 @@
         .w-90 {
             width: 90%;
         }
-        .date-semi-radial{
+
+        .date-semi-radial {
             position: absolute;
             bottom: 17%;
             left: 50%;
             translate: -50%;
             white-space: nowrap;
         }
+
+        ,
     </style>
 @endpush
 
@@ -65,7 +65,7 @@
                             <div class="t-profile">
                                 <div class="d-flex flex-row justify-content-between">
                                     <div class="flex-grow-1 w-100">
-                                        <p class="fw-bolder no-ws">VARX SEC</p>
+                                        <p class="fw-bolder no-ws" id="vm-name"></p>
                                     </div>
                                     <div class="dropdown">
                                         <button type="button" class="btn dropdown-toggle btn-primary hide-arrow p-0"
@@ -74,32 +74,32 @@
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li>
-                                                <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">
+                                                <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/start"
+                                                    class="dropdown-item d-flex align-items-center btn-start">
                                                     <p class="no-ws">
                                                         <span class="tf-icons ti-xs ti ti-player-play"></span> Start
                                                     </p>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">
+                                                <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/shutdown"
+                                                    class="dropdown-item d-flex align-items-center btn-shutdown">
                                                     <p class="no-ws">
                                                         <span class="tf-icons ti-xs ti ti-power"></span> Shutdown
                                                     </p>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">
+                                                <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/reboot"
+                                                    class="dropdown-item d-flex align-items-center btn-restart">
                                                     <p class="no-ws">
                                                         <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Reboot
                                                     </p>
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">
+                                                <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/force-shutdown"
+                                                    class="dropdown-item d-flex align-items-center btn-shutdown">
                                                     <p class="no-ws">
                                                         <span class="tf-icons ti-xs ti ti-recharging"></span> Force Shutdown
                                                     </p>
@@ -111,21 +111,21 @@
                                 <div class="row">
                                     <div class="col-md-4 col-sm-6 mt-2">
                                         <p class="no-ws">CPU Usage:</p>
-                                        <p>50</p>
+                                        <p id="cpu-info">-</p>
                                         <p class="no-ws">Image:</p>
-                                        <p class="no-ws">50</p>
+                                        <p id="image-info" class="no-ws">-</p>
                                     </div>
                                     <div class="col-md-4 col-sm-6 mt-2">
                                         <p class="no-ws">Memory Usage:</p>
-                                        <p>50</p>
+                                        <p id="mem-info">-</p>
                                         <p class="no-ws">Kernel:</p>
-                                        <p class="no-ws">50</p>
+                                        <p id="kernel-info" class="no-ws">-</p>
                                     </div>
                                     <div class="col-md-4 col-sm-6 mt-2">
                                         <p class="no-ws">Disk Size:</p>
-                                        <p>50</p>
+                                        <p id="disk-info">-</p>
                                         <p class="no-ws">IPs:</p>
-                                        <p class="no-ws">50</p>
+                                        <p id="ip-info" class="no-ws">-</p>
                                     </div>
                                 </div>
                             </div>
@@ -154,12 +154,12 @@
                 </ul>
                 <div class="mt-3">
                     <div class="fade show active" id="navs-pills-justified-home" role="tabpanel">
-                        <div class="row">
+                        <div class="row mb-4">
                             <div class="col-md-4 mb-2">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5>CPU Usage</h5>
-                                        <p class="date-semi-radial w-100 text-center"> 23/23/23 | 9:14</p>
+                                        <p class="date-semi-radial w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
                                         <div class="w-100">
                                             <div class="chart no-ws" id="cpuRadial"></div>
                                         </div>
@@ -170,9 +170,9 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5>Memory Usage</h5>
-                                        <p class="date-semi-radial w-100 text-center"> 23/23/23 | 9:14</p>
+                                        <p class="date-semi-radial w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
                                         <div class="text-center w-100">
-                                             <div class="chart" id="memoryRadial"></div>
+                                            <div class="chart" id="memoryRadial"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -181,11 +181,159 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5>Disk Size</h5>
-                                        <p class="date-semi-radial w-100 text-center"> 23/23/23 | 9:14</p>
+                                        <p class="date-semi-radial w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
                                         <div class="text-center w-100">
                                             <div class="chart" id="diskRadial"></div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Line Area Chart -->
+                        <div class="col-12 mb-4">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div>
+                                        <h5 class="card-title mb-0">Network Traffic</h5>
+                                        <small class="text-muted">Commercial networks</small>
+                                    </div>false
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-2 btn-label-secondary mt-4"
+                                            data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="text-date">Hour, AVERAGE</span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Hour,
+                                                    AVERAGE</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Hour,
+                                                    MAX</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Day,
+                                                    AVERAGE
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Day, MAX
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Week,
+                                                    AVERAGE</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Week,
+                                                    MAX</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Month,
+                                                    AVERAGE</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Month,
+                                                    MAX</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Year,
+                                                    AVERAGE</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Year,
+                                                    MAX</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="networkGraph"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div>
+                                        <h5 class="card-title mb-0">Disk IO</h5>
+                                        <small class="text-muted">Commercial networks</small>
+                                    </div>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-2 btn-label-secondary mt-4"
+                                            data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="ti "></i>
+                                            <span class="text-date2">Hour, AVERAGE</span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Hour,
+                                                    AVERAGE</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Hour,
+                                                    MAX</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Day,
+                                                    AVERAGE
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Day, MAX
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Week,
+                                                    AVERAGE</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Week,
+                                                    MAX</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Month,
+                                                    AVERAGE</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Month,
+                                                    MAX</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Year,
+                                                    AVERAGE</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);"
+                                                    class="dropdown-item d-flex align-items-center filter-date">Year,
+                                                    MAX</a>
+                                            </li>
+                                        </ul>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="diskGraph"></div>
                                 </div>
                             </div>
                         </div>
@@ -195,105 +343,7 @@
                 </div>
             </div>
 
-            <!-- Line Area Chart -->
-            <div class="col-12 mb-4">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between">
-                        <div>
-                            <h5 class="card-title mb-0">Network Traffic</h5>
-                            <small class="text-muted">Commercial networks</small>
-                        </div>
-                        <div class="dropdown">
-                            <button type="button" class="btn dropdown-toggle p-2 btn-label-secondary mt-4"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="text-date"> Today </span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Today</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Yesterday</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Last 7 Days</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Last 30 Days</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Current Month</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Last Month</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div id="networkGraph"></div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-12 mb-4">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between">
-                        <div>
-                            <h5 class="card-title mb-0">Disk IO</h5>
-                            <small class="text-muted">Commercial networks</small>
-                        </div>
-                        <div class="dropdown">
-                            <button type="button" class="btn dropdown-toggle p-2 btn-label-secondary mt-4"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ti "></i>
-                                <span class="text-date"> Today </span>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Today</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Yesterday</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Last 7 Days</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Last 30 Days</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider" />
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Current Month</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item d-flex align-items-center filter-date">Last Month</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div id="diskGraph"></div>
-                    </div>
-                </div>
-            </div>
             <!-- /Line Area Chart -->
             <div class="content-backdrop fade"></div>
         </div>
@@ -301,7 +351,4 @@
 
     @push('script')
         @include('virtual_machine_detail.script')
-        {{-- @include('virtual_machine_detail.script-table') --}}
-        @include('virtual_machine_detail.script-chart')
-        @include('virtual_machine_detail.script-area')
     @endpush

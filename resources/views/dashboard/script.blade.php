@@ -1,7 +1,7 @@
 <script>
     const cpuUsageChart = (data) => {
         var options = {
-            series: [7],
+            series: [0],
             chart: {
                 type: 'radialBar',
                 offsetY: -5,
@@ -61,7 +61,7 @@
 
     const ramUsageChart = (data) => {
         var options = {
-            series: [7],
+            series: [0],
             chart: {
                 type: 'radialBar',
                 offsetY: -5,
