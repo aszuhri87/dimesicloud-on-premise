@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('notification_receipts', function (Blueprint $table) {
             $table->uuid('id');
             $table->string('type');
-            $table->string('value');
+            $table->string('value')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

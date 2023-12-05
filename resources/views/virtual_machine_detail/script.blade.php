@@ -1,10 +1,14 @@
 <script>
     $(document).ready(function() {
         var series_config = $(".text-date").text().split(', ')
+        var series_config_2 = $(".text-date-2").text().split(', ')
+
 
         console.log(series_config);
+        // console.log(data_sess['ticket']);
 
         getSeries(series_config[0].toLowerCase(), series_config[1])
+        getSeriesDisk(series_config_2[0].toLowerCase(), series_config_2[1])
 
         getNetwork()
 
@@ -14,6 +18,8 @@
         }, 1000)
 
         setInterval(getSeries(series_config[0].toLowerCase(), series_config[1]), 10000)
+        setInterval(getSeriesDisk(series_config_2[0].toLowerCase(), series_config_2[1]), 10000)
+
 
         getCurrentChart()
         setInterval(getCurrentChart, 10000)
@@ -27,10 +33,67 @@
               var selText = $(this).text();
               let series_config = $(this).text().split(', ');
               $(".text-date").text(selText);
-              $(".text-date2").text(selText);
+            //   $(".text-date2").text(selText);
 
               getSeries(series_config[0].toLowerCase(), series_config[1])
             });
+
+            $(".filter-date-2").on('click', function(e) {
+              e.preventDefault(); // cancel the link behaviour
+              var selText = $(this).text();
+              let series_config_2 = $(this).text().split(', ');
+
+              console.log(series_config_2);
+            //   $(".text-date").text(selText);
+              $(".text-date-2").text(selText);
+
+              getSeriesDisk(series_config_2[0].toLowerCase(), series_config_2[1])
+            });
+
+            $('.console').on('click', function(e){
+                e.preventDefault();
+                let data_sess = {!! json_encode(Session::get('data')) !!};
+
+                $.ajax({
+                    type: "GET",
+                    url: "https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=",
+                    crossDomain: true,
+                    // withCredentials: true,
+                    dataType: 'jsonp',
+                    beforeSend: function(xhr) {
+                        xhr.withCredentials = false;
+                        xhr.setRequestHeader("Cookie", 'PVEAuthCookie='+ data_sess['ticket']);
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        var iframeDoc = document.querySelector('#console-iframe').contentWindow.document;
+                        iframeDoc.open('text/html', 'replace');
+                        iframeDoc.write(data);
+                        iframeDoc.close();
+                    }
+                });
+
+            //     let cookie = Cookies.set('PVEAuthCookie', JSON.stringify(data_sess['ticket']));
+
+            //     $.ajax({
+            //         type: "GET",
+            //         url: "https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=",
+            //         contentType: "application/json",
+            //         beforeSend: function(xhr, settings){
+            //                 xhr.setRequestHeader("Cookie", encodeURIComponent(cookie));},
+            //         withCredentials: true,
+            //         success: function(data){
+            //             $(".console-iframe").attr('src',"https://172.16.200.201:8086/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=")
+            //             console.log('yes');
+            //         }
+            //     });
+
+            //     // console.log("https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=?cookie=" + cookie)
+
+            //     // $('#console-iframe').attr('src', "https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=&vncticket="+ encodeURIComponent(cookie))
+            //     // console.log($.cookie('PVEAuthCookie', data_sess['ticket']));
+
+            })
 
             $(document).on('click', '.btn-console', function(event) {
                 event.preventDefault();
@@ -157,6 +220,9 @@
                             value: {
                                 offsetY: 60,
                                 fontSize: '22px',
+                                formatter: function(val) {
+                                    return val
+                                },
                             }
                         }
                     }
@@ -181,7 +247,7 @@
 
             var chart = new ApexCharts(document.querySelector("#cpuRadial"), options);
             chart.render();
-            chart.updateSeries([cpu.toFixed(2)])
+            chart.updateSeries([cpu])
 
         },
         memoryRadialChart = (mem = []) => {
@@ -614,7 +680,6 @@
             let node = '{{ Request::segment(2) }}';
             let vmid = '{{ Request::segment(3) }}'
 
-
             $.ajax({
                     url: `{{ url('virtual-machine-series') }}/${node}/${vmid}/${unit}/${type}`,
                     type: 'get',
@@ -623,6 +688,28 @@
                     // cpuLineChart(res.data.cpu, res.data.category)
                     // memoryLineChart(res.data.mem, res.data.category)
                     networkLineChart(res.data.netin, res.data.netout, res.data.category)
+                    // diskLineChart(res.data.diskwrite, res.data.diskread, res.data.category)
+                })
+                .fail(function(res, error) {
+                    toastr.error(res.responseJSON.message, 'Error')
+                })
+                .always(function() {
+
+                });
+        },
+        getSeriesDisk = (unit, type) => {
+            let node = '{{ Request::segment(2) }}';
+            let vmid = '{{ Request::segment(3) }}'
+
+
+            $.ajax({
+                    url: `{{ url('virtual-machine-series-disk') }}/${node}/${vmid}/${unit}/${type}`,
+                    type: 'get',
+                })
+                .done(function(res, xhr, meta) {
+                    // cpuLineChart(res.data.cpu, res.data.category)
+                    // memoryLineChart(res.data.mem, res.data.category)
+                    // networkLineChart(res.data.netin, res.data.netout, res.data.category)
                     diskLineChart(res.data.diskwrite, res.data.diskread, res.data.category)
                 })
                 .fail(function(res, error) {
@@ -640,9 +727,11 @@
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
-                    var cpu = res.data.cpu * 100;
+                    var cpu = `${(res.data.cpu * 100).toFixed(2) }% of ${res.data.cpus} CPU(s)`;
                     var mem = bytesToSize(res.data.mem) + ' of ' + bytesToSize(res.data.maxmem);
                     var disk = bytesToSize(res.data.maxdisk);
+
+                    console.log(res.data);
 
                     cpuRadialChart(cpu);
                     memoryRadialChart(mem);

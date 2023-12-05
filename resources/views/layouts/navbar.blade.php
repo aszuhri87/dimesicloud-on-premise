@@ -8,6 +8,8 @@
     <div class="fw-bolder" style="margin-top: 3px; white-space: nowrap">
         @if (strpos(Request::url(), 'virtual-machine'))
             Virtual Machine
+        @elseif (strpos(Request::url(), 'management-alert'))
+            Management Alert
         @elseif (strpos(Request::url(), 'dashboard'))
             Dashboard
         @else

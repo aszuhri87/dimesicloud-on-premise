@@ -135,8 +135,8 @@
             </div>
             <hr>
 
-            <div class="nav-align-top mb-3">
-                <ul class="nav nav-pills mb-2 " role="tablist">
+            <div class="nav-align-top mb-4">
+                <ul class="nav nav-pills mb-4" role="tablist">
                     <li class="nav-item">
                         <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
                             data-bs-target="#navs-pills-justified-home" aria-controls="navs-pills-justified-home"
@@ -145,15 +145,16 @@
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                        <button type="button" class="nav-link console" role="tab" data-bs-toggle="tab"
                             data-bs-target="#navs-pills-justified-profile" aria-controls="navs-pills-justified-profile"
                             aria-selected="false">
                             <i class="tf-icons ti ti-terminal-2 ti-xs me-1"></i> Console
                         </button>
                     </li>
                 </ul>
-                <div class="mt-3">
-                    <div class="fade show active" id="navs-pills-justified-home" role="tabpanel">
+                <div class="tab-content"
+                    style="background-color: transparent !important; border-color: transparent !important; box-shadow: none !important; margin:0 !important; padding:0 !important;">
+                    <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
                         <div class="row mb-4">
                             <div class="col-md-4 mb-2">
                                 <div class="card">
@@ -190,7 +191,7 @@
                             </div>
                         </div>
                         <!-- Line Area Chart -->
-                        <div class="col-12 mb-4">
+                        <div class="mb-4">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
@@ -205,54 +206,43 @@
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Hour,
-                                                    AVERAGE</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date">Hour, AVERAGE</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Hour,
-                                                    MAX</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date">Hour, MAX</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Day,
-                                                    AVERAGE
-                                                </a>
+                                                    class="dropdown-item d-flex align-items-center filter-date">Day, AVERAGE</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Day, MAX
-                                                </a>
+                                                    class="dropdown-item d-flex align-items-center filter-date">Day, MAX</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Week,
-                                                    AVERAGE</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date">Week, AVERAGE</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Week,
-                                                    MAX</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date">Week, MAX</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Month,
-                                                    AVERAGE</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date">Month, AVERAGE</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Month,
-                                                    MAX</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date">Month, MAX</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Year,
-                                                    AVERAGE</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date">Year, AVERAGE</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Year,
-                                                    MAX</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date">Year, MAX</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -263,7 +253,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12 mb-4">
+                        <div class="mb-4">
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
@@ -274,59 +264,48 @@
                                         <button type="button" class="btn p-2 btn-label-secondary mt-4"
                                             data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="ti "></i>
-                                            <span class="text-date2">Hour, AVERAGE</span>
+                                            <span class="text-date-2">Hour, AVERAGE</span>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Hour,
-                                                    AVERAGE</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date-2">Hour, AVERAGE</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Hour,
-                                                    MAX</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date-2">Hour, MAX</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Day,
-                                                    AVERAGE
-                                                </a>
+                                                    class="dropdown-item d-flex align-items-center filter-date-2">Day, AVERAGE</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Day, MAX
-                                                </a>
+                                                    class="dropdown-item d-flex align-items-center filter-date-2">Day, MAX</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Week,
-                                                    AVERAGE</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date-2">Week, AVERAGE</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Week,
-                                                    MAX</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date-2">Week, MAX</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Month,
-                                                    AVERAGE</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date-2">Month, AVERAGE</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Month,
-                                                    MAX</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date-2">Month, MAX</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Year,
-                                                    AVERAGE</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date-2">Year, AVERAGE</a>
                                             </li>
                                             <li>
                                                 <a href="javascript:void(0);"
-                                                    class="dropdown-item d-flex align-items-center filter-date">Year,
-                                                    MAX</a>
+                                                    class="dropdown-item d-flex align-items-center filter-date-2">Year, MAX</a>
                                             </li>
                                         </ul>
                                         </ul>
@@ -339,10 +318,10 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
+                        <iframe id="console-iframe" src="" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe>
                     </div>
                 </div>
             </div>
-
 
             <!-- /Line Area Chart -->
             <div class="content-backdrop fade"></div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ManagementAlert;
 use App\Http\Controllers\MonitoringVMController;
 use App\Http\Controllers\PowerManagementController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ use InfluxDB2\Point;
 include base_path('routes/auth/route.php');
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Route::group(['middleware' => ['auth-middleware']], function () {
@@ -41,6 +42,10 @@ Route::group(['middleware' => ['auth-middleware']], function () {
     Route::get('/virtual-machine-network/{node}/{vmid}',[MonitoringVMController::class, 'network']);
 
     Route::get('/virtual-machine-series/{node}/{vmid}/{unit}/{type}',[MonitoringVMController::class, 'series']);
+    Route::get('/virtual-machine-series-disk/{node}/{vmid}/{unit}/{type}',[MonitoringVMController::class, 'series_disk']);
+    Route::get('/management-alert',[ManagementAlert::class, 'index']);
+    Route::post('/management-alert',[ManagementAlert::class, 'store']);
+
 
 });
 include base_path('routes/module/dashboard.php');

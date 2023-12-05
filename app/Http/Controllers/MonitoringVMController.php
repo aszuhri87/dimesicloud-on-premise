@@ -78,50 +78,76 @@ class MonitoringVMController extends Controller
 
     public function detail($node, $vmid)
     {
-        // dd($node);
-        // try {
-            // $auth_data = Session::get('data');
-            // $client = new \GuzzleHttp\Client([
-            //     'verify' => false
-            // ]);
+        $auth_data = Session::get('data');
+        // // Session::put('Cookie', 'PVEAuthCookie='.$auth_data['ticket']);
+        // // request()->cookie('PVEAuthCookie=', $auth_data['ticket']);
 
-            // $response = $client->request(
-            //                 'GET',
-            //                 config('app.proxmox').'/api2/json/nodes/'.$node.'/qemu/'.$vmid.'/status/current',
-            //                 // config('app.proxmox').'/api2/json/nodes/'.$node.'/qemu/'.$vmid.'/agent/get-osinfo',
-            //                 // config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/config',
+        // $client = new \GuzzleHttp\Client([
+        //     'verify' => false
+        // ]);
 
-            //                 [
-            //                     'headers' => [
-            //                         'Cookie' => 'PVEAuthCookie='.$auth_data['ticket'],
-            //                         "Authorization" => "PVEAPIToken=" . env('PMX_USER') . "!" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN'),
-            //                         "User-Agent" => "DimensiCloud",
-            //                     ]
-            //                 ]
-            //             );
-            // $data = json_decode($response->getBody(), true);
-            // dd($data);
+        // $response = $client->request(
+        //     'GET',
+        //     "https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=",
+        //     [
+        //         'headers' => [
+        //             'Cookie' => 'PVEAuthCookie='.$auth_data['ticket']
+        //         ]
+        //     ]
+        // );
+        // // dd($response);
+        //     $response = json_decode($response->getBody(), true);
 
-            // if($response->getStatusCode() == 200){
-            //     $data = json_decode($response->getBody(), true);
 
-                // return response([
-                //     'data' => $data['data']['result']
-                // ]);
-                    // dd($data['data']['result']);
-                // }
 
-                return view('virtual_machine_detail.index');
-        // } catch (ClientException $e){
-        //     return response([
-        //         "message"      => 'Token Expired'
-        //     ], 401);
-        // } catch (Exception $e) {
-        //     return response([
-        //         "message"      => 'Internal Server Error'
-        //     ], 500);
+            // setCookie("PVEAuthCookie", $auth_data['ticket']);
+
+        // if($response->getStatusCode() == 200){
+        //     $response = json_decode($response->getBody(), true);
+
+        //     if(!is_null($response['data'])){
+        //         Session::put('login',TRUE);
+        //         Session::put('data',$response['data']);
+        // setcookie('PVEAuthCookie='.$auth_data['ticket'], 1, time() + (86400), "/; SameSite=None; Secure");
+
+                return response(view('virtual_machine_detail.index'))->withCookie(cookie('PVEAuthCookie', $auth_data['ticket']));
+        //     }
         // }
+    }
 
+    public function console(){
+                // // request()->cookie('PVEAuthCookie=', $auth_data['ticket']);
+        $auth_data = Session::get('data');
+        $client = new \GuzzleHttp\Client([
+            'verify' => false
+        ]);
+
+        $response = $client->request(
+            'POST',
+            config('app.proxmox').'/api2/extjs/access/ticket',
+            [
+                'headers' => [
+                    'Cookie' => 'PVEAuthCookie='.$auth_data['ticket']
+                ]
+            ]
+        );
+
+            // setCookie("PVEAuthCookie", $auth_data['ticket']);
+
+        if($response->getStatusCode() == 200){
+            $response = json_decode($response->getBody(), true);
+
+            if(!is_null($response['data'])){
+                Session::put('login',TRUE);
+                Session::put('data',$response['data']);
+            }
+        }
+        $src = 'https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=';
+
+        $iframe = `<iframe id="console-iframe" src="`.$src.`" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe>`;
+
+        // return redirect($src)->withCookie('PVEAuthCookie='.$auth_data['ticket']);
+        return response($iframe, 200)->withCookie(cookie('PVEAuthCookie', $auth_data['ticket']));
     }
 
 
@@ -130,10 +156,10 @@ class MonitoringVMController extends Controller
         return view('pages.virtual_machine.graph.index');
     }
 
-    public function console()
-    {
-        return view('pages.virtual_machine.console.index');
-    }
+    // public function console()
+    // {
+    //     return view('pages.virtual_machine.console.index');
+    // }
 
     public function power()
     {
@@ -219,6 +245,81 @@ class MonitoringVMController extends Controller
     }
 
     public function series($node, $vmid, $unit, $type)
+    {
+        try {
+            date_default_timezone_set('Asia/Jakarta');
+
+            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/rrddata?timeframe=' . $unit . '&cf=' . $type, 'GET');
+
+            $data = json_decode($response->getBody(), true);
+
+            if ($response->getStatusCode() == 200) {
+                $data = json_decode($response->getBody(), true);
+
+                $list_category = array();
+                $cpu_usage = array();
+                $mem_usage = array();
+                $net_in_usage = array();
+                $net_out_usage = array();
+                $disk_read_usage = array();
+                $disk_write_usage = array();
+
+
+                foreach ($data['data'] as $key => $value) {
+                    array_push($list_category, date("Y-m-d H:i:s ", $value['time']));
+
+                    if (array_key_exists('cpu', $value)) {
+                        array_push($cpu_usage, number_format($value['cpu'] * 100, 2));
+                    }
+
+                    if (array_key_exists('mem', $value)) {
+                        array_push($mem_usage, number_format($value['mem'] / $value['maxmem'] * 100, 2));
+                    }
+
+                    if (array_key_exists('netin', $value)) {
+                        array_push($net_in_usage, number_format($value['netin'], 2));
+                    }
+
+                    if (array_key_exists('netout', $value)) {
+                        array_push($net_out_usage, number_format($value['netout'], 2));
+                    }
+
+                    if (array_key_exists('diskwrite', $value)) {
+                        array_push($disk_write_usage, $value['diskwrite']);
+                    }
+
+                    if (array_key_exists('diskread', $value)) {
+                        array_push($disk_read_usage, $value['diskread']);
+                    }
+
+                }
+
+                return response([
+                    'data' => [
+                        'category' => $list_category,
+                        'cpu' => $cpu_usage,
+                        'mem' => $mem_usage,
+                        'netin' => $net_in_usage,
+                        'netout' => $net_out_usage,
+                        'diskread' => $disk_read_usage,
+                        'diskwrite' => $disk_write_usage
+
+                    ],
+                    'res' => $data
+                ]);
+            }
+        } catch (ClientException $e) {
+            return response([
+                "message" => 'Token Expired'
+            ], 401);
+        } catch (Exception $e) {
+            return response([
+                "message" => 'Internal Server Error'
+            ], 500);
+        }
+    }
+
+    public function series_disk($node, $vmid, $unit, $type)
     {
         try {
             date_default_timezone_set('Asia/Jakarta');

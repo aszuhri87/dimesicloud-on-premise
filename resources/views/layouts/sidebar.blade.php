@@ -28,7 +28,7 @@
         </a>
       </li>
       <li class="menu-item @if (strpos(Request::url(), 'management-alert')) active @endif">
-        <a href="/monitoring-vm" class="menu-link">
+        <a href="/management-alert" class="menu-link">
           <i class="menu-icon tf-icons ti ti-device-imac"></i>
           <div data-i18n="Management Alert">Management Alert</div>
         </a>
