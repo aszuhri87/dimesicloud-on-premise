@@ -128,15 +128,15 @@
                 </div>
               </div>
               <div class="mb-3">
-                <div class="form-check">
+                {{-- <div class="form-check">
                   <input class="form-check-input" type="checkbox" id="remember-me" />
                   <label class="form-check-label" for="remember-me"> Remember Me </label>
-                </div>
+                </div> --}}
               </div>
               <button type="submit" class="btn btn-primary d-grid w-100">Sign in</button>
             </form>
 
-            <p class="text-center">
+            {{-- <p class="text-center">
               <span>New on our platform?</span>
               <a href="auth-register-cover.html">
                 <span>Create an account</span>
@@ -145,9 +145,9 @@
 
             <div class="divider my-4">
               <div class="divider-text">or</div>
-            </div>
+            </div> --}}
 
-            <div class="d-flex justify-content-center">
+            {{-- <div class="d-flex justify-content-center">
               <a href="javascript:;" class="btn btn-icon btn-label-facebook me-3">
                 <i class="tf-icons fa-brands fa-facebook-f fs-5"></i>
               </a>
@@ -159,7 +159,7 @@
               <a href="javascript:;" class="btn btn-icon btn-label-twitter">
                 <i class="tf-icons fa-brands fa-twitter fs-5"></i>
               </a>
-            </div>
+            </div> --}}
           </div>
         </div>
         <!-- /Login -->

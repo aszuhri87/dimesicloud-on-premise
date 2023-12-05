@@ -260,13 +260,13 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-medium d-block">John Doe</span>
+                                    <span class="fw-medium d-block">{{ Session::get('data')['username'] }}</span>
                                     <small class="text-muted">Admin</small>
                                 </div>
                             </div>
                         </a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
@@ -286,12 +286,8 @@
                             <span class="d-flex align-items-center align-middle">
                                 <i class="flex-shrink-0 ti ti-credit-card me-2 ti-sm"></i>
                                 <span class="flex-grow-1 align-middle">Billing</span>
-<<<<<<< HEAD
-                                <span class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20">2</span>
-=======
                                 <span
                                     class="flex-shrink-0 badge badge-center rounded-pill bg-label-danger w-px-20 h-px-20">2</span>
->>>>>>> 94f295a74467da075f9f34419702a65e44411edc
                             </span>
                         </a>
                     </li>
@@ -312,9 +308,9 @@
                     </li>
                     <li>
                         <div class="dropdown-divider"></div>
-                    </li>
+                    </li> --}}
                     <li>
-                        <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
+                        <a class="dropdown-item" href="{{ url('/logout') }}">
                             <i class="ti ti-logout me-2 ti-sm"></i>
                             <span class="align-middle">Log Out</span>
                         </a>

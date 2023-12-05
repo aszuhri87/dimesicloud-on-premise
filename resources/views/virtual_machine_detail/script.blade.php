@@ -72,27 +72,6 @@
                         iframeDoc.close();
                     }
                 });
-
-            //     let cookie = Cookies.set('PVEAuthCookie', JSON.stringify(data_sess['ticket']));
-
-            //     $.ajax({
-            //         type: "GET",
-            //         url: "https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=",
-            //         contentType: "application/json",
-            //         beforeSend: function(xhr, settings){
-            //                 xhr.setRequestHeader("Cookie", encodeURIComponent(cookie));},
-            //         withCredentials: true,
-            //         success: function(data){
-            //             $(".console-iframe").attr('src',"https://172.16.200.201:8086/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=")
-            //             console.log('yes');
-            //         }
-            //     });
-
-            //     // console.log("https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=?cookie=" + cookie)
-
-            //     // $('#console-iframe').attr('src', "https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=&vncticket="+ encodeURIComponent(cookie))
-            //     // console.log($.cookie('PVEAuthCookie', data_sess['ticket']));
-
             })
 
             $(document).on('click', '.btn-console', function(event) {
@@ -224,7 +203,7 @@
                                     return val
                                 },
                             }
-                        }
+                        },
                     }
                 },
                 grid: {

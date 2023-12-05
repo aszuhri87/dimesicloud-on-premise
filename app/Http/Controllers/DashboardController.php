@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Library\PMXConnect;
-
+use Session;
 
 class DashboardController extends Controller
 {

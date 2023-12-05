@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ManagementAlert;
 use App\Http\Controllers\MonitoringVMController;
@@ -45,6 +46,9 @@ Route::group(['middleware' => ['auth-middleware']], function () {
     Route::get('/virtual-machine-series-disk/{node}/{vmid}/{unit}/{type}',[MonitoringVMController::class, 'series_disk']);
     Route::get('/management-alert',[ManagementAlert::class, 'index']);
     Route::post('/management-alert',[ManagementAlert::class, 'store']);
+
+    Route::get('logout', [AuthController::class, 'logout']);
+
 
 
 });

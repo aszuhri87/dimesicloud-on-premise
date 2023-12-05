@@ -14,6 +14,4 @@ Route::group(['middleware' => ['guest-middleware']], function () {
 
     Route::get('login', [AuthController::class, 'index']);
     Route::post('login', [AuthController::class, 'login']);
-    Route::get('logout', [AuthController::class, 'logout']);
-
 });
