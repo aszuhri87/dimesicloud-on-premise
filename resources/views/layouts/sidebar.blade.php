@@ -22,20 +22,20 @@
         </a>
       </li>
       <li class="menu-item @if (strpos(Request::url(), 'ceph')) active @endif">
-        <a href="/monitoring-vm" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-device-imac"></i>
+        <a href="/ceph" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-devices-2"></i>
           <div data-i18n="CEPH">CEPH</div>
         </a>
       </li>
       <li class="menu-item @if (strpos(Request::url(), 'management-alert')) active @endif">
         <a href="/management-alert" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-device-imac"></i>
+          <i class="menu-icon tf-icons ti ti-bell"></i>
           <div data-i18n="Management Alert">Management Alert</div>
         </a>
       </li>
       <li class="menu-item @if (strpos(Request::url(), 'object-storage')) active @endif">
-        <a href="/monitoring-vm" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-device-imac"></i>
+        <a href="/object-storage" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-database"></i>
           <div data-i18n="Object Storage">Object Storage</div>
         </a>
       </li>

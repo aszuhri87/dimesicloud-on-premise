@@ -192,18 +192,18 @@
                             strokeHeight: '100%',
                             margin: -5, // margin is in pixels
                         },
-                        dataLabels: {
-                            name: {
-                                show: false
-                            },
-                            value: {
-                                offsetY: 60,
-                                fontSize: '22px',
-                                formatter: function(val) {
-                                    return val
-                                },
-                            }
-                        },
+                        // dataLabels: {
+                        //     name: {
+                        //         show: false
+                        //     },
+                        //     value: {
+                        //         offsetY: 60,
+                        //         fontSize: '22px',
+                        //         formatter: function(val) {
+                        //             return val
+                        //         },
+                        //     }
+                        // },
                     }
                 },
                 grid: {
@@ -215,7 +215,7 @@
                     type: 'solid',
                     colors: ['#62D6C5']
                 },
-                labels: ['Average Results'],
+                labels: [''],
                 // subtitle: {
                 //     offsetY: 110,
                 //     text: d + '/' + m + '/' + y + ' | ' + h + ':' + mn,
@@ -250,18 +250,18 @@
                             strokeHeight: '100%',
                             margin: -5, // margin is in pixels
                         },
-                        dataLabels: {
-                            name: {
-                                show: false
-                            },
-                            value: {
-                                offsetY: 60,
-                                fontSize: '22px',
-                                formatter: function(val) {
-                                    return val
-                                },
-                            }
-                        }
+                        // dataLabels: {
+                        //     name: {
+                        //         show: false
+                        //     },
+                        //     value: {
+                        //         offsetY: 60,
+                        //         fontSize: '22px',
+                        //         formatter: function(val) {
+                        //             return val
+                        //         },
+                        //     }
+                        // }
                     }
                 },
                 grid: {
@@ -273,7 +273,7 @@
                     type: 'solid',
                     colors: ['#62D6C5']
                 },
-                labels: ['Average Results'],
+                labels: [''],
             };
 
             var chart = new ApexCharts(document.querySelector("#memoryRadial"), options);
@@ -301,18 +301,18 @@
                             strokeHeight: '100%',
                             margin: -5, // margin is in pixels
                         },
-                        dataLabels: {
-                            name: {
-                                show: false
-                            },
-                            value: {
-                                offsetY: 60,
-                                fontSize: '22px',
-                                formatter: function(val) {
-                                    return val
-                                },
-                            },
-                        }
+                        // dataLabels: {
+                        //     name: {
+                        //         show: false
+                        //     },
+                        //     value: {
+                        //         offsetY: 60,
+                        //         fontSize: '22px',
+                        //         formatter: function(val) {
+                        //             return val
+                        //         },
+                        //     },
+                        // }
                     }
                 },
                 grid: {
@@ -324,7 +324,7 @@
                     type: 'solid',
                     colors: ['#62D6C5']
                 },
-                labels: ['Average Results'],
+                labels: [''],
             };
 
             var chart = new ApexCharts(document.querySelector("#diskRadial"), options);
@@ -710,11 +710,33 @@
                     var mem = bytesToSize(res.data.mem) + ' of ' + bytesToSize(res.data.maxmem);
                     var disk = bytesToSize(res.data.maxdisk);
 
-                    console.log(res.data);
+                    $('.data-label-cpu').text(cpu)
+                    $('.data-label-mem').text(mem)
+                    $('.data-label-disk').text(disk)
 
-                    cpuRadialChart(cpu);
-                    memoryRadialChart(mem);
-                    diskRadialChart(disk);
+                    var cpu_percent = (res.data.cpu * 100).toFixed(2)
+                    var mem_percent = ((res.data.mem / res.data.maxmem) * 100).toFixed(2)
+                    var disk_percent = ((res.data.maxdisk / res.data.maxdisk) * 100).toFixed(2)
+
+                    $('#cpuRadial').on('mouseover', function(e){
+                        e.preventDefault()
+                        $(this).attr('title', cpu_percent + '%')
+                    })
+
+                    $('#memoryRadial').on('mouseover', function(e){
+                        e.preventDefault()
+                        $(this).attr('title', mem_percent + '%')
+                    })
+
+                    $('#diskRadial').on('mouseover', function(e){
+                        e.preventDefault()
+                        $(this).attr('title', disk_percent + '%')
+                    })
+
+                    cpuRadialChart(cpu_percent);
+                    memoryRadialChart(mem_percent);
+                    diskRadialChart(disk_percent);
+
 
                 })
         },
@@ -780,6 +802,14 @@
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
+                    let name = res.data['name'];
+
+                    console.log(name);
+                    if(res.data['name'] == "Ubuntu"){
+                        $('.os_logo').append(`<img src="../../assets/os_logo/${name.toLowerCase()}.svg" alt="" style="margin-top: 25%; margin-left: 9%">`)
+                    } else {
+                        $('.os_logo').append(`<img src="../../assets/os_logo/unknown.svg" alt="" style="margin-top: 25%; margin-left: 9%">`)
+                    }
                     $("#image-info").text(`${res.data['pretty-name']} ${res.data.machine}`)
                     $("#kernel-info").text(res.data['kernel-release'])
 

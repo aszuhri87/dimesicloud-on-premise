@@ -34,9 +34,10 @@
 
         .date-semi-radial {
             position: absolute;
-            bottom: 17%;
+            /* margin-top: 5%; */
+            bottom: 2%;
             left: 50%;
-            translate: -50%;
+            translate: -50% 3%;
             white-space: nowrap;
         }
 
@@ -58,7 +59,9 @@
                 <div class="card-body c-body-h">
                     <div class="row">
                         <div class="col-md-2 col-lg-2 col-sm-6 vm-detail-profile">
-
+                            <div class="os_logo">
+                                {{-- <img src="../../assets/os_logo/ubuntu.svg" alt="" srcset=""> --}}
+                            </div>
                         </div>
                         <div class="d-block d-sm-none mt-5"></div>
                         <div class="col-md-10 col-lg-10 col-sm-6">
@@ -159,10 +162,15 @@
                             <div class="col-md-4 mb-2">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5>CPU Usage</h5>
-                                        <p class="date-semi-radial w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
-                                        <div class="w-100">
-                                            <div class="chart no-ws" id="cpuRadial"></div>
+                                        <div style="position: relative; height: 240px">
+                                            <h5>CPU Usage</h5>
+                                            <div class="date-semi-radial">
+                                                <p class="w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
+                                                <h4 class="data-label-cpu"></h4>
+                                            </div>
+                                            <div class="w-100">
+                                                <div class="chart no-ws" id="cpuRadial"  data-bs-toggle="tooltip" data-bs-placement="top"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -170,10 +178,15 @@
                             <div class="col-md-4 mb-2">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5>Memory Usage</h5>
-                                        <p class="date-semi-radial w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
-                                        <div class="text-center w-100">
-                                            <div class="chart" id="memoryRadial"></div>
+                                        <div style="position: relative; height: 240px">
+                                            <h5>Memory Usage</h5>
+                                            <div class="date-semi-radial">
+                                                <p class="w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
+                                                <h4 class="data-label-mem"></h4>
+                                            </div>
+                                            <div class="text-center w-100">
+                                                <div class="chart" id="memoryRadial"  data-bs-toggle="tooltip" data-bs-placement="top"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -181,10 +194,15 @@
                             <div class="col-md-4 mb-2">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5>Disk Size</h5>
-                                        <p class="date-semi-radial w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
-                                        <div class="text-center w-100">
-                                            <div class="chart" id="diskRadial"></div>
+                                        <div style="position: relative; height: 240px">
+                                            <h5>Disk Size</h5>
+                                            <div class="date-semi-radial text-center">
+                                                <p class="w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
+                                                <h4 class="data-label-disk"></h4>
+                                            </div>
+                                            <div class="text-center w-100">
+                                                <div class="chart" id="diskRadial"  data-bs-toggle="tooltip" data-bs-placement="top"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
