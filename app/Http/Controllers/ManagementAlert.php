@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class ManagementAlert extends Controller
 {
     public function index(){
-        return view('management_alert.index');
+        $type = NotificationReceipt::whereNull('deleted_at')->first();
+
+        return view('management_alert.index', ['data' => $type]);
     }
 
     public function store(Request $request){

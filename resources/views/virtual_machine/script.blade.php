@@ -64,9 +64,6 @@
             });
         });
 
-
-
-
         $(document).on('click', '.btn-shutdown', function(event){
             event.preventDefault();
             let url = $(this).attr('href')
