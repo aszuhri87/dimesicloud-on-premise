@@ -336,7 +336,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
-                        <iframe id="console-iframe" src="" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe>
+                        <iframe id="console-iframe" src="/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe>
                     </div>
                 </div>
             </div>

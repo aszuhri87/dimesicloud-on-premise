@@ -70,9 +70,6 @@ class MonitoringVMController extends Controller
             }
 
         }
-
-        // dd($data);
-
         return DataTables::of($data)->addIndexColumn()->make(true);
     }
 
