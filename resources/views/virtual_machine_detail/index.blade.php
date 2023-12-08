@@ -70,45 +70,52 @@
                                     <div class="flex-grow-1 w-100">
                                         <p class="fw-bolder no-ws" id="vm-name"></p>
                                     </div>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn dropdown-toggle btn-primary hide-arrow p-0"
-                                            style="width:38px; height:38px;" data-bs-toggle="dropdown">
-                                            <span class="tf-icons ti-xs ti ti-power text-center"></span>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <li>
-                                                <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/start"
-                                                    class="dropdown-item d-flex align-items-center btn-start">
-                                                    <p class="no-ws">
-                                                        <span class="tf-icons ti-xs ti ti-player-play"></span> Start
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/shutdown"
-                                                    class="dropdown-item d-flex align-items-center btn-shutdown">
-                                                    <p class="no-ws">
-                                                        <span class="tf-icons ti-xs ti ti-power"></span> Shutdown
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/reboot"
-                                                    class="dropdown-item d-flex align-items-center btn-restart">
-                                                    <p class="no-ws">
-                                                        <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Reboot
-                                                    </p>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/force-shutdown"
-                                                    class="dropdown-item d-flex align-items-center btn-shutdown">
-                                                    <p class="no-ws">
-                                                        <span class="tf-icons ti-xs ti ti-recharging"></span> Force Shutdown
-                                                    </p>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                    <div class="dropdown d-flex">
+                                        <div class="pt-1">
+                                            <a href="https://console.dimensi.com/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" title="Console" class="btn btn-primary console" style="width:35px; height:38px;">
+                                                <i class="tf-icons ti ti-terminal-2 ti-xs me-1"></i>
+                                            </a>
+                                        </div>
+                                        <div class="p-1">
+                                            <button type="button" class="btn dropdown-toggle btn-primary hide-arrow p-0"
+                                                style="width:38px; height:38px;" data-bs-toggle="dropdown">
+                                                <span class="tf-icons ti-xs ti ti-power text-center"></span>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li>
+                                                    <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/start"
+                                                        class="dropdown-item d-flex align-items-center btn-start">
+                                                        <p class="no-ws">
+                                                            <span class="tf-icons ti-xs ti ti-player-play"></span> Start
+                                                        </p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/shutdown"
+                                                        class="dropdown-item d-flex align-items-center btn-shutdown">
+                                                        <p class="no-ws">
+                                                            <span class="tf-icons ti-xs ti ti-power"></span> Shutdown
+                                                        </p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/reboot"
+                                                        class="dropdown-item d-flex align-items-center btn-restart">
+                                                        <p class="no-ws">
+                                                            <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Reboot
+                                                        </p>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/force-shutdown"
+                                                        class="dropdown-item d-flex align-items-center btn-shutdown">
+                                                        <p class="no-ws">
+                                                            <span class="tf-icons ti-xs ti ti-recharging"></span> Force Shutdown
+                                                        </p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -139,7 +146,7 @@
             <hr>
 
             <div class="nav-align-top mb-4">
-                <ul class="nav nav-pills mb-4" role="tablist">
+                {{-- <ul class="nav nav-pills mb-4" role="tablist">
                     <li class="nav-item">
                         <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
                             data-bs-target="#navs-pills-justified-home" aria-controls="navs-pills-justified-home"
@@ -148,13 +155,13 @@
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="nav-link console" role="tab" data-bs-toggle="tab"
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                             data-bs-target="#navs-pills-justified-profile" aria-controls="navs-pills-justified-profile"
                             aria-selected="false">
                             <i class="tf-icons ti ti-terminal-2 ti-xs me-1"></i> Console
                         </button>
                     </li>
-                </ul>
+                </ul> --}}
                 <div class="tab-content"
                     style="background-color: transparent !important; border-color: transparent !important; box-shadow: none !important; margin:0 !important; padding:0 !important;">
                     <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
@@ -336,7 +343,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
-                        <iframe id="console-iframe" src="/?console=kvm&xtermjs=1&vmid={{ Request::segment(4) }}&node={{ Request::segment(3) }}" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe>
+                        {{-- <iframe id="console-iframe" src="https://console.dimensi.com/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe> --}}
                     </div>
                 </div>
             </div>
