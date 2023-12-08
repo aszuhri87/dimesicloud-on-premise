@@ -54,24 +54,36 @@
                 e.preventDefault();
                 let data_sess = {!! json_encode(Session::get('data')) !!};
 
-                $.ajax({
-                    type: "GET",
-                    url: "https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=",
-                    crossDomain: true,
-                    // withCredentials: true,
-                    dataType: 'jsonp',
-                    beforeSend: function(xhr) {
-                        xhr.withCredentials = false;
-                        xhr.setRequestHeader("Cookie", 'PVEAuthCookie='+ data_sess['ticket']);
-                    },
-                    success: function(data) {
-                        console.log(data);
-                        var iframeDoc = document.querySelector('#console-iframe').contentWindow.document;
-                        iframeDoc.open('text/html', 'replace');
-                        iframeDoc.write(data);
-                        iframeDoc.close();
-                    }
-                });
+                // Cookies.set('PVEAuthCookie', JSON.stringify(data_sess['ticket']))
+
+                var domain = '172.16.200.11';
+                var expires = (function(days){
+                    date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    return date.toUTCString();
+                })(5);
+
+                document.cookie = 'PVEAuthCookie' + "=" + encodeURIComponent(JSON.stringify(data_sess['ticket'])) + "; expires=" + expires + "; path='/'; domain=" + domain + ";";
+                // window.open("https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=", "_blank")
+                // $.ajax({
+                //     type: "GET",
+                //     url: "https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=",
+                //     crossDomain: true,
+                //     // withCredentials: true,
+                //     dataType: 'jsonp',
+                //     beforeSend: function(xhr) {
+                //         xhr.withCredentials = false;
+                //         xhr.setRequestHeader("Cookie", 'PVEAuthCookie='+ data_sess['ticket']);
+                //     },
+                //     success: function(data) {
+                //         // console.log(data);
+                //         // var iframeDoc = document.querySelector('#console-iframe').contentWindow.document;
+                //         // iframeDoc.open('text/html', 'replace');
+                //         // iframeDoc.write(data);
+                //         // iframeDoc.close();
+
+                //     }
+                // });
             })
 
             $(document).on('click', '.btn-console', function(event) {
@@ -632,10 +644,10 @@
             })
         },
         getMonitor = () => {
-            let node = '{{ Request::segment(2) }}';
-            let vmid = '{{ Request::segment(3) }}'
+            let node = '{{ Request::segment(3) }}';
+            let vmid = '{{ Request::segment(4) }}'
             $.ajax({
-                    url: `{{ url('virtual_machine/resources') }}/${node}/${vmid}`,
+                    url: `{{ url('/dashboard/virtual_machine/resources') }}/${node}/${vmid}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -656,11 +668,11 @@
                 });
         },
         getSeries = (unit, type) => {
-            let node = '{{ Request::segment(2) }}';
-            let vmid = '{{ Request::segment(3) }}'
+            let node = '{{ Request::segment(3) }}';
+            let vmid = '{{ Request::segment(4) }}'
 
             $.ajax({
-                    url: `{{ url('virtual-machine-series') }}/${node}/${vmid}/${unit}/${type}`,
+                    url: `{{ url('/dashboard/virtual-machine-series') }}/${node}/${vmid}/${unit}/${type}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -677,12 +689,12 @@
                 });
         },
         getSeriesDisk = (unit, type) => {
-            let node = '{{ Request::segment(2) }}';
-            let vmid = '{{ Request::segment(3) }}'
+            let node = '{{ Request::segment(3) }}';
+            let vmid = '{{ Request::segment(4) }}'
 
 
             $.ajax({
-                    url: `{{ url('virtual-machine-series-disk') }}/${node}/${vmid}/${unit}/${type}`,
+                    url: `{{ url('/dashboard/virtual-machine-series-disk') }}/${node}/${vmid}/${unit}/${type}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -699,10 +711,10 @@
                 });
         },
         getCurrentChart = () => {
-            let node = '{{ Request::segment(2) }}';
-            let vmid = '{{ Request::segment(3) }}'
+            let node = '{{ Request::segment(3) }}';
+            let vmid = '{{ Request::segment(4) }}'
             $.ajax({
-                    url: `{{ url('virtual-machine-current') }}/${node}/${vmid}`,
+                    url: `{{ url('/dashboard/virtual-machine-current') }}/${node}/${vmid}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -741,10 +753,10 @@
                 })
         },
         getCurrentStatus = () => {
-            let node = '{{ Request::segment(2) }}';
-            let vmid = '{{ Request::segment(3) }}'
+            let node = '{{ Request::segment(3) }}';
+            let vmid = '{{ Request::segment(4) }}'
             $.ajax({
-                    url: `{{ url('virtual-machine-current') }}/${node}/${vmid}`,
+                    url: `{{ url('/dashboard/virtual-machine-current') }}/${node}/${vmid}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -777,10 +789,10 @@
                 });
         },
         getNetwork = () => {
-            let node = '{{ Request::segment(2) }}';
-            let vmid = '{{ Request::segment(3) }}';
+            let node = '{{ Request::segment(3) }}';
+            let vmid = '{{ Request::segment(4) }}';
             $.ajax({
-                    url: `{{ url('virtual-machine-network') }}/${node}/${vmid}`,
+                    url: `{{ url('/dashboard/virtual-machine-network') }}/${node}/${vmid}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -795,10 +807,10 @@
                 });
         },
         getOS = () => {
-            let node = '{{ Request::segment(2) }}';
-            let vmid = '{{ Request::segment(3) }}'
+            let node = '{{ Request::segment(3) }}';
+            let vmid = '{{ Request::segment(4) }}'
             $.ajax({
-                    url: `{{ url('virtual-machine-os') }}/${node}/${vmid}`,
+                    url: `{{ url('/dashboard/virtual-machine-os') }}/${node}/${vmid}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -806,9 +818,9 @@
 
                     console.log(name);
                     if(res.data['name'] == "Ubuntu"){
-                        $('.os_logo').append(`<img src="../../assets/os_logo/${name.toLowerCase()}.svg" alt="" style="margin-top: 25%; margin-left: 9%">`)
+                        $('.os_logo').append(`<img src="{{ asset('/dashboard/assets/os_logo/${name.toLowerCase()}.svg')}}" alt="" style="margin-top: 25%; margin-left: 9%">`)
                     } else {
-                        $('.os_logo').append(`<img src="../../assets/os_logo/unknown.svg" alt="" style="margin-top: 25%; margin-left: 9%">`)
+                        $('.os_logo').append(`<img src=".{{ asset('/dashboard/assets/os_logo/unknown.svg')}}" alt="" style="margin-top: 25%; margin-left: 9%">`)
                     }
                     $("#image-info").text(`${res.data['pretty-name']} ${res.data.machine}`)
                     $("#kernel-info").text(res.data['kernel-release'])

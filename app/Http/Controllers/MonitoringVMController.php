@@ -79,25 +79,25 @@ class MonitoringVMController extends Controller
         // // Session::put('Cookie', 'PVEAuthCookie='.$auth_data['ticket']);
         // // request()->cookie('PVEAuthCookie=', $auth_data['ticket']);
 
-        // $client = new \GuzzleHttp\Client([
-        //     'verify' => false
-        // ]);
+        $client = new \GuzzleHttp\Client([
+            'verify' => false
+        ]);
 
-        // $response = $client->request(
-        //     'GET',
-        //     "https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=",
-        //     [
-        //         'headers' => [
-        //             'Cookie' => 'PVEAuthCookie='.$auth_data['ticket']
-        //         ]
-        //     ]
-        // );
-        // // dd($response);
-        //     $response = json_decode($response->getBody(), true);
+        $response = $client->request(
+            'GET',
+            "https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=",
+            [
+                'headers' => [
+                    'Cookie' => 'PVEAuthCookie='.$auth_data['ticket']
+                ]
+            ]
+        );
+        // dd(json_encode($response);
+        // $response = json_decode($response->getBody(), true);
 
 
-
-            // setCookie("PVEAuthCookie", $auth_data['ticket']);
+        // setcookie('name', 'value', $time, '/', '.example.com')
+            // setCookie("PVEAuthCookie", $auth_data['ticket'], 0, '/', '172.16.200.11');
 
         // if($response->getStatusCode() == 200){
         //     $response = json_decode($response->getBody(), true);
@@ -107,7 +107,7 @@ class MonitoringVMController extends Controller
         //         Session::put('data',$response['data']);
         // setcookie('PVEAuthCookie='.$auth_data['ticket'], 1, time() + (86400), "/; SameSite=None; Secure");
 
-                return response(view('virtual_machine_detail.index'))->withCookie(cookie('PVEAuthCookie', $auth_data['ticket']));
+                return response(view('virtual_machine_detail.index'))->header('X-Frame-Options', 'allow-from https://172.16.200.11/')->withCookie(cookie('PVEAuthCookie', $auth_data['ticket'], 0, '/', '172.16.200.11',true, false, true, 'none'));
         //     }
         // }
     }
@@ -115,36 +115,39 @@ class MonitoringVMController extends Controller
     public function console(){
                 // // request()->cookie('PVEAuthCookie=', $auth_data['ticket']);
         $auth_data = Session::get('data');
-        $client = new \GuzzleHttp\Client([
-            'verify' => false
-        ]);
+        // $client = new \GuzzleHttp\Client([
+        //     'verify' => false
+        // ]);
 
-        $response = $client->request(
-            'POST',
-            config('app.proxmox').'/api2/extjs/access/ticket',
-            [
-                'headers' => [
-                    'Cookie' => 'PVEAuthCookie='.$auth_data['ticket']
-                ]
-            ]
-        );
+        // $response = $client->request(
+        //     'POST',
+        //     config('app.proxmox').'/api2/extjs/access/ticket',
+        //     [
+        //         'headers' => [
+        //             'Cookie' => 'PVEAuthCookie='.$auth_data['ticket']
+        //         ]
+        //     ]
+        // );
 
-            // setCookie("PVEAuthCookie", $auth_data['ticket']);
+        header('Location: https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=');
 
-        if($response->getStatusCode() == 200){
-            $response = json_decode($response->getBody(), true);
 
-            if(!is_null($response['data'])){
-                Session::put('login',TRUE);
-                Session::put('data',$response['data']);
-            }
-        }
-        $src = 'https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=';
+        setcookie("PVEAuthCookie", $auth_data['ticket']);
 
-        $iframe = `<iframe id="console-iframe" src="`.$src.`" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe>`;
+        // if($response->getStatusCode() == 200){
+        //     $response = json_decode($response->getBody(), true);
+
+        //     if(!is_null($response['data'])){
+        //         // Session::put('login',TRUE);
+        //         Session::put('data',$response['data']);
+        //     }
+        // }
+        // $src = 'https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=';
+
+        // $iframe = `<iframe id="console-iframe" src="`.$src.`" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe>`;
 
         // return redirect($src)->withCookie('PVEAuthCookie='.$auth_data['ticket']);
-        return response($iframe, 200)->withCookie(cookie('PVEAuthCookie', $auth_data['ticket']));
+        return redirect('https://172.16.200.11/?console=kvm&novnc=1&vmid=200081&vmname=anto-vm1&node=R230&resize=off&cmd=');
     }
 
 

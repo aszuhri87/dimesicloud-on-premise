@@ -5,7 +5,6 @@
   class="light-style layout-wide customizer-hide"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="../../assets/"
   data-template="horizontal-menu-template">
   <head>
     <meta charset="utf-8" />
@@ -18,7 +17,7 @@
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('/dashboard/assets/img/favicon/favicon.svg')}}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,33 +27,33 @@
       rel="stylesheet" />
 
     <!-- Icons -->
-    <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" />
-    <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
-    <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" />
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/fonts/fontawesome.svg')}}" />
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/fonts/tabler-icons.svg')}}" />
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/fonts/flag-icons.svg')}}" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../../assets/css/demo.css" />
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/css/rtl/core.svg')}}" class="template-customizer-core-svg')}}" />
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/css/rtl/theme-default.svg')}}" class="template-customizer-theme-svg')}}" />
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/css/demo.svg')}}" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/libs/node-waves/node-waves.svg')}}" />
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.svg')}}" />
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/libs/typeahead-js/typeahead.svg')}}" />
     <!-- Vendor -->
-    {{-- <link rel="stylesheet" href="../../assets/vendor/libs/@form-validation/umd/styles/index.min.css" /> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/libs/@form-validation/umd/styles/index.min.svg')}}" /> --}}
 
     <!-- Page CSS -->
     <!-- Page -->
-    <link rel="stylesheet" href="../../assets/vendor/css/pages/page-auth.css" />
+    <link rel="stylesheet" href="{{ asset('/dashboard/assets/vendor/css/pages/page-auth.svg')}}" />
 
     <!-- Helpers -->
-    <script src="../../assets/vendor/js/helpers.js"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/js/helpers.svg')}}"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-    <script src="../../assets/vendor/js/template-customizer.js"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/js/template-customizer.svg')}}"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="../../assets/js/config.js"></script>
+    <script src="{{ asset('/dashboard/assets/js/config.svg')}}"></script>
   </head>
 
   <body>
@@ -66,18 +65,18 @@
         <div class="d-none d-lg-flex col-lg-7 p-0">
           <div class="auth-cover-bg auth-cover-bg-color d-flex justify-content-center align-items-center">
             <img
-              src="../../assets/img/illustrations/auth-login-illustration-light.png"
+              src="{{ asset('/dashboard/assets/img/illustrations/auth-login-illustration-light.svg')}}"
               alt="auth-login-cover"
               class="img-fluid my-5 auth-illustration"
-              data-app-light-img="illustrations/auth-login-illustration-light.png"
-              data-app-dark-img="illustrations/auth-login-illustration-dark.png" />
+              data-app-light-img="illustrations/auth-login-illustration-light.svg')}}"
+              data-app-dark-img="illustrations/auth-login-illustration-dark.svg')}}" />
 
             <img
-              src="../../assets/img/illustrations/bg-shape-image-light.png"
+              src="{{ asset('/dashboard/assets/img/illustrations/bg-shape-image-light.svg')}}"
               alt="auth-login-cover"
               class="platform-bg"
-              data-app-light-img="illustrations/bg-shape-image-light.png"
-              data-app-dark-img="illustrations/bg-shape-image-dark.png" />
+              data-app-light-img="illustrations/bg-shape-image-light.svg')}}"
+              data-app-dark-img="illustrations/bg-shape-image-dark.svg')}}" />
           </div>
         </div>
         <!-- /Left Text -->
@@ -89,7 +88,7 @@
             <div class="app-brand mb-4">
               <a href="index.html" class="app-brand-link gap-2">
                 <span class="demo">
-                    <img src="../../assets/svg/icons/dimensi-blue.svg" alt="" height="50px" width="50%">
+                    <img src="{{ asset('/dashboard/assets/svg/icons/dimensi-blue.svg')}}" alt="" height="50px" width="50%">
                 </span>
               </a>
             </div>
@@ -171,27 +170,27 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
-    <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../../assets/vendor/js/bootstrap.js"></script>
-    <script src="../../assets/vendor/libs/node-waves/node-waves.js"></script>
-    <script src="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
-    <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
-    <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-    <script src="../../assets/vendor/js/menu.js"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/libs/jquery/jquery.svg')}}"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/libs/popper/popper.svg')}}"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/js/bootstrap.svg')}}"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/libs/node-waves/node-waves.svg')}}"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.svg')}}"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/libs/hammer/hammer.svg')}}"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/libs/i18n/i18n.svg')}}"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/libs/typeahead-js/typeahead.svg')}}"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/js/menu.svg')}}"></script>
 
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    {{-- <script src="../../assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-    <script src="../../assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-    <script src="../../assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script> --}}
+    {{-- <script src="{{ asset('/dashboard/assets/vendor/libs/@form-validation/umd/bundle/popular.min.svg')}}"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.svg')}}"></script>
+    <script src="{{ asset('/dashboard/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.svg')}}"></script> --}}
 
     <!-- Main JS -->
-    <script src="../../assets/js/main.js"></script>
+    <script src="{{ asset('/dashboard/assets/js/main.svg')}}"></script>
 
     <!-- Page JS -->
-    <script src="../../assets/js/pages-auth.js"></script>
+    <script src="{{ asset('/dashboard/assets/js/pages-auth.svg')}}"></script>
   </body>
 </html>

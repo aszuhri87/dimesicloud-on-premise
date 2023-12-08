@@ -26,10 +26,10 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::group(['middleware' => ['auth-middleware']], function () {
+Route::group(['prefix'=>'dashboard', 'middleware' => ['auth-middleware']], function () {
     Route::get('virtual-machine', [MonitoringVMController::class, 'index']);
     Route::post('virtual-machine/dt', [MonitoringVMController::class, 'dt']);
-    Route::get('dashboard', [DashboardController::class, 'index']);
+    Route::get('index', [DashboardController::class, 'index']);
     // Route::get('virtual-machine/{node}/{vmid}/graph', [MonitoringVMController::class, 'detail']);
     Route::get('virtual-machine-graph/{node}/{vmid}', [MonitoringVMController::class, 'detail']);
     Route::get('/resources/{virtual_machine_id}','DashboardController@resources');
@@ -46,6 +46,9 @@ Route::group(['middleware' => ['auth-middleware']], function () {
     Route::get('/virtual-machine-series-disk/{node}/{vmid}/{unit}/{type}',[MonitoringVMController::class, 'series_disk']);
     Route::get('/management-alert',[ManagementAlert::class, 'index']);
     Route::post('/management-alert',[ManagementAlert::class, 'store']);
+    Route::get('/console',[MonitoringVMController::class, 'console']);
+
+
 
     Route::get('logout', [AuthController::class, 'logout']);
 

@@ -60,7 +60,7 @@
                     <div class="row">
                         <div class="col-md-2 col-lg-2 col-sm-6 vm-detail-profile">
                             <div class="os_logo">
-                                {{-- <img src="../../assets/os_logo/ubuntu.svg" alt="" srcset=""> --}}
+                                {{-- <img src="../../dashboard/assets/os_logo/ubuntu.svg" alt="" srcset=""> --}}
                             </div>
                         </div>
                         <div class="d-block d-sm-none mt-5"></div>
@@ -77,7 +77,7 @@
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li>
-                                                <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/start"
+                                                <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/start"
                                                     class="dropdown-item d-flex align-items-center btn-start">
                                                     <p class="no-ws">
                                                         <span class="tf-icons ti-xs ti ti-player-play"></span> Start
@@ -85,7 +85,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/shutdown"
+                                                <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/shutdown"
                                                     class="dropdown-item d-flex align-items-center btn-shutdown">
                                                     <p class="no-ws">
                                                         <span class="tf-icons ti-xs ti ti-power"></span> Shutdown
@@ -93,7 +93,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/reboot"
+                                                <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/reboot"
                                                     class="dropdown-item d-flex align-items-center btn-restart">
                                                     <p class="no-ws">
                                                         <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Reboot
@@ -101,7 +101,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/force-shutdown"
+                                                <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(3) }}/force-shutdown"
                                                     class="dropdown-item d-flex align-items-center btn-shutdown">
                                                     <p class="no-ws">
                                                         <span class="tf-icons ti-xs ti ti-recharging"></span> Force Shutdown
@@ -336,7 +336,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
-                        <iframe id="console-iframe" src="/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe>
+                        <iframe id="console-iframe" src="/?console=kvm&xtermjs=1&vmid={{ Request::segment(4) }}&node={{ Request::segment(3) }}" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe>
                     </div>
                 </div>
             </div>

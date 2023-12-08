@@ -42,12 +42,10 @@ class AuthController extends Controller
             if(!is_null($response['data'])){
                 Session::put('login',TRUE);
                 Session::put('data',$response['data']);
-                return redirect('/dashboard');
+                return redirect('/dashboard/index');
             }
             return Redirect::back()->withErrors(['message' => 'Username atau password salah.']);
         }
-
-
     }
 
     public function logout()
