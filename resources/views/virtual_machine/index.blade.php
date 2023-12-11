@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@push('style')
+<style>
+    .power-btn-action{
+        background-color: #0073C029;
+        border-radius: 4px;
+        width: 24px;
+        height: 24px;
+    }
+</style>
+
+@endpush
+
 @section('content')
     <div class="content-wrapper">
         <!-- Content -->
