@@ -16,7 +16,7 @@
     <div class="content-wrapper">
         <!-- Content -->
 
-        <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="flex-grow-1 container-p-y container-fluid">
             <div class="card" style="background: transparent; border-radius: 5px; box-shadow: none;">
                 <div class="card-datatable">
                     <table id="init-table" class="table table-sm border"

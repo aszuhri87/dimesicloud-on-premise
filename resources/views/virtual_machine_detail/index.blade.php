@@ -47,7 +47,7 @@
     <div class="content-wrapper">
         <!-- Content -->
 
-        <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="flex-grow-1 container-p-y container-fluid">
             <h6 class="mb-4"><span class="text-muted fw-light">Virtual Machine /</span> Virtual Machine Details</h6>
 
             {{-- profile --}}

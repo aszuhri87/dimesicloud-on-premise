@@ -19,7 +19,7 @@ class DashboardController extends Controller
             if($response->getStatusCode() == 200){
                 $resources = json_decode($response->getBody(), true);
 
-                $data = array();
+                $vms = array();
 				$cpu_usage = 0;
 				$cpu = 0;
 
@@ -35,6 +35,8 @@ class DashboardController extends Controller
 				$node_running = 0;
 				$node_stopped = 0;
                 foreach ($resources['data'] as $key => $resource) {
+
+
                 	if($resource['type'] == 'node'){
 						$cpu_usage += $resource['cpu'];
 						$cpu += $resource['maxcpu'];
@@ -53,7 +55,28 @@ class DashboardController extends Controller
 						}
 					}
 
-					if($resource['type'] == 'qemu'){
+					if($resource['type'] == 'qemu' || $resource['type'] == 'lxc'){
+
+                        $vm_cpu_usage = number_format($resource['cpu'] * 100, 2);
+                        $vm_mem_usage = number_format($resource['mem'] / $resource['maxmem'] * 100, 2);
+
+                        if($vm_cpu_usage > 80 || $vm_mem_usage > 80){
+                            $_data = array(
+                                'name' => $resource['name'],
+                                'status' => $resource['status'],
+                                'uptime' => gmdate("H:i:s", $resource['uptime']),
+                                'node' => $resource['node'],
+                                'vmid' => $resource['vmid'],
+                                'maxdisk' => number_format($resource['maxdisk'] / pow(1024, 3), 1) . " G",
+                                'maxmem' => number_format($resource['maxmem'] / pow(1024, 3), 1) . " G",
+                                'mem' => number_format($resource['mem'] / pow(1024, 3), 1) . " G",
+                                'cpu' => $vm_cpu_usage . " %",
+                                'mem_usage' => $vm_mem_usage ." %",
+                                'vmid' => $resource['vmid'],
+                                'maxcpu' => $resource['maxcpu'],
+                            );
+                            array_push($vms, $_data);
+                        }
 
 						// Virtual Machine Statistic
 						if($resource['status'] == 'running'){
@@ -92,7 +115,8 @@ class DashboardController extends Controller
                             "total" => $node_running + $node_stopped,
                             "running" => $node_running,
                             "stopped" => $node_stopped
-                        ]
+                        ],
+                        'vms' => $vms
 					]
                 ]);
             }

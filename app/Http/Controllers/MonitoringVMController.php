@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\ClientException;
 use Session;
 use Exception;
 use DataTables;
-
+use Illuminate\Support\Facades\Log;
 
 class MonitoringVMController extends Controller
 {
@@ -31,11 +31,10 @@ class MonitoringVMController extends Controller
             $virtual_machines = json_decode($response->getBody(), true);
 
             $data = array();
-
             foreach ($virtual_machines['data'] as $key => $virtual_machine) {
-                if ($virtual_machine['type'] == 'qemu') {
+                if ($virtual_machine['type'] == 'qemu' || $virtual_machine['type'] == 'lxc' ) {
 
-                    $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/nodes/' . $virtual_machine['node'] . '/qemu/' . $virtual_machine['vmid'] . '/config', 'GET');
+                    $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/nodes/' . $virtual_machine['node'] . '/'.$virtual_machine['type'].'/' . $virtual_machine['vmid'] . '/config', 'GET');
 
                     if ($response->getStatusCode() == 200) {
                         $config = json_decode($response->getBody(), true);
