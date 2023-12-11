@@ -5,8 +5,8 @@
     .power-btn-action{
         background-color: #0073C029;
         border-radius: 4px;
-        width: 24px;
-        height: 24px;
+        width: 26px;
+        height: 26px;
     }
 </style>
 
