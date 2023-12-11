@@ -8,7 +8,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dimensi</title>
+    <title>DimensiCloud</title>
 
     <meta name="description" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -86,21 +86,15 @@
 
                     <!-- Footer -->
                     <footer class="content-footer footer bg-footer-theme">
-                        <div class="container-xxl">
+                        <div class="container-fluid">
                             <div
-                                class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+                                class="footer-container d-flex align-items-center justify-content-start py-2 flex-md-row flex-column">
                                 <div>
                                     ©
                                     <script>
                                         document.write(new Date().getFullYear());
                                     </script>
-                                    Dimensi Cloud by Gmedia
-                                </div>
-                                <div class="d-none d-lg-inline-block">
-                                    <a href="https://themeforest.net/licenses/standard" class="footer-link me-4"
-                                        target="_blank">License</a>
-                                    <a href="https://pixinvent.ticksy.com/" target="_blank"
-                                        class="footer-link d-none d-sm-inline-block">Support</a>
+                                    DimensiCloud Powered by Gmedia
                                 </div>
                             </div>
                         </div>
