@@ -35,13 +35,11 @@
         .date-semi-radial {
             position: absolute;
             /* margin-top: 5%; */
-            bottom: 2%;
+            bottom: -5px;
             left: 50%;
-            translate: -50% 3%;
+            translate: -50% 5px;
             white-space: nowrap;
         }
-
-        ,
     </style>
 @endpush
 
@@ -59,9 +57,7 @@
                 <div class="card-body c-body-h">
                     <div class="row">
                         <div class="col-md-2 col-lg-2 col-sm-6 vm-detail-profile">
-                            <div class="os_logo">
-                                {{-- <img src="../../dashboard/assets/os_logo/ubuntu.svg" alt="" srcset=""> --}}
-                            </div>
+                            <div class="os_logo"></div>
                         </div>
                         <div class="d-block d-sm-none mt-5"></div>
                         <div class="col-md-10 col-lg-10 col-sm-6">
@@ -70,20 +66,20 @@
                                     <div class="flex-grow-1 w-100">
                                         <p class="fw-bolder no-ws" id="vm-name"></p>
                                     </div>
-                                    <div class="dropdown d-flex">
-                                        <div class="pt-1">
+                                    <div class="dropdown d-flex justify-content-end">
+                                        <div class="pe-2 no-ws">
                                             <a href="https://console.dimensi.com/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" title="Console" class="btn btn-primary console" style="width:35px; height:38px;">
                                                 <i class="tf-icons ti ti-terminal-2 ti-xs me-1"></i>
                                             </a>
                                         </div>
-                                        <div class="p-1">
+                                        <div class="">
                                             <button type="button" class="btn dropdown-toggle btn-primary hide-arrow p-0"
                                                 style="width:38px; height:38px;" data-bs-toggle="dropdown">
                                                 <span class="tf-icons ti-xs ti ti-power text-center"></span>
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
                                                 <li>
-                                                    <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/start"
+                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/start"
                                                         class="dropdown-item d-flex align-items-center btn-start">
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-player-play"></span> Start
@@ -91,7 +87,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/shutdown"
+                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/shutdown"
                                                         class="dropdown-item d-flex align-items-center btn-shutdown">
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-power"></span> Shutdown
@@ -99,7 +95,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/reboot"
+                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/reboot"
                                                         class="dropdown-item d-flex align-items-center btn-restart">
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Reboot
@@ -107,7 +103,7 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ url('dashboard/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/force-shutdown"
+                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/force-shutdown"
                                                         class="dropdown-item d-flex align-items-center btn-shutdown">
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-recharging"></span> Force Shutdown
@@ -146,22 +142,6 @@
             <hr>
 
             <div class="nav-align-top mb-4">
-                {{-- <ul class="nav nav-pills mb-4" role="tablist">
-                    <li class="nav-item">
-                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
-                            data-bs-target="#navs-pills-justified-home" aria-controls="navs-pills-justified-home"
-                            aria-selected="true">
-                            <i class="tf-icons ti ti-chart-histogram ti-xs me-1"></i> Graph
-                        </button>
-                    </li>
-                    <li class="nav-item">
-                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
-                            data-bs-target="#navs-pills-justified-profile" aria-controls="navs-pills-justified-profile"
-                            aria-selected="false">
-                            <i class="tf-icons ti ti-terminal-2 ti-xs me-1"></i> Console
-                        </button>
-                    </li>
-                </ul> --}}
                 <div class="tab-content"
                     style="background-color: transparent !important; border-color: transparent !important; box-shadow: none !important; margin:0 !important; padding:0 !important;">
                     <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
@@ -169,7 +149,7 @@
                             <div class="col-md-4 mb-2">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div style="position: relative; height: 240px">
+                                        <div style="position: relative; height: 260px;">
                                             <h5>CPU Usage</h5>
                                             <div class="date-semi-radial">
                                                 <p class="w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
@@ -185,7 +165,7 @@
                             <div class="col-md-4 mb-2">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div style="position: relative; height: 240px">
+                                        <div style="position: relative; height: 260px">
                                             <h5>Memory Usage</h5>
                                             <div class="date-semi-radial">
                                                 <p class="w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
@@ -201,7 +181,7 @@
                             <div class="col-md-4 mb-2">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div style="position: relative; height: 240px">
+                                        <div style="position: relative; height: 260px">
                                             <h5>Disk Size</h5>
                                             <div class="date-semi-radial text-center">
                                                 <p class="w-100 text-center"> {{ date('d/m/Y | H:i') }}</p>
@@ -343,7 +323,6 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
-                        {{-- <iframe id="console-iframe" src="https://console.dimensi.com/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" frameborder="0" class="w-100" style="height: 500px; border-radius: 5px;"></iframe> --}}
                     </div>
                 </div>
             </div>
