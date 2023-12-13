@@ -45,15 +45,14 @@
                         </div>
                     </div>
                     <div class="tab-pane fade list-tele" id="navs-pills-top-profile" role="tabpanel">
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @include('management_alert.modal')
 @endsection
 
-@include('management_alert.modal')
 
 @push('script')
     @include('management_alert.script')

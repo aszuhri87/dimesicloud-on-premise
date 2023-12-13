@@ -84,32 +84,6 @@
                         .always(function() { });
                     }
                 });
-
-                // Swal.fire({
-                //     title: 'Hapus data?',
-                //     text: "Data yang akan anda Hapus akan hilang permanen!",
-                //     confirmButtonColor: '#0073C0',
-                //     confirmButtonText: "Confirm",
-                //     showCloseButton: true,
-                // }).then(function (result) {
-                //     if (result.value) {
-                //         $.ajax({
-                //             url: url,
-                //             type: 'DELETE',
-                //             dataType: 'json',
-                //         })
-                //         .done(function(res, xhr, meta) {
-                //             toastr.success(res.message, 'Success')
-
-                //             $('#email-table').DataTable().ajax.reload();
-                //             $('#tele-table').DataTable().ajax.reload();$('#init-table').DataTable().ajax.reload();
-                //         })
-                //         .fail(function(res, error) {
-                //             toastr.error(res.responseJSON.message, 'Gagal')
-                //         })
-                //         .always(function() { });
-                //     }
-                // })
             });
 
         $('#form-submit').submit(function(event){
