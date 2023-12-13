@@ -19,7 +19,8 @@ class DashboardController extends Controller
             if($response->getStatusCode() == 200){
                 $resources = json_decode($response->getBody(), true);
 
-                $vms = array();
+                $top_cpu = array();
+                $top_memory = array();
 				$cpu_usage = 0;
 				$cpu = 0;
 
@@ -60,22 +61,28 @@ class DashboardController extends Controller
                         $vm_cpu_usage = number_format($resource['cpu'] * 100, 2);
                         $vm_mem_usage = number_format($resource['mem'] / $resource['maxmem'] * 100, 2);
 
-                        if($vm_cpu_usage > 80 || $vm_mem_usage > 80){
-                            $_data = array(
-                                'name' => $resource['name'],
-                                'status' => $resource['status'],
-                                'uptime' => gmdate("H:i:s", $resource['uptime']),
-                                'node' => $resource['node'],
-                                'vmid' => $resource['vmid'],
-                                'maxdisk' => number_format($resource['maxdisk'] / pow(1024, 3), 1) . " G",
-                                'maxmem' => number_format($resource['maxmem'] / pow(1024, 3), 1) . " G",
-                                'mem' => number_format($resource['mem'] / pow(1024, 3), 1) . " G",
-                                'cpu' => $vm_cpu_usage . " %",
-                                'mem_usage' => $vm_mem_usage ." %",
-                                'vmid' => $resource['vmid'],
-                                'maxcpu' => $resource['maxcpu'],
-                            );
-                            array_push($vms, $_data);
+                        $_data = array(
+                            'name' => $resource['name'],
+                            'status' => $resource['status'],
+                            'uptime' => gmdate("H:i:s", $resource['uptime']),
+                            'node' => $resource['node'],
+                            'vmid' => $resource['vmid'],
+                            'maxdisk' => number_format($resource['maxdisk'] / pow(1024, 3), 1) . " G",
+                            'maxmem' => number_format($resource['maxmem'] / pow(1024, 3), 1) . " G",
+                            'mem' => number_format($resource['mem'] / pow(1024, 3), 1) . " G",
+                            'cpu' => $vm_cpu_usage . " %",
+                            'mem_usage' => $vm_mem_usage ." %",
+                            'vmid' => $resource['vmid'],
+                            'maxcpu' => $resource['maxcpu'],
+                        );
+
+                        if($vm_cpu_usage > 80){
+                            array_push($top_cpu, $_data);
+                        }
+
+                        if($vm_mem_usage > 80){
+
+                            array_push($top_memory, $_data);
                         }
 
 						// Virtual Machine Statistic
@@ -116,7 +123,8 @@ class DashboardController extends Controller
                             "running" => $node_running,
                             "stopped" => $node_stopped
                         ],
-                        'vms' => $vms
+                        'top_cpu' => $top_cpu,
+                        'top_memory' => $top_memory
 					]
                 ]);
             }

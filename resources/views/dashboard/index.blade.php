@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="content-wrapper">
     <!-- Content -->
@@ -116,56 +115,42 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
-                <div class="card h-100">
-                    <div class="card-header d-flex justify-content-between pb-0">
-                        <div class="card-title mb-0">
-                            <h5 class="mb-0">Virtual Machine High Resource Usage</h5>
-                            <small class="text-muted">Data will be update every 10 seconds</small>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 col-sm-4 col-md-12 col-lg-6">
-                                <div class="mt-lg-4 mt-lg-2 mb-lg-4 mb-2 pt-1">
-                                    <h1 class="mb-0" id="count-vm-high-resource">0</h1>
-                                    <p class="mb-0">Total Virtual Machine</p>
-                                </div>
-                                <ul class="p-0 m-0">
-                                    <li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
-                                        <div class="badge rounded bg-label-primary p-1"><i class="ti ti-ticket ti-sm"></i></div>
-                                        <div>
-                                            <h6 class="mb-0 text-nowrap">CPU Usage</h6>
-                                            <small class="text-muted">More than 80%</small>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex gap-3 align-items-center mb-lg-3 pb-1">
-                                        <div class="badge rounded bg-label-info p-1">
-                                            <i class="ti ti-circle-check ti-sm"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-nowrap">Memory Usage</h6>
-                                            <small class="text-muted">More than 80%</small>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-12 col-sm-8 col-md-12 col-lg-8">
-                                <div id="supportTracker"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-12 col-sm-12 mb-4">
+            <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
                 <div class="card">
+                    <h5 class="card-header">Top VM CPU Usage</h5>
+                    <div class="card-body">
+                        <p class="card-text">
+                            VM used more than 80% resource.
+                        </p>
+                    </div>
                     <div class="card-datatable table-responsive">
-                        <table id="vm-table" class="table border-top">
+                        <table id="top-vm-cpu-table" class="table border-top">
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Node</th>
                                     <th>CPU USAGE</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
+                <div class="card">
+                    <h5 class="card-header">TOP VM Memory Usage</h5>
+                    <div class="card-body">
+                        <p class="card-text">
+                            VM used more than 80% resource.
+                        </p>
+                    </div>
+                    <div class="card-datatable table-responsive">
+                        <table id="top-vm-memory-table" class="table border-top">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Node</th>
                                     <th>MEMORY USAGE</th>
                                     <th>MEMORY SIZE</th>
                                     <th>STATUS</th>

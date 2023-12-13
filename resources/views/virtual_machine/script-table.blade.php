@@ -4,7 +4,6 @@
 
         $(document).ready(function() {
             initTable();
-            // actionTable();
         });
 
         const initTable = () => {
@@ -77,31 +76,32 @@
                         className: "text-center",
                         data: "vmid",
                         render: function(data, type, full, meta) {
+                            let is_running = full['status'] === 'running';
                             return `
                         <div class="d-flex" role="group" aria-label="Basic example">
                             <div class="p-1">
-                                <a href="{{ url('power') }}/${full['node']}/${full['vmid']}/start" title="Start" class="btn  btn-start btn-sm btn-clean btn-icon p-1" title="Start">
+                                <a href="{{ url('power') }}/${full['node']}/${full['vmid']}/start" ${is_running ? 'disabled':''}  title="Start" class="btn  btn-start btn-sm btn-clean btn-icon p-1" title="Start">
                                     <span class="svg-icon svg-icon-md power-btn-action">
                                         <i class="menu-icon tf-icons ti ti-xs ti-player-play text-primary p-1" ></i>
                                     </span>
                                 </a>
                             </div>
                             <div class="pt-1">
-                                <a href="{{ url('power') }}/${full['node']}/${full['vmid']}/shutdown" title="Shutdown" class="btn  btn-shutdown btn-sm btn-clean btn-icon p-1" title="Shutdown">
+                                <a href="{{ url('power') }}/${full['node']}/${full['vmid']}/shutdown" ${is_running === false ? 'disabled':''} title="Shutdown" class="btn  btn-shutdown btn-sm btn-clean btn-icon p-1" title="Shutdown">
                                     <span class="svg-icon svg-icon-md power-btn-action">
                                         <i class="menu-icon tf-icons ti ti-xs ti-power text-primary p-1" ></i>
                                     </span>
                                 </a>
                             </div>
                             <div class="p-1">
-                                <a href="{{ url('power') }}/${full['node']}/${full['vmid']}/reboot" title="Reboot" class="btn btn-reboot btn-sm btn-clean btn-icon p-1" data-toggle="tooltip">
+                                <a href="{{ url('power') }}/${full['node']}/${full['vmid']}/reboot" ${is_running === false ? 'disabled':''} title="Reboot" class="btn btn-reboot btn-sm btn-clean btn-icon p-1" data-toggle="tooltip">
                                     <span class="svg-icon svg-icon-md power-btn-action">
                                         <i class="menu-icon tf-icons ti ti-xs ti-refresh-dot text-primary p-1" ></i>
                                     </span>
                                 </a>
                             </div>
                             <div class="pt-1">
-                                <a href="{{ url('power') }}/${full['node']}/${full['vmid']}/force-shutdown" title="Force Shutdown" class="btn btn-force-shutdown btn-sm btn-clean btn-icon p-1" data-toggle="tooltip">
+                                <a href="{{ url('power') }}/${full['node']}/${full['vmid']}/force-shutdown" ${is_running === false ? 'disabled':''} title="Force Shutdown" class="btn btn-force-shutdown btn-sm btn-clean btn-icon p-1" data-toggle="tooltip">
                                     <span class="svg-icon svg-icon-md power-btn-action">
                                         <i class="menu-icon tf-icons ti ti-xs ti-recharging text-primary p-1"></i>
                                     </span>

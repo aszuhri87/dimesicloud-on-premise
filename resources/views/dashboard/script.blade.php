@@ -1,5 +1,8 @@
 <script>
-    var vm_table = null;
+    var top_vm_cpu_table = null;
+    var top_vm_memory_table = null;
+
+
     const cpuUsageChart = (data) => {
         var options = {
             series: [0],
@@ -173,8 +176,8 @@
 
     }
 
-    const vmAbuseTable = () => {
-        vm_table = $('#vm-table').DataTable({
+    const topVmCpuTable = () => {
+        top_vm_cpu_table = $('#top-vm-cpu-table').DataTable({
             columns: [{
                     data: 'name', orderable: false, width:"30%"
                 },
@@ -183,6 +186,53 @@
                 },
                 {
                     data: 'cpu', class: 'text-center'
+                },
+                {
+                    data: 'status', orderable: false,  class: 'text-center'
+                }
+            ],
+            columnDefs: [{
+                    targets: 0,
+                    data: 'id',
+                    render: function(data, type, full, meta) {
+                        return `
+						<a href="{{ url('virtual-machine-graph') }}/${full['node']}/${full['vmid']}">
+							<p class="font-weight-bold text-primary-75 text-hover-primary font-size-lg mb-1">${ full['name'].toUpperCase() }</p>
+						</a>
+					`
+                    }
+                },
+                {
+                    // Label
+                    targets: -1,
+                    data: 'status',
+                    render: function(data, type, full, meta) {
+                        return data == 'running' ?
+                            `<span class="badge bg-label-primary">Running</span>` :
+                            `<span class="badge bg-label-danger">Stopped</span>`
+                    }
+                },
+            ],
+            order: [
+                [2, 'desc']
+            ],
+            dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            select: {
+                // Select style
+                style: 'multi'
+            },
+            lengthChange: false,
+            pageLength: 5
+        });
+    }
+
+    const topVmMemoryTable = () => {
+        top_vm_memory_table = $('#top-vm-memory-table').DataTable({
+            columns: [{
+                    data: 'name', orderable: false, width:"30%"
+                },
+                {
+                    data: 'node', orderable: false
                 },
                 {
                     data: 'mem_usage',  class: 'text-center'
@@ -223,7 +273,9 @@
             select: {
                 // Select style
                 style: 'multi'
-            }
+            },
+            lengthChange: false,
+            pageLength: 5
         });
     }
 
@@ -252,9 +304,8 @@
                 ramUsageChart(res.data.memory)
                 diskUsageChart(res.data.disk)
 
-                // vmAbuseTable(res.data.vms)
-                $("#count-vm-high-resource").text(res.data.vms.length);
-                vm_table.clear().rows.add( res.data.vms ).draw();
+                top_vm_cpu_table.clear().rows.add( res.data.top_cpu ).draw();
+                top_vm_memory_table.clear().rows.add( res.data.top_memory ).draw();
             })
             .fail(function(res, error) {
 
@@ -271,6 +322,7 @@
         // cpuUsageChart();
         // ramUsageChart();
         // diskUsageChart();
-        vmAbuseTable();
+        topVmCpuTable();
+        topVmMemoryTable()
     })
 </script>

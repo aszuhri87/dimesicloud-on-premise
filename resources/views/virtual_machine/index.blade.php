@@ -8,6 +8,12 @@
         width: 26px;
         height: 26px;
     }
+
+    a[disabled] {
+        opacity: .4;
+        cursor: default !important;
+        pointer-events: none;
+    }
 </style>
 
 @endpush

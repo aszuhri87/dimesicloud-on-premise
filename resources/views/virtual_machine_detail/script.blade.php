@@ -738,10 +738,6 @@
                     $("#disk-info").text(`${bytesToSize(res.data.maxdisk)}`)
                     $("#uptime").text(secondsToDhms(res.data.uptime))
 
-                    // var cpu = res.data.cpu * 100;
-
-                    // cpuLineChart(cpu);
-
                     let element = res.data.status == 'running' ?
                         `<span class="badge badge-primary">
                                     ${res.data.status.toUpperCase()}
@@ -749,6 +745,16 @@
                         `<span class="badge badge-danger">
                                     ${res.data.status.toUpperCase()}
                                 </span>`;
+
+                    if(res.data.status === 'running'){
+                        $('.btn-running').attr('disabled',true)
+                        $('.btn-stopped').attr('disabled',false)
+                    }
+
+                    if(res.data.status === 'stopped'){
+                        $('.btn-running').attr('disabled',false)
+                        $('.btn-stopped').attr('disabled',true)
+                    }
 
                     $("#status-info").html(element)
 
