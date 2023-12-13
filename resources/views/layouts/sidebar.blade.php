@@ -35,7 +35,7 @@
       </li>
       <li class="menu-item @if (strpos(Request::url(), 'management-alert')) active @endif">
         <a href="/management-alert" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-bell"></i>
+          <i class="menu-icon tf-icons ti ti-bell-cog"></i>
           <div data-i18n="Management Alert">Management Alert</div>
         </a>
       </li>
