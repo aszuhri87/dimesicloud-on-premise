@@ -4,9 +4,6 @@
         var series_config_2 = $(".text-date-2").text().split(', ')
 
 
-        console.log(series_config);
-        // console.log(data_sess['ticket']);
-
         getSeries(series_config[0].toLowerCase(), series_config[1])
         getSeriesDisk(series_config_2[0].toLowerCase(), series_config_2[1])
 
@@ -54,7 +51,7 @@
                 e.preventDefault();
                 let data_sess = {!! json_encode(Session::get('data')) !!};
 
-                Cookies.set('PVEAuthCookie', data_sess['ticket'], {domain: '.dimensi.com'})
+                Cookies.set('PVEAuthCookie', data_sess['ticket'], {domain: "{{env('BASE_DOMAIN')}}"})
                 window.open($(this).attr('href'), "_blank", "location=yes")
             })
 

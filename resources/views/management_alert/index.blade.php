@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="flex-grow-1 container-p-y container-fluid">
         <div>
             <div class="nav-align-top mb-4">
                 <div class="d-flex justify-content-between">

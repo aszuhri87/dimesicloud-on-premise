@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="dropdown d-flex justify-content-end">
                                         <div class="pe-2 no-ws">
-                                            <a href="https://console.dimensi.com/?console=shell&xtermjs=1&vmid=0&vmname=&node={{ Request::segment(2) }}&cmd=" title="Console" class="btn btn-primary console" style="width:35px; height:38px;">
+                                            <a href="{{env('CONSOLE_URL')}}/?console=shell&xtermjs=1&vmid=0&vmname=&node={{ Request::segment(2) }}&cmd=" title="Console" class="btn btn-primary console" style="width:35px; height:38px;">
                                                 <i class="tf-icons ti ti-terminal-2 ti-xs me-1"></i>
                                             </a>
                                         </div>
