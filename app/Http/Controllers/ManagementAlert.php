@@ -10,8 +10,6 @@ use DB;
 class ManagementAlert extends Controller
 {
     public function index(){
-        // $type = NotificationReceipt::whereNull('deleted_at')->first();
-
         return view('management_alert.index');
     }
 
@@ -44,6 +42,15 @@ class ManagementAlert extends Controller
 
     public function store(Request $request){
         try {
+
+            $check = NotificationReceipt::where('value', $request->value)->whereNull('deleted_at')->first();
+
+            if($check){
+                return response()->json([
+                    'message' => ucwords($request->type)." already exist!",
+                    'code' => 400
+                ], 400);
+            }
 
             NotificationReceipt::create([
                 'type' => $request->type,
