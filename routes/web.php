@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth-middleware']], function () {
     Route::get('/node-detail/{node}',[NodeController::class, 'detail']);
     Route::get('/node-detail/{node}/profile',[NodeController::class, 'profile']);
     Route::get('/node-detail/{node}/{unit}/{type}/resources',[NodeController::class, 'resource']);
+    Route::post('/node-detail/{node}/list-disk',[NodeController::class, 'list_disk']);
+
 
     Route::get('logout', [AuthController::class, 'logout']);
 

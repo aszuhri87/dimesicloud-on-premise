@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @push('style')
-<<<<<<< Updated upstream
 <style>
     .power-btn-action{
         background-color: #0073C029;
@@ -17,16 +16,6 @@
     }
 </style>
 
-=======
-    <style>
-        .power-btn-action{
-            background-color: #0073C029;
-            border-radius: 4px;
-            width: 26px;
-            height: 26px;
-        }
-    </style>
->>>>>>> Stashed changes
 @endpush
 
 @section('content')

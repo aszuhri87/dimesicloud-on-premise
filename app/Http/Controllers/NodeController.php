@@ -119,7 +119,7 @@ class NodeController extends Controller
                 $mem_usage = array();
                 $net_in_usage = array();
                 $net_out_usage = array();
-                $load = array();
+                $io = array();
 
                 foreach ($data['data'] as $key => $value) {
                     array_push($list_category, date("Y-m-d H:i:s ", $value['time']));
@@ -140,8 +140,8 @@ class NodeController extends Controller
                         array_push($net_out_usage, number_format($value['netout'], 2));
                     }
 
-                    if (array_key_exists('loadavg', $value)) {
-                        array_push($load, $value['loadavg']);
+                    if (array_key_exists('iowait', $value)) {
+                        array_push($io, $value['iowait']);
                     }
 
                 }
@@ -153,7 +153,7 @@ class NodeController extends Controller
                         'mem' => $mem_usage,
                         'netin' => $net_in_usage,
                         'netout' => $net_out_usage,
-                        'load' => $load,
+                        'iowait' => $io,
                     ],
                     'res' => $data
                 ]);
@@ -166,5 +166,52 @@ class NodeController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    }
+
+    public function list_disk($node){
+            $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/nodes/'.$node.'/disks/list', 'GET');
+
+            $data = array();
+            $wearout = null;
+
+            if($response->getStatusCode() == 200){
+                $response = json_decode($response->getBody(), true);
+
+                $resource = $response['data'];
+
+                foreach($resource as $r){
+                    $wearout_raw = $r['wearout'];
+
+                    if(is_numeric($wearout_raw) == 1){
+                        $wearout = (string)(100 - (int)$wearout_raw).' %';
+                    } else {
+                        $wearout = $wearout_raw;
+                    }
+
+                    $_data = [
+                        "model" => $r['model'],
+                        "used" => $r['used'],
+                        "gpt" => $r['gpt'],
+                        "type" => $r['type'],
+                        "devpath" => $r['devpath'],
+                        "serial" => $r['serial'],
+                        "osdid-list" =>['osdid-list'],
+                        "health" => $r['health'],
+                        "wwn" => $r['wwn'],
+                        "wearout" => $wearout,
+                        "osdid" => $r['osdid'],
+                        "vendor" => $r['vendor'],
+                        "by_id_link" => $r['by_id_link'],
+                        "size" => $r['size'],
+                        "rpm" => $r['rpm']
+                    ];
+
+                    array_push($data, $_data);
+                }
+
+            }
+
+
+            return DataTables::of($data)->addIndexColumn()->make(true);
     }
 }

@@ -72,46 +72,6 @@
                                                 <i class="tf-icons ti ti-terminal-2 ti-xs me-1"></i>
                                             </a>
                                         </div>
-                                        <div class="">
-                                            <button type="button" class="btn dropdown-toggle btn-primary hide-arrow p-0"
-                                                style="width:38px; height:38px;" data-bs-toggle="dropdown">
-                                                <span class="tf-icons ti-xs ti ti-power text-center"></span>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-end">
-                                                <li>
-                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/start"
-                                                        class="dropdown-item d-flex align-items-center btn-start">
-                                                        <p class="no-ws">
-                                                            <span class="tf-icons ti-xs ti ti-player-play"></span> Start
-                                                        </p>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/shutdown"
-                                                        class="dropdown-item d-flex align-items-center btn-shutdown">
-                                                        <p class="no-ws">
-                                                            <span class="tf-icons ti-xs ti ti-power"></span> Shutdown
-                                                        </p>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/reboot"
-                                                        class="dropdown-item d-flex align-items-center btn-restart">
-                                                        <p class="no-ws">
-                                                            <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Reboot
-                                                        </p>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/force-shutdown"
-                                                        class="dropdown-item d-flex align-items-center btn-shutdown">
-                                                        <p class="no-ws">
-                                                            <span class="tf-icons ti-xs ti ti-recharging"></span> Force Shutdown
-                                                        </p>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -262,8 +222,8 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
-                                        <h5 class="card-title mb-0">Disk IO</h5>
-                                        <small class="text-muted">Commercial networks</small>
+                                        <h5 class="card-title mb-0">CPU Usage</h5>
+                                        <small class="text-muted">Graph for cpu usage </small>
                                     </div>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-2 btn-label-secondary mt-4"
@@ -317,8 +277,30 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div id="diskGraph"></div>
+                                    <div id="cpuGraph"></div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="card p-4" style="border-radius: 5px;">
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0">Disk Wearout</h5>
+                                <small class="text-muted mb-4">List of Disk</small>
+                            </div>
+                            <div class="card-datatable mt-2">
+                                <table id="init-table" class="table table-sm border"
+                                    style="font-size: 10pt; border-collapse: separate !important; border-radius: 10px; max-width: 500px important!; width: 500px important!">
+                                    <thead>
+                                        <tr>
+                                            <th style="font-size: 8pt;">DEVICE</th>
+                                            <th style="font-size: 8pt;">USAGE</th>
+                                            <th style="font-size: 8pt;">MODEL</th>
+                                            <th style="font-size: 8pt;">SERIAL</th>
+                                            <th style="font-size: 8pt;">SIZE</th>
+                                            <th style="font-size: 8pt;">WEAROUT</th>
+                                        </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -333,4 +315,5 @@
 
     @push('script')
         @include('node_detail.script')
+        @include('node_detail.script-table')
     @endpush

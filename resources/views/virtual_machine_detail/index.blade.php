@@ -85,52 +85,32 @@
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
                                                 <li>
-<<<<<<< Updated upstream
-                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/start"
-                                                        class="dropdown-item d-flex align-items-center btn-start btn-running">
-=======
                                                     <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(3) }}/start"
                                                         class="dropdown-item d-flex align-items-center btn-start">
->>>>>>> Stashed changes
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-player-play"></span> Start
                                                         </p>
                                                     </a>
                                                 </li>
                                                 <li>
-<<<<<<< Updated upstream
-                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/shutdown"
-                                                        class="dropdown-item d-flex align-items-center btn-shutdown btn-stopped">
-=======
                                                     <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(3) }}/shutdown"
                                                         class="dropdown-item d-flex align-items-center btn-shutdown">
->>>>>>> Stashed changes
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-power"></span> Shutdown
                                                         </p>
                                                     </a>
                                                 </li>
                                                 <li>
-<<<<<<< Updated upstream
-                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/reboot"
-                                                        class="dropdown-item d-flex align-items-center btn-restart btn-stopped">
-=======
                                                     <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(3) }}/reboot"
                                                         class="dropdown-item d-flex align-items-center btn-restart">
->>>>>>> Stashed changes
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Reboot
                                                         </p>
                                                     </a>
                                                 </li>
                                                 <li>
-<<<<<<< Updated upstream
-                                                    <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/force-shutdown"
-                                                        class="dropdown-item d-flex align-items-center btn-shutdown btn-stopped">
-=======
                                                     <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(3) }}/force-shutdown"
                                                         class="dropdown-item d-flex align-items-center btn-shutdown">
->>>>>>> Stashed changes
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-recharging"></span> Force Shutdown
                                                         </p>

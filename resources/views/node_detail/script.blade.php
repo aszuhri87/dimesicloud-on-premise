@@ -3,14 +3,8 @@
         var series_config = $(".text-date").text().split(', ')
         var series_config_2 = $(".text-date-2").text().split(', ')
 
-
-        console.log(series_config);
-        // console.log(data_sess['ticket']);
-
         getSeries(series_config[0].toLowerCase(), series_config[1])
-        getSeriesDisk(series_config_2[0].toLowerCase(), series_config_2[1])
-
-        getNetwork()
+        getSeriesCpu(series_config_2[0].toLowerCase(), series_config_2[1])
 
         getOS()
         setInterval(function() {
@@ -18,8 +12,7 @@
         }, 1000)
 
         setInterval(getSeries(series_config[0].toLowerCase(), series_config[1]), 10000)
-        setInterval(getSeriesDisk(series_config_2[0].toLowerCase(), series_config_2[1]), 10000)
-
+        setInterval(getSeriesCpu(series_config_2[0].toLowerCase(), series_config_2[1]), 10000)
 
         getCurrentChart()
         setInterval(getCurrentChart, 10000)
@@ -43,11 +36,10 @@
               var selText = $(this).text();
               let series_config_2 = $(this).text().split(', ');
 
-              console.log(series_config_2);
             //   $(".text-date").text(selText);
               $(".text-date-2").text(selText);
 
-              getSeriesDisk(series_config_2[0].toLowerCase(), series_config_2[1])
+              getSeriesCpu(series_config_2[0].toLowerCase(), series_config_2[1])
             });
 
             $('.console').on('click', function(e){
@@ -465,7 +457,7 @@
                 }
             })
         },
-        diskLineChart = (list_series_diskwrite, list_series_diskread, list_categories) => {
+        cpuLineChart = (list_series_cpu, list_series_io, list_categories) => {
             let cardColor, headingColor, labelColor, borderColor, legendColor;
 
             cardColor = '#4B465C';
@@ -584,17 +576,17 @@
                     }
                 };
 
-            var chart = new ApexCharts(document.querySelector('#diskGraph'), options);
+            var chart = new ApexCharts(document.querySelector('#cpuGraph'), options);
             chart.render();
 
             chart.updateSeries([
                 {
-                    name: 'Read',
-                    data: list_series_diskread
+                    name: 'CPU usage',
+                    data: list_series_cpu
                 },
                 {
-                    name: 'Write',
-                    data: list_series_diskwrite
+                    name: 'IO delay',
+                    data: list_series_io
                 },
             ])
             chart.updateOptions({
@@ -659,20 +651,15 @@
 
                 });
         },
-        getSeriesDisk = (unit, type) => {
+        getSeriesCpu = (unit, type) => {
             let node = '{{ Request::segment(2) }}';
-            let vmid = '{{ Request::segment(3) }}'
-
 
             $.ajax({
-                    url: `{{ url('/node-detail-disk') }}/${node}/${vmid}/${unit}/${type}`,
+                    url: `{{ url('/node-detail') }}/${node}/${unit}/${type}/resources`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
-                    // cpuLineChart(res.data.cpu, res.data.category)
-                    // memoryLineChart(res.data.mem, res.data.category)
-                    // networkLineChart(res.data.netin, res.data.netout, res.data.category)
-                    diskLineChart(res.data.diskwrite, res.data.diskread, res.data.category)
+                    cpuLineChart(res.data.cpu, res.data.iowait, res.data.category)
                 })
                 .fail(function(res, error) {
                     toastr.error(res.responseJSON.message, 'Error')
@@ -763,24 +750,6 @@
 
                 });
         },
-        getNetwork = () => {
-            let node = '{{ Request::segment(2) }}';
-            let vmid = '{{ Request::segment(3) }}';
-            $.ajax({
-                    url: `{{ url('/virtual-machine-network') }}/${node}/${vmid}`,
-                    type: 'get',
-                })
-                .done(function(res, xhr, meta) {
-                    $("#ip-info").text(res.data.ip)
-
-                })
-                .fail(function(res, error) {
-                    toastr.error(res.responseJSON.message, 'Error')
-                })
-                .always(function() {
-
-                });
-        },
         getOS = () => {
             let node = '{{ Request::segment(2) }}';
             $.ajax({
@@ -797,7 +766,6 @@
                     $("#ip-info").text(res.data.ip)
                 })
                 .fail(function(res, error) {
-                    console.log(res.responseJSON);
                 })
                 .always(function() {
 

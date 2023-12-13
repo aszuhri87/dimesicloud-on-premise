@@ -40,7 +40,6 @@
               var selText = $(this).text();
               let series_config_2 = $(this).text().split(', ');
 
-              console.log(series_config_2);
             //   $(".text-date").text(selText);
               $(".text-date-2").text(selText);
 
@@ -791,7 +790,6 @@
                 .done(function(res, xhr, meta) {
                     let name = res.data['name'];
 
-                    console.log(name);
                     if(res.data['name'] == "Ubuntu"){
                         $('.os_logo').append(`<img src="{{ asset('assets/os_logo/${name.toLowerCase()}.svg')}}" alt="" style="margin-top: 25%; margin-left: 9%">`)
                     } else {
@@ -802,9 +800,7 @@
 
                 })
                 .fail(function(res, error) {
-                    // toastr.error(res.responseJSON.message, 'Error')
-
-                    console.log(res.responseJSON);
+                    toastr.error(res.responseJSON.message, 'Error')
                 })
                 .always(function() {
 
