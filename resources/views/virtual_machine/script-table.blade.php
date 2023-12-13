@@ -21,12 +21,14 @@
                     {
                         data: 'ip'
                     },
-                    // { data: 'vmid' },
                     {
                         data: 'node'
                     },
                     {
-                        data: 'maxdisk'
+                        data: 'cpu'
+                    },
+                    {
+                        data: 'maxcpu'
                     },
                     {
                         data: 'mem'
@@ -35,12 +37,8 @@
                         data: 'maxmem'
                     },
                     {
-                        data: 'cpu'
+                        data: 'maxdisk'
                     },
-                    {
-                        data: 'maxcpu'
-                    },
-                    // { data: 'uptime' },
                     {
                         data: 'status'
                     },
@@ -57,6 +55,34 @@
 							<p class="font-weight-bold text-primary-75 text-hover-primary font-size-lg mb-1">${ full['name'].toUpperCase() }</p>
 						</a>
 					`
+                        }
+                    },
+                    {
+                        targets:3,
+                        data:'cpu',
+                        render: function(data, type, full, meta){
+                            return `${data.toFixed(2)} %`
+                        }
+                    },
+                    {
+                        targets:5,
+			        	data:'mem',
+			        	render: function(data, type, full, meta){
+                            return bytesToSize(data)
+			        	}
+                    },
+                    {
+                        targets:6,
+			        	data:'maxmem',
+			        	render: function(data, type, full, meta){
+                            return bytesToSize(data)
+			        	}
+                    },
+                    {
+                        targets:7,
+                        data:'maxdisk',
+                        render: function(data, type, full, meta){
+                            return bytesToSize(data)
                         }
                     },
                     {

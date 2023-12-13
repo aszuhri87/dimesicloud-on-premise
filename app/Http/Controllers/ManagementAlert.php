@@ -4,35 +4,50 @@ namespace App\Http\Controllers;
 
 use App\Models\NotificationReceipt;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+use DB;
 
 class ManagementAlert extends Controller
 {
     public function index(){
-        $type = NotificationReceipt::whereNull('deleted_at')->first();
+        // $type = NotificationReceipt::whereNull('deleted_at')->first();
 
-        return view('management_alert.index', ['data' => $type]);
+        return view('management_alert.index');
+    }
+
+    public function dt_email(){
+        $data = DB::table('notification_receipts')
+        ->select([
+            'id',
+            'value',
+            'type'
+        ])
+        ->where('type', 'email')
+        ->whereNull('deleted_at');
+
+        return DataTables::query($data)->addIndexColumn()->make(true);
+    }
+
+    public function dt_telegram(){
+        $data = DB::table('notification_receipts')
+        ->select([
+            'id',
+            'value',
+            'type'
+        ])
+        ->where('type', 'telegram')
+        ->whereNull('deleted_at');
+
+        return datatables::query($data)->addIndexColumn()->make(true);
+
     }
 
     public function store(Request $request){
         try {
-            $exist = NotificationReceipt::whereNull('deleted_at')->first();
 
-            if(!$exist){
-                NotificationReceipt::create([
-                    'type' => $request->type,
-                    'value' => $request->email
-                ]);
-
-                return response()->json([
-                    'message' => "Success",
-                    'code' => 200
-                ], 200);
-            }
-
-            $update = NotificationReceipt::whereNull('deleted_at')->where('id', $exist->id);
-            $update->update([
+            NotificationReceipt::create([
                 'type' => $request->type,
-                'value' => $request->email
+                'value' => $request->value
             ]);
 
             return response()->json([
@@ -40,6 +55,23 @@ class ManagementAlert extends Controller
                 'code' => 200
             ], 200);
         } catch (\Exception $e) {
+            return response()->json([
+                'message' => "Error",
+                'code' => 500
+            ], 500);
+        }
+    }
+
+    public function delete($id){
+        try {
+            $data = NotificationReceipt::find($id);
+            $data->delete();
+
+            return response()->json([
+                'message' => "Success",
+                'code' => 200
+            ], 200);
+        } catch (\Throwable $th) {
             return response()->json([
                 'message' => "Error",
                 'code' => 500

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ManagementAlert;
 use App\Http\Controllers\MonitoringVMController;
+use App\Http\Controllers\NodeController;
 use App\Http\Controllers\PowerManagementController;
 use Illuminate\Support\Facades\Route;
 use App\Library\Influx;
@@ -45,7 +46,17 @@ Route::group(['middleware' => ['auth-middleware']], function () {
     Route::get('/virtual-machine-series-disk/{node}/{vmid}/{unit}/{type}',[MonitoringVMController::class, 'series_disk']);
     Route::get('/management-alert',[ManagementAlert::class, 'index']);
     Route::post('/management-alert',[ManagementAlert::class, 'store']);
+    Route::post('/management-alert/dt_email',[ManagementAlert::class, 'dt_email']);
+    Route::post('/management-alert/dt_telegram',[ManagementAlert::class, 'dt_telegram']);
+    Route::delete('/management-alert/{id}',[ManagementAlert::class, 'delete']);
+
     Route::get('/console',[MonitoringVMController::class, 'console']);
+
+    Route::get('/node',[NodeController::class, 'index']);
+    Route::post('/node/dt',[NodeController::class, 'dt']);
+    Route::get('/node-detail/{node}',[NodeController::class, 'detail']);
+    Route::get('/node-detail/{node}/profile',[NodeController::class, 'profile']);
+    Route::get('/node-detail/{node}/{unit}/{type}/resources',[NodeController::class, 'resource']);
 
     Route::get('logout', [AuthController::class, 'logout']);
 

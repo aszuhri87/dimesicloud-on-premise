@@ -1,34 +1,12 @@
 <script>
     $(document).ready(function() {
-        let data = {!! json_encode($data) !!}
-
-        if(data.type == 'telegram'){
-            $('#sendTele').prop('checked', true)
-        } else {
-            $('#sendEmail').prop('checked', true)
-            $('.form-place').html(`
-            <div class="email-form">
-                    <label class="form-label" for="basic-default-email">Email</label>
-                    <div class="input-group input-group-merge">
-                      <input
-                        type="text"
-                        id="email-form"
-                        name="email"
-                        class="form-control"
-                        placeholder="example@mail.com"
-                        aria-label="example@mail.com"
-                        aria-describedby="basic-default-email2" required />
-                    </div>
-                </div>
-            `);
-            $('#email-form').val(data.value)
-        }
-
         $('#sendEmail').on('change', function(e){
             e.preventDefault();
             $(this).prop('checked', true)
 
             $('#sendTele').remove('checked');
+
+            $('.tele-form').remove();
 
             $('.form-place').html(`
                 <div class="email-form">
@@ -37,7 +15,7 @@
                       <input
                         type="text"
                         id="email-form"
-                        name="email"
+                        name="value"
                         class="form-control"
                         placeholder="example@mail.com"
                         aria-label="example@mail.com"
@@ -53,7 +31,86 @@
             $('#sendEmail').attr('checked', false);
 
             $('.email-form').remove();
+
+            $('.form-place').html(`
+                <div class="tele-form">
+                    <label class="form-label" for="basic-default-email">Group ID</label>
+                    <div class="input-group input-group-merge">
+                      <input
+                        type="text"
+                        id="tele-form"
+                        name="value"
+                        class="form-control"
+                        placeholder="1234567"
+                        aria-label="1234567"
+                        aria-describedby="basic-default" required />
+                    </div>
+                </div>
+            `);
         });
+
+        $(document).on('click', '.btn-delete', function(event){
+                event.preventDefault();
+                var url = $(this).attr('href');
+
+                Swal.fire({
+                    title: 'Hapus data?',
+                    text: "Data yang akan anda Hapus akan hilang permanen!",
+                    customClass: {
+                        confirmButton: 'btn',
+                        cancelButton: 'btn btn-label-secondary',
+                        confirmButtonColor: '#0073C0',
+                    },
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: "Confirm",
+                    buttonsStyling: true
+                }).then(function (result) {
+                    if (result.value) {
+                        $.ajax({
+                            url: url,
+                            type: 'DELETE',
+                            dataType: 'json',
+                        })
+                        .done(function(res, xhr, meta) {
+                            toastr.success(res.message, 'Success')
+
+                            $('#email-table').DataTable().ajax.reload();
+                            $('#tele-table').DataTable().ajax.reload();$('#init-table').DataTable().ajax.reload();
+                        })
+                        .fail(function(res, error) {
+                            toastr.error(res.responseJSON.message, 'Gagal')
+                        })
+                        .always(function() { });
+                    }
+                });
+
+                // Swal.fire({
+                //     title: 'Hapus data?',
+                //     text: "Data yang akan anda Hapus akan hilang permanen!",
+                //     confirmButtonColor: '#0073C0',
+                //     confirmButtonText: "Confirm",
+                //     showCloseButton: true,
+                // }).then(function (result) {
+                //     if (result.value) {
+                //         $.ajax({
+                //             url: url,
+                //             type: 'DELETE',
+                //             dataType: 'json',
+                //         })
+                //         .done(function(res, xhr, meta) {
+                //             toastr.success(res.message, 'Success')
+
+                //             $('#email-table').DataTable().ajax.reload();
+                //             $('#tele-table').DataTable().ajax.reload();$('#init-table').DataTable().ajax.reload();
+                //         })
+                //         .fail(function(res, error) {
+                //             toastr.error(res.responseJSON.message, 'Gagal')
+                //         })
+                //         .always(function() { });
+                //     }
+                // })
+            });
 
         $('#form-submit').submit(function(event){
                 event.preventDefault();
@@ -65,6 +122,11 @@
                 })
                 .done(function(res, xhr, meta) {
                     toastr.success(res.message)
+
+                    $('#email-table').DataTable().ajax.reload();
+                    $('#tele-table').DataTable().ajax.reload();
+
+                    hideModal('modalCenter');
                 })
                 .fail(function(res, error) {
                     toastr.error(res.responseJSON.message)
@@ -72,4 +134,6 @@
                 .always(function() { });
             });
     });
+
+
 </script>

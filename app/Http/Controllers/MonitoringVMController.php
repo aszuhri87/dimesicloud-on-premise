@@ -51,12 +51,12 @@ class MonitoringVMController extends Controller
                             'uptime' => gmdate("H:i:s", $virtual_machine['uptime']),
                             'node' => $virtual_machine['node'],
                             'vmid' => $virtual_machine['vmid'],
-                            'maxdisk' => number_format($virtual_machine['maxdisk'] / pow(1024, 3), 1) . " G",
-                            'maxmem' => number_format($virtual_machine['maxmem'] / pow(1024, 3), 1) . " G",
-                            'mem' => number_format($virtual_machine['mem'] / pow(1024, 3), 1) . " G",
-                            'cpu' => number_format($virtual_machine['cpu'] / pow(1024, 3), 1) . " G",
+                            'maxdisk' => $virtual_machine['maxdisk'],
+                            'maxmem' => $virtual_machine['maxmem'],
+                            'mem' => $virtual_machine['mem'],
+                            'cpu' => $virtual_machine['cpu'],
                             'vmid' => $virtual_machine['vmid'],
-                            'maxcpu' => number_format($virtual_machine['maxcpu'] / pow(1024, 3), 1) . " G",
+                            'maxcpu' => $virtual_machine['maxcpu'],
                             'ip' => $ip
                         );
                         if (array_key_exists('pool', $virtual_machine)) {

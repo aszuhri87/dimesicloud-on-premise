@@ -1,23 +1,6 @@
 @extends('layouts.app')
 
 @push('style')
-<<<<<<< Updated upstream
-<style>
-    .power-btn-action{
-        background-color: #0073C029;
-        border-radius: 4px;
-        width: 26px;
-        height: 26px;
-    }
-
-    a[disabled] {
-        opacity: .4;
-        cursor: default !important;
-        pointer-events: none;
-    }
-</style>
-
-=======
     <style>
         .power-btn-action{
             background-color: #0073C029;
@@ -26,7 +9,6 @@
             height: 26px;
         }
     </style>
->>>>>>> Stashed changes
 @endpush
 
 @section('content')
@@ -42,14 +24,13 @@
                             <tr>
                                 <th style="font-size: 8pt;">NAME</th>
                                 <th style="font-size: 8pt;">IP</th>
-                                <th style="font-size: 8pt;">NODE</th>
                                 <th style="font-size: 8pt;">CPU</th>
                                 <th style="font-size: 8pt;">CPU USAGE</th>
                                 <th style="font-size: 8pt;">MEMORY USAGE</th>
                                 <th style="font-size: 8pt;">MEMORY SIZE</th>
                                 <th style="font-size: 8pt;">DISK SIZE</th>
                                 <th style="font-size: 8pt;">STATUS</th>
-                                <th style="font-size: 8pt; width: 50px;">ACTION</th>
+                                {{-- <th style="font-size: 8pt; width: 50px;">ACTION</th> --}}
                             </tr>
                         </thead>
                     </table>
@@ -60,6 +41,6 @@
     @endsection
 
     @push('script')
-        @include('virtual_machine.script')
-        @include('virtual_machine.script-table')
+        @include('node.script')
+        @include('node.script-table')
     @endpush

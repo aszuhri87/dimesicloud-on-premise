@@ -1,63 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="card">
-                <div class="card-body">
-                    <form name="form-submit" method="POST" id="form-submit">
-                        @csrf
-                        <div class="mb-3">
-                            {{-- <label class="form-label" for="basic-default-fullname">Full Name</label> --}}
-                            <div class="row">
-                                <div class="col-md mb-md-0 mb-2">
-                                  <div class="form-check custom-option custom-option-icon">
-                                    <label class="form-check-label custom-option-content" for="sendTele">
-                                      <span class="custom-option-body">
-                                        <i class="ti ti-brand-telegram"></i>
-                                        <span class="custom-option-title">Telegram</span>
-                                        <small> Send alert to Telegram.</small>
-                                      </span>
-                                      <input
-                                        name="type"
-                                        class="form-check-input"
-                                        type="radio"
-                                        value="telegram"
-                                        id="sendTele"
-                                        />
-                                    </label>
-                                  </div>
-                                </div>
-                                <div class="col-md mb-md-0 mb-2">
-                                  <div class="form-check custom-option custom-option-icon">
-                                    <label class="form-check-label custom-option-content" for="sendEmail">
-                                      <span class="custom-option-body">
-                                        <i class="ti ti-mail-share"></i>
-                                        <span class="custom-option-title"> Email </span>
-                                        <small> Send alert to Email. </small>
-                                      </span>
-                                      <input
-                                        name="type"
-                                        class="form-check-input"
-                                        type="radio"
-                                        value="email"
-                                        id="sendEmail" />
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div>
+            <div class="nav-align-top mb-4">
+                <div class="d-flex justify-content-between">
+                    <ul class="nav nav-pills mb-3" role="tablist">
+                        <li class="nav-item">
+                            <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
+                                data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home"
+                                aria-selected="true">
+                                <i class="tf-icons ti ti-mail ti-xs me-1"></i> Email
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" class="nav-link btn-tele" role="tab" data-bs-toggle="tab"
+                                data-bs-target="#navs-pills-top-profile" aria-controls="navs-pills-top-profile"
+                                aria-selected="false">
+                                <i class="tf-icons ti ti-brand-telegram ti-xs me-1"></i> Telegram
+                            </button>
+                        </li>
+                    </ul>
+                    <div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+                            + Create New
+                        </button>
+                    </div>
+                </div>
+                <div class="tab-content"
+                    style="background: transparent; border-radius: 5px; box-shadow: none; padding:0; margin:0;">
+                    <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
+                        <div class="card" style="background: transparent; border-radius: 5px; box-shadow: none;">
+                            <div class="card-datatable">
+                                <table id="email-table" class="table table-sm border"
+                                    style="font-size: 10pt; border-collapse: separate !important; border-radius: 10px; max-width: 500px important!; width: 500px important!">
+                                    <thead>
+                                        <tr>
+                                            <th style="font-size: 8pt; width: 90%;">Email</th>
+                                            <th style="font-size: 8pt;">Action</th>
+                                        </tr>
+                                    </thead>
+                                </table>
                             </div>
-                        <div class="mb-3 form-place">
-                          {{-- <div class="form-text">You can use letters, numbers & periods</div> --}}
                         </div>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                      </form>
+                    </div>
+                    <div class="tab-pane fade list-tele" id="navs-pills-top-profile" role="tabpanel">
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
+@include('management_alert.modal')
+
 @push('script')
     @include('management_alert.script')
-    {{-- @include('dashboard.script-table') --}}
+    @include('management_alert.script-table')
 @endpush

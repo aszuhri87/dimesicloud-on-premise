@@ -15,6 +15,12 @@
           <div data-i18n="Dashboard">Dashboard</div>
         </a>
       </li>
+      <li class="menu-item @if (strpos(Request::url(), 'node')) active @endif">
+        <a href="/node" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-server-2"></i>
+          <div data-i18n="Node">Node</div>
+        </a>
+      </li>
       <li class="menu-item @if (strpos(Request::url(), 'virtual-machine')) active @endif">
         <a href="/virtual-machine" class="menu-link">
           <i class="menu-icon tf-icons ti ti-device-imac"></i>

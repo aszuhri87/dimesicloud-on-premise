@@ -40,12 +40,6 @@
             translate: -50% 5px;
             white-space: nowrap;
         }
-
-        a[disabled] {
-            opacity: .4;
-            cursor: default !important;
-            pointer-events: none;
-        }
     </style>
 @endpush
 
@@ -74,7 +68,7 @@
                                     </div>
                                     <div class="dropdown d-flex justify-content-end">
                                         <div class="pe-2 no-ws">
-                                            <a href="https://console.dimensi.com/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" title="Console" class="btn btn-primary console btn-running" style="width:35px; height:38px;">
+                                            <a href="https://console.dimensi.com/?console=shell&xtermjs=1&vmid=0&vmname=&node={{ Request::segment(2) }}&cmd=" title="Console" class="btn btn-primary console" style="width:35px; height:38px;">
                                                 <i class="tf-icons ti ti-terminal-2 ti-xs me-1"></i>
                                             </a>
                                         </div>
@@ -85,52 +79,32 @@
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-end">
                                                 <li>
-<<<<<<< Updated upstream
                                                     <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/start"
-                                                        class="dropdown-item d-flex align-items-center btn-start btn-running">
-=======
-                                                    <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(3) }}/start"
                                                         class="dropdown-item d-flex align-items-center btn-start">
->>>>>>> Stashed changes
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-player-play"></span> Start
                                                         </p>
                                                     </a>
                                                 </li>
                                                 <li>
-<<<<<<< Updated upstream
                                                     <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/shutdown"
-                                                        class="dropdown-item d-flex align-items-center btn-shutdown btn-stopped">
-=======
-                                                    <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(3) }}/shutdown"
                                                         class="dropdown-item d-flex align-items-center btn-shutdown">
->>>>>>> Stashed changes
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-power"></span> Shutdown
                                                         </p>
                                                     </a>
                                                 </li>
                                                 <li>
-<<<<<<< Updated upstream
                                                     <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/reboot"
-                                                        class="dropdown-item d-flex align-items-center btn-restart btn-stopped">
-=======
-                                                    <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(3) }}/reboot"
                                                         class="dropdown-item d-flex align-items-center btn-restart">
->>>>>>> Stashed changes
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Reboot
                                                         </p>
                                                     </a>
                                                 </li>
                                                 <li>
-<<<<<<< Updated upstream
                                                     <a href="{{ url('/power') }}/{{ Request::segment(2) }}/{{ Request::segment(2) }}/force-shutdown"
-                                                        class="dropdown-item d-flex align-items-center btn-shutdown btn-stopped">
-=======
-                                                    <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(3) }}/force-shutdown"
                                                         class="dropdown-item d-flex align-items-center btn-shutdown">
->>>>>>> Stashed changes
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-recharging"></span> Force Shutdown
                                                         </p>
@@ -151,7 +125,7 @@
                                         <p class="no-ws">Memory Usage:</p>
                                         <p id="mem-info">-</p>
                                         <p class="no-ws">Kernel:</p>
-                                        <p id="kernel-info" class="no-ws">-</p>
+                                        <p id="kernel-info">-</p>
                                     </div>
                                     <div class="col-md-4 col-sm-6 mt-2">
                                         <p class="no-ws">Disk Size:</p>
@@ -352,12 +326,11 @@
                     </div>
                 </div>
             </div>
-
             <!-- /Line Area Chart -->
             <div class="content-backdrop fade"></div>
         </div>
     @endsection
 
     @push('script')
-        @include('virtual_machine_detail.script')
+        @include('node_detail.script')
     @endpush
