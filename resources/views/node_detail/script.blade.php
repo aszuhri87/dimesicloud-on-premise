@@ -764,6 +764,11 @@
                     $("#mem-info").text(`${bytesToSize(res.data.mem)} of ${bytesToSize(res.data.maxmem)}`)
                     $("#disk-info").text(`${bytesToSize(res.data.disk_used)} of ${bytesToSize(res.data.disk_total)}`)
                     $("#ip-info").text(res.data.ip)
+
+                    if(res.data['kernel'].includes('Linux') == true){
+                        $('#img-src').remove();
+                        $('.os_logo').append(`<img src="{{ asset('assets/os_logo/linux.svg')}}" alt="" style="margin-top: 25%; margin-left: 11%">`)
+                    }
                 })
                 .fail(function(res, error) {
                 })

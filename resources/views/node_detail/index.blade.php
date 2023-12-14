@@ -57,7 +57,9 @@
                 <div class="card-body c-body-h">
                     <div class="row">
                         <div class="col-md-2 col-lg-2 col-sm-6 vm-detail-profile">
-                            <div class="os_logo"></div>
+                            <div class="os_logo">
+                                <img src="{{ asset('assets/os_logo/unknown.svg')}}" id="img-src" alt="" style="margin-top: 25%; margin-left: 11%">
+                            </div>
                         </div>
                         <div class="d-block d-sm-none mt-5"></div>
                         <div class="col-md-10 col-lg-10 col-sm-6">

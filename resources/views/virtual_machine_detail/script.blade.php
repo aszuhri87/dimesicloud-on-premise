@@ -637,10 +637,11 @@
         },
         getSeries = (unit, type) => {
             let node = '{{ Request::segment(2) }}';
-            let vmid = '{{ Request::segment(3) }}'
+            let vmid = '{{ Request::segment(3) }}';
+            let node_type = "{{ Request::get('type') }}";
 
             $.ajax({
-                    url: `{{ url('/virtual-machine-series') }}/${node}/${vmid}/${unit}/${type}`,
+                    url: `{{ url('/virtual-machine-series') }}/${node}/${vmid}/${unit}/${type}/${node_type}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -659,10 +660,10 @@
         getSeriesDisk = (unit, type) => {
             let node = '{{ Request::segment(2) }}';
             let vmid = '{{ Request::segment(3) }}'
-
+            let node_type = "{{ Request::get('type') }}";
 
             $.ajax({
-                    url: `{{ url('/virtual-machine-series-disk') }}/${node}/${vmid}/${unit}/${type}`,
+                    url: `{{ url('/virtual-machine-series-disk') }}/${node}/${vmid}/${unit}/${type}/${node_type}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -681,8 +682,10 @@
         getCurrentChart = () => {
             let node = '{{ Request::segment(2) }}';
             let vmid = '{{ Request::segment(3) }}'
+            let type = "{{ Request::get('type') }}";
+
             $.ajax({
-                    url: `{{ url('/virtual-machine-current') }}/${node}/${vmid}`,
+                    url: `{{ url('/virtual-machine-current') }}/${node}/${vmid}/${type}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -723,8 +726,10 @@
         getCurrentStatus = () => {
             let node = '{{ Request::segment(2) }}';
             let vmid = '{{ Request::segment(3) }}'
+            let type = "{{ Request::get('type') }}";
+
             $.ajax({
-                    url: `{{ url('/virtual-machine-current') }}/${node}/${vmid}`,
+                    url: `{{ url('/virtual-machine-current') }}/${node}/${vmid}/${type}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -765,8 +770,10 @@
         getNetwork = () => {
             let node = '{{ Request::segment(2) }}';
             let vmid = '{{ Request::segment(3) }}';
+            let type = "{{ Request::get('type') }}";
+
             $.ajax({
-                    url: `{{ url('/virtual-machine-network') }}/${node}/${vmid}`,
+                    url: `{{ url('/virtual-machine-network') }}/${node}/${vmid}/${type}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
@@ -783,18 +790,21 @@
         getOS = () => {
             let node = '{{ Request::segment(2) }}';
             let vmid = '{{ Request::segment(3) }}'
+            let type = "{{ Request::get('type') }}"
+
+            console.log(type);
             $.ajax({
-                    url: `{{ url('/virtual-machine-os') }}/${node}/${vmid}`,
+                    url: `{{ url('/virtual-machine-os') }}/${node}/${vmid}/${type}`,
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
-                    let name = res.data['name'];
+                    let name = res.data['id'];
 
-                    if(res.data['name'] == "Ubuntu"){
+                    if(res.data['id'] == "ubuntu"){
+                        $('#img-src').remove();
                         $('.os_logo').append(`<img src="{{ asset('assets/os_logo/${name.toLowerCase()}.svg')}}" alt="" style="margin-top: 25%; margin-left: 9%">`)
-                    } else {
-                        $('.os_logo').append(`<img src=".{{ asset('assets/os_logo/unknown.svg')}}" alt="" style="margin-top: 25%; margin-left: 9%">`)
                     }
+
                     $("#image-info").text(`${res.data['pretty-name']} ${res.data.machine}`)
                     $("#kernel-info").text(res.data['kernel-release'])
 

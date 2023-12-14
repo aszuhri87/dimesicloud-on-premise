@@ -8,10 +8,11 @@ Route::group(['middleware' => ['guest-middleware']], function () {
         // return view('layouts.base');
         return redirect('/login');
     });
-    // Route::get('/register', function(){
-    // 	return view('register');
-    // });
 
     Route::get('login', [AuthController::class, 'index']);
     Route::post('login', [AuthController::class, 'login']);
+});
+
+Route::group(['middleware' => ['auth-middleware']], function () {
+    Route::get('logout', [AuthController::class, 'logout']);
 });

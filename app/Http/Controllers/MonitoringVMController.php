@@ -29,10 +29,16 @@ class MonitoringVMController extends Controller
 
         if ($response->getStatusCode() == 200) {
             $virtual_machines = json_decode($response->getBody(), true);
-
+            $type = null;
             $data = array();
             foreach ($virtual_machines['data'] as $key => $virtual_machine) {
                 if ($virtual_machine['type'] == 'qemu' || $virtual_machine['type'] == 'lxc' ) {
+
+                    if($virtual_machine['type'] == 'qemu'){
+                        $type = 'qemu';
+                    } else {
+                        $type = 'lxc';
+                    }
 
                     $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/nodes/' . $virtual_machine['node'] . '/'.$virtual_machine['type'].'/' . $virtual_machine['vmid'] . '/config', 'GET');
 
@@ -57,6 +63,7 @@ class MonitoringVMController extends Controller
                             'cpu' => $virtual_machine['cpu'],
                             'vmid' => $virtual_machine['vmid'],
                             'maxcpu' => $virtual_machine['maxcpu'],
+                            'type' => $type,
                             'ip' => $ip
                         );
                         if (array_key_exists('pool', $virtual_machine)) {
@@ -67,6 +74,7 @@ class MonitoringVMController extends Controller
                     }
                 }
             }
+
 
         }
         return DataTables::of($data)->addIndexColumn()->make(true);
@@ -87,9 +95,9 @@ class MonitoringVMController extends Controller
         return view('pages.virtual_machine.power.index');
     }
 
-    public function network($node, $vmid){
+    public function network($node, $vmid, $type){
         try {
-            $response = PMXConnect::connection(config('app.proxmox').'/api2/json/nodes/'.$node.'/qemu/'.$vmid.'/config', 'GET');
+            $response = PMXConnect::connection(config('app.proxmox').'/api2/json/nodes/'.$node.'/'.$type.'/'.$vmid.'/config', 'GET');
 
             if($response->getStatusCode() == 200){
                 $config = json_decode($response->getBody(), true);
@@ -117,10 +125,10 @@ class MonitoringVMController extends Controller
         }
     }
 
-    public function current($node, $vmid)
+    public function current($node, $vmid, $type)
     {
         try {
-            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/status/current', 'GET');
+            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/'.$type.'/' . $vmid . '/status/current', 'GET');
 
             if ($response->getStatusCode() == 200) {
                 $data = json_decode($response->getBody(), true);
@@ -138,10 +146,10 @@ class MonitoringVMController extends Controller
         }
     }
 
-    public function os_info($node, $vmid)
+    public function os_info($node, $vmid, $type)
     {
         try {
-            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/agent/get-osinfo', 'GET');
+            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/'.$type.'/' . $vmid . '/agent/get-osinfo', 'GET');
 
             $data = json_decode($response->getBody(), true);
 
@@ -151,9 +159,8 @@ class MonitoringVMController extends Controller
                 return response([
                     'data' => $data['data']['result']
                 ]);
-            } else {
-
             }
+
         } catch (ClientException $e) {
             return response([
                 "message" => 'Token Expired'
@@ -165,12 +172,12 @@ class MonitoringVMController extends Controller
         }
     }
 
-    public function series($node, $vmid, $unit, $type)
+    public function series($node, $vmid, $unit, $type, $node_type)
     {
         try {
             date_default_timezone_set('Asia/Jakarta');
 
-            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/rrddata?timeframe=' . $unit . '&cf=' . $type, 'GET');
+            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/'.$node_type.'/' . $vmid . '/rrddata?timeframe=' . $unit . '&cf=' . $type, 'GET');
 
             $data = json_decode($response->getBody(), true);
 
@@ -240,12 +247,12 @@ class MonitoringVMController extends Controller
         }
     }
 
-    public function series_disk($node, $vmid, $unit, $type)
+    public function series_disk($node, $vmid, $unit, $type, $node_type)
     {
         try {
             date_default_timezone_set('Asia/Jakarta');
 
-            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/qemu/' . $vmid . '/rrddata?timeframe=' . $unit . '&cf=' . $type, 'GET');
+            $response = PMXConnect::connection(config('app.proxmox') . '/api2/json/nodes/' . $node . '/'.$node_type.'/' . $vmid . '/rrddata?timeframe=' . $unit . '&cf=' . $type, 'GET');
 
             $data = json_decode($response->getBody(), true);
 

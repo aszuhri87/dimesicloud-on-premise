@@ -9,8 +9,8 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboards -->
-      <li class="menu-item @if (strpos(Request::url(), 'index')) active @endif">
-        <a href="/index" class="menu-link">
+      <li class="menu-item @if (strpos(Request::url(), 'dashboard')) active @endif">
+        <a href="/dashboard/index" class="menu-link">
           <i class="menu-icon tf-icons ti ti-smart-home"></i>
           <div data-i18n="Dashboard">Dashboard</div>
         </a>

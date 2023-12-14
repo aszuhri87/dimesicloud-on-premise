@@ -10,6 +10,8 @@
             Virtual Machine
         @elseif (strpos(Request::url(), 'management-alert'))
             Management Alert
+        @elseif (strpos(Request::url(), 'node'))
+            Node
         @elseif (strpos(Request::url(), 'dashboard'))
             Dashboard
         @else

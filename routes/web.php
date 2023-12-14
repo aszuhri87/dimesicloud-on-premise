@@ -21,46 +21,17 @@ use InfluxDB2\Point;
 |
 */
 
-include base_path('routes/auth/route.php');
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::group(['middleware' => ['auth-middleware']], function () {
-    Route::get('virtual-machine', [MonitoringVMController::class, 'index']);
-    Route::post('virtual-machine/dt', [MonitoringVMController::class, 'dt']);
-    Route::get('index', [DashboardController::class, 'index']);
-    Route::get('virtual-machine-graph/{node}/{vmid}', [MonitoringVMController::class, 'detail']);
-    Route::get('/resources/{virtual_machine_id}','DashboardController@resources');
 
-    Route::post('/power/{node}/{vmid}/start',[PowerManagementController::class, 'start']);
-    Route::post('/power/{node}/{vmid}/reboot',[PowerManagementController::class, 'reboot']);
-    Route::post('/power/{node}/{vmid}/shutdown',[PowerManagementController::class, 'shutdown']);
-    Route::post('/power/{node}/{vmid}/force-shutdown',[PowerManagementController::class, 'force-shutdown']);
-    Route::get('/virtual-machine-current/{node}/{vmid}', [MonitoringVMController::class, 'current']);
-    Route::get('/virtual-machine-os/{node}/{vmid}',[MonitoringVMController::class, 'os_info']);
-    Route::get('/virtual-machine-network/{node}/{vmid}',[MonitoringVMController::class, 'network']);
-
-    Route::get('/virtual-machine-series/{node}/{vmid}/{unit}/{type}',[MonitoringVMController::class, 'series']);
-    Route::get('/virtual-machine-series-disk/{node}/{vmid}/{unit}/{type}',[MonitoringVMController::class, 'series_disk']);
-    Route::get('/management-alert',[ManagementAlert::class, 'index']);
-    Route::post('/management-alert',[ManagementAlert::class, 'store']);
-    Route::post('/management-alert/dt_email',[ManagementAlert::class, 'dt_email']);
-    Route::post('/management-alert/dt_telegram',[ManagementAlert::class, 'dt_telegram']);
-    Route::delete('/management-alert/{id}',[ManagementAlert::class, 'delete']);
-
-    Route::get('/console',[MonitoringVMController::class, 'console']);
-
-    Route::get('/node',[NodeController::class, 'index']);
-    Route::post('/node/dt',[NodeController::class, 'dt']);
-    Route::get('/node-detail/{node}',[NodeController::class, 'detail']);
-    Route::get('/node-detail/{node}/profile',[NodeController::class, 'profile']);
-    Route::get('/node-detail/{node}/{unit}/{type}/resources',[NodeController::class, 'resource']);
-    Route::post('/node-detail/{node}/list-disk',[NodeController::class, 'list_disk']);
-
-
-    Route::get('logout', [AuthController::class, 'logout']);
-
-});
+include base_path('routes/auth/route.php');
 include base_path('routes/module/dashboard.php');
+include base_path('routes/module/virtual_machine.php');
+include base_path('routes/module/power.php');
+include base_path('routes/module/alert.php');
+include base_path('routes/module/node.php');
+
+

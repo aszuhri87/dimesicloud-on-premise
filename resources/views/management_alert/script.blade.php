@@ -54,8 +54,9 @@
                 var url = $(this).attr('href');
 
                 Swal.fire({
-                    title: 'Hapus data?',
-                    text: "Data yang akan anda Hapus akan hilang permanen!",
+                    title: 'Delete?',
+                    text: "Are you sure removing this data? this action can't be undone!",
+                    icon: 'warning',
                     customClass: {
                         confirmButton: 'btn',
                         cancelButton: 'btn btn-label-secondary',

@@ -51,10 +51,10 @@
                         data: 'id',
                         render: function(data, type, full, meta) {
                             return `
-						<a href="{{ url('virtual-machine-graph') }}/${full['node']}/${full['vmid']}">
-							<p class="font-weight-bold text-primary-75 text-hover-primary font-size-lg mb-1">${ full['name'].toUpperCase() }</p>
-						</a>
-					`
+					        	<a href="{{ url('virtual-machine-graph') }}/${full['node']}/${full['vmid']}?type=${full['type']}">
+					        		<p class="font-weight-bold text-primary-75 text-hover-primary font-size-lg mb-1">${ full['name'].toUpperCase() }</p>
+					        	</a>
+					        `
                         }
                     },
                     {
