@@ -10,15 +10,15 @@
 
             $('.form-place').html(`
                 <div class="email-form">
-                    <label class="form-label" for="basic-default-email">Email</label>
+                    <label class="form-label" for="basic-default-email">Email Address</label>
                     <div class="input-group input-group-merge">
                       <input
                         type="text"
                         id="email-form"
                         name="value"
                         class="form-control"
-                        placeholder="example@mail.com"
-                        aria-label="example@mail.com"
+                        placeholder="Enter email address..."
+                        aria-label="Enter email address..."
                         aria-describedby="basic-default-email2" required />
                     </div>
                 </div>
@@ -41,8 +41,8 @@
                         id="tele-form"
                         name="value"
                         class="form-control"
-                        placeholder="1234567"
-                        aria-label="1234567"
+                        placeholder="Enter group id..."
+                        aria-label="Enter group id..."
                         aria-describedby="basic-default" required />
                     </div>
                 </div>

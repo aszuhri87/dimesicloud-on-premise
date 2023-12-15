@@ -36,8 +36,6 @@ class DashboardController extends Controller
 				$node_running = 0;
 				$node_stopped = 0;
                 foreach ($resources['data'] as $key => $resource) {
-
-
                 	if($resource['type'] == 'node'){
 						$cpu_usage += $resource['cpu'];
 						$cpu += $resource['maxcpu'];

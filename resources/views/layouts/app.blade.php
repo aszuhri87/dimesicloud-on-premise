@@ -44,7 +44,7 @@
     <link rel="stylesheet" href="../../assets/vendor/libs/datatables-fixedcolumns-bs5/fixedcolumns.bootstrap5.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/datatables-fixedheader-bs5/fixedheader.bootstrap5.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/apex-charts/apex-charts.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="../../assets/vendor/libs/toastr/toastr.css" />
     <link rel="stylesheet" href="../../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- Row Group CSS -->
@@ -140,9 +140,7 @@
     <script src="../../assets/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="../../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
-
-
-
+    <script src="../../assets/vendor/libs/toastr/toastr.js"></script>
 
     <!-- Main JS -->
     <script src="../../assets/js/main.js"></script>
