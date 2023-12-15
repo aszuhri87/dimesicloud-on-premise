@@ -72,7 +72,7 @@ body {
 }
 
 .text-body[href]:hover {
-  color: #685dd8 !important;
+  color: #0073C0 !important;
 }
 
 .bg-primary {
@@ -270,19 +270,19 @@ button.list-group-item-primary.active {
 }
 .btn-primary:hover {
   color: #fff !important;
-  background-color: #685dd8 !important;
-  border-color: #685dd8 !important;
+  background-color: #0073C0 !important;
+  border-color: #0073C0 !important;
 }
 .btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary.focus {
   color: #fff;
-  background-color: #685dd8;
-  border-color: #685dd8;
+  background-color: #0073C0;
+  border-color: #0073C0;
   box-shadow: none;
 }
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .btn-primary.show.dropdown-toggle, .show > .btn-primary.dropdown-toggle {
   color: #fff !important;
-  background-color: #685dd8 !important;
-  border-color: #685dd8 !important;
+  background-color: #0073C0 !important;
+  border-color: #0073C0 !important;
 }
 .btn-primary.disabled, .btn-primary:disabled {
   color: #fff !important;
@@ -293,13 +293,13 @@ button.list-group-item-primary.active {
 
 .btn-group .btn-primary,
 .input-group .btn-primary {
-  border-right: var(--bs-border-width) solid #685dd8;
-  border-left: var(--bs-border-width) solid #685dd8;
+  border-right: var(--bs-border-width) solid #0073C0;
+  border-left: var(--bs-border-width) solid #0073C0;
 }
 
 .btn-group-vertical .btn-primary {
-  border-top-color: #685dd8;
-  border-bottom-color: #685dd8;
+  border-top-color: #0073C0;
+  border-bottom-color: #0073C0;
 }
 
 .btn-label-primary {
@@ -597,7 +597,7 @@ button.list-group-item-primary.active {
   color: #e2dffc;
 }
 .menu.bg-primary.menu-horizontal {
-  background-color: rgba(115, 103, 240, 0.95) !important;
+  background-color: rgba(28, 14, 182, 0.95) !important;
 }
 .menu.bg-primary .menu-link,
 .menu.bg-primary .menu-horizontal-prev,
@@ -756,7 +756,7 @@ a {
   color: #0073C0;
 }
 a:hover {
-  color: #8176f2;
+  color: rgb(100, 87, 248);
 }
 
 .fill-primary {
@@ -1076,19 +1076,19 @@ li.ui-timepicker-selected,
 }
 .shepherd-element .shepherd-button:not(:disabled).btn-primary:hover {
   color: #fff !important;
-  background-color: #685dd8 !important;
-  border-color: #685dd8 !important;
+  background-color: #0073C0 !important;
+  border-color: #0073C0 !important;
 }
 .btn-check:focus + .shepherd-element .shepherd-button:not(:disabled).btn-primary, .shepherd-element .shepherd-button:not(:disabled).btn-primary:focus, .shepherd-element .shepherd-button:not(:disabled).btn-primary.focus {
   color: #fff;
-  background-color: #685dd8;
-  border-color: #685dd8;
+  background-color: #0073C0;
+  border-color: #0073C0;
   box-shadow: none;
 }
 .btn-check:checked + .shepherd-element .shepherd-button:not(:disabled).btn-primary, .btn-check:active + .shepherd-element .shepherd-button:not(:disabled).btn-primary, .shepherd-element .shepherd-button:not(:disabled).btn-primary:active, .shepherd-element .shepherd-button:not(:disabled).btn-primary.active, .shepherd-element .shepherd-button:not(:disabled).btn-primary.show.dropdown-toggle, .show > .shepherd-element .shepherd-button:not(:disabled).btn-primary.dropdown-toggle {
   color: #fff !important;
-  background-color: #685dd8 !important;
-  border-color: #685dd8 !important;
+  background-color: #0073C0 !important;
+  border-color: #0073C0 !important;
 }
 .shepherd-element .shepherd-button:not(:disabled).btn-primary.disabled, .shepherd-element .shepherd-button:not(:disabled).btn-primary:disabled {
   color: #fff !important;
@@ -1098,12 +1098,12 @@ li.ui-timepicker-selected,
 }
 .shepherd-element .btn-group .shepherd-button:not(:disabled).btn-primary,
 .shepherd-element .input-group .shepherd-button:not(:disabled).btn-primary {
-  border-right: var(--bs-border-width) solid #685dd8;
-  border-left: var(--bs-border-width) solid #685dd8;
+  border-right: var(--bs-border-width) solid #0073C0;
+  border-left: var(--bs-border-width) solid #0073C0;
 }
 .shepherd-element .btn-group-vertical .shepherd-button:not(:disabled).btn-primary {
-  border-top-color: #685dd8;
-  border-bottom-color: #685dd8;
+  border-top-color: #0073C0;
+  border-bottom-color: #0073C0;
 }
 .shepherd-element .shepherd-button:not(:disabled).btn-label-secondary {
   color: #a8aaae;
