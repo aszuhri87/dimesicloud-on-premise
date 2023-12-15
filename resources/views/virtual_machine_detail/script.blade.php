@@ -792,7 +792,6 @@
             let vmid = '{{ Request::segment(3) }}'
             let type = "{{ Request::get('type') }}"
 
-            console.log(type);
             $.ajax({
                     url: `{{ url('/virtual-machine-os') }}/${node}/${vmid}/${type}`,
                     type: 'get',

@@ -166,8 +166,9 @@ class MonitoringVMController extends Controller
                 "message" => 'Token Expired'
             ], 401);
         } catch (Exception $e) {
+            Log::error($e->getMessage());
             return response([
-                "message" => $e->getMessage()
+                "message" => "Server can't get os info"
             ], 500);
         }
     }

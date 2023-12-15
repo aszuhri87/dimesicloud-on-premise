@@ -33,7 +33,7 @@
                                 <th style="font-size: 8pt;">IP</th>
                                 <th style="font-size: 8pt;">NODE</th>
                                 <th style="font-size: 8pt;">CPU</th>
-                                <th style="font-size: 8pt;">CPU USAGE</th>
+                                <th style="font-size: 8pt;">CPUs</th>
                                 <th style="font-size: 8pt;">MEMORY USAGE</th>
                                 <th style="font-size: 8pt;">MEMORY SIZE</th>
                                 <th style="font-size: 8pt;">DISK SIZE</th>

@@ -95,7 +95,7 @@
                                     <script>
                                         document.write(new Date().getFullYear());
                                     </script>
-                                    DimensiCloud Powered by Gmedia
+                                    DimensiCloud Powered by GMEDIA
                                 </div>
                             </div>
                         </div>
