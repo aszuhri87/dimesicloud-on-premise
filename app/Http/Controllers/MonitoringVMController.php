@@ -25,7 +25,7 @@ class MonitoringVMController extends Controller
 
     public function dt()
     {
-        $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/cluster/resources', 'GET');
+        $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/cluster/resources', 'GET');
 
         if ($response->getStatusCode() == 200) {
             $virtual_machines = json_decode($response->getBody(), true);
@@ -40,7 +40,7 @@ class MonitoringVMController extends Controller
                         $type = 'lxc';
                     }
 
-                    $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/nodes/' . $virtual_machine['node'] . '/'.$virtual_machine['type'].'/' . $virtual_machine['vmid'] . '/config', 'GET');
+                    $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/nodes/' . $virtual_machine['node'] . '/'.$virtual_machine['type'].'/' . $virtual_machine['vmid'] . '/config', 'GET');
 
                     if ($response->getStatusCode() == 200) {
                         $config = json_decode($response->getBody(), true);

@@ -14,7 +14,7 @@ class NodeController extends Controller
     }
 
     public function dt(){
-        $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/cluster/status', 'GET');
+        $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/cluster/status', 'GET');
 
         $data = array();
 
@@ -24,7 +24,7 @@ class NodeController extends Controller
             foreach ($clusters['data'] as $key => $cluster) {
                 if($cluster['type'] == 'node'){
 
-                    $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/nodes/'.$cluster['name'].'/status', 'GET');
+                    $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/nodes/'.$cluster['name'].'/status', 'GET');
 
                     if($response->getStatusCode() == 200){
                         $status = json_decode($response->getBody(), true);
@@ -56,11 +56,11 @@ class NodeController extends Controller
 
     public function profile($node){
         try {
-            $clusters = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/cluster/status', 'GET');
+            $clusters = PMXConnect::connection(env('PMX_HOST') . '/api2/json/cluster/status', 'GET');
 
             $data = array();
 
-            $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/nodes/'.$node.'/status', 'GET');
+            $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/nodes/'.$node.'/status', 'GET');
 
             $cluster = json_decode($clusters->getBody(), true)['data'];
 
@@ -169,7 +169,7 @@ class NodeController extends Controller
     }
 
     public function list_disk($node){
-            $response = PMXConnect::connection(env('PROXMOX_BASE') . '/api2/json/nodes/'.$node.'/disks/list', 'GET');
+            $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/nodes/'.$node.'/disks/list', 'GET');
 
             $data = array();
             $wearout = null;
