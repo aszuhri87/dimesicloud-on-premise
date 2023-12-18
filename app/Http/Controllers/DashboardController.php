@@ -127,7 +127,6 @@ class DashboardController extends Controller
                 ]);
             }
 		}catch (\Exception $e) {
-            dd($e);
 			return response([
 				"message"      => 'Internal Server Error'
 			], 500);

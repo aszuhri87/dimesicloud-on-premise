@@ -76,8 +76,8 @@
                                     </div>
                                     <div class="dropdown d-flex justify-content-end">
                                         <div class="pe-2 no-ws">
-                                            <a href="{{env('CONSOLE_URL')}}/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" title="Console" class="btn btn-primary console btn-running" style="width:35px; height:38px;">
-                                                <i class="tf-icons ti ti-terminal-2 ti-xs me-1"></i>
+                                            <a href="{{env('CONSOLE_URL')}}/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" title="Console" class="btn btn-primary console btn-running p-0" style="width:38px; height:38px;">
+                                                <i class="tf-icons ti ti-terminal-2 ti-xs mx-auto"></i>
                                             </a>
                                         </div>
                                         <div class="">

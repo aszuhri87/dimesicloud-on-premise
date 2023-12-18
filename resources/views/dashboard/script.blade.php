@@ -105,12 +105,6 @@
                 colors: ['#62D6C5']
             },
             labels: ['Average Results'],
-            // subtitle: {
-            //     offsetY: 110,
-            //     text: d + '/' + m + '/' + y + ' | ' + h + ':' + mn,
-            //     align: 'center',
-            //     fontSize: '15px'
-            // },
         };
 
         var chart = new ApexCharts(document.querySelector("#ramUsageChart"), options);

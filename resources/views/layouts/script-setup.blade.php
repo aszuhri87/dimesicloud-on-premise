@@ -18,9 +18,7 @@
     });
 
     $(document).ready(function(){
-        // $('#init-table').DataTable({
-        //     "dom": '<lf<t>ip>'
-        //     });
+
     });
 
 </script>

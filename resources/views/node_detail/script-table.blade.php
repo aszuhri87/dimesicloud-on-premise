@@ -45,14 +45,7 @@
                         render: function(data, type, full, meta){
                             return bytesToSize(data)
                         }
-                    },
-                    // {
-                    //     targets:5,
-			        // 	data:'wearout',
-			        // 	render: function(data, type, full, meta){
-                    //         return `${data} %`
-			        // 	}
-                    // },
+                    }
                 ],
                 order: [
                     [1, 'desc']

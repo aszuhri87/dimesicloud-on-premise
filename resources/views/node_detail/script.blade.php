@@ -26,7 +26,6 @@
               var selText = $(this).text();
               let series_config = $(this).text().split(', ');
               $(".text-date").text(selText);
-            //   $(".text-date2").text(selText);
 
               getSeries(series_config[0].toLowerCase(), series_config[1])
             });
@@ -36,7 +35,6 @@
               var selText = $(this).text();
               let series_config_2 = $(this).text().split(', ');
 
-            //   $(".text-date").text(selText);
               $(".text-date-2").text(selText);
 
               getSeriesCpu(series_config_2[0].toLowerCase(), series_config_2[1])
@@ -168,18 +166,6 @@
                             strokeHeight: '100%',
                             margin: -5, // margin is in pixels
                         },
-                        // dataLabels: {
-                        //     name: {
-                        //         show: false
-                        //     },
-                        //     value: {
-                        //         offsetY: 60,
-                        //         fontSize: '22px',
-                        //         formatter: function(val) {
-                        //             return val
-                        //         },
-                        //     }
-                        // },
                     }
                 },
                 grid: {
@@ -191,13 +177,7 @@
                     type: 'solid',
                     colors: ['#62D6C5']
                 },
-                labels: [''],
-                // subtitle: {
-                //     offsetY: 110,
-                //     text: d + '/' + m + '/' + y + ' | ' + h + ':' + mn,
-                //     align: 'center',
-                //     fontSize: '15px'
-                // },
+                labels: ['']
             };
 
             var chart = new ApexCharts(document.querySelector("#cpuRadial"), options);
@@ -225,19 +205,7 @@
                             strokeWidth: '100%',
                             strokeHeight: '100%',
                             margin: -5, // margin is in pixels
-                        },
-                        // dataLabels: {
-                        //     name: {
-                        //         show: false
-                        //     },
-                        //     value: {
-                        //         offsetY: 60,
-                        //         fontSize: '22px',
-                        //         formatter: function(val) {
-                        //             return val
-                        //         },
-                        //     }
-                        // }
+                        }
                     }
                 },
                 grid: {
@@ -276,19 +244,7 @@
                             strokeWidth: '100%',
                             strokeHeight: '100%',
                             margin: -5, // margin is in pixels
-                        },
-                        // dataLabels: {
-                        //     name: {
-                        //         show: false
-                        //     },
-                        //     value: {
-                        //         offsetY: 60,
-                        //         fontSize: '22px',
-                        //         formatter: function(val) {
-                        //             return val
-                        //         },
-                        //     },
-                        // }
+                        }
                     }
                 },
                 grid: {
@@ -639,10 +595,7 @@
                     type: 'get',
                 })
                 .done(function(res, xhr, meta) {
-                    // cpuLineChart(res.data.cpu, res.data.category)
-                    // memoryLineChart(res.data.mem, res.data.category)
                     networkLineChart(res.data.netin, res.data.netout, res.data.category)
-                    // diskLineChart(res.data.diskwrite, res.data.diskread, res.data.category)
                 })
                 .fail(function(res, error) {
                     toastr.error(res.responseJSON.message, 'Error')
@@ -727,10 +680,6 @@
                     $("#mem-info").text(`${bytesToSize(res.data.mem)} of ${bytesToSize(res.data.maxmem)}`)
                     $("#disk-info").text(`${bytesToSize(res.data.maxdisk)}`)
                     $("#uptime").text(secondsToDhms(res.data.uptime))
-
-                    // var cpu = res.data.cpu * 100;
-
-                    // cpuLineChart(cpu);
 
                     let element = res.data.status == 'running' ?
                         `<span class="badge badge-primary">
