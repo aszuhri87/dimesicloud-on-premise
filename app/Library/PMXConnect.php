@@ -12,7 +12,6 @@ class PMXConnect {
             "Authorization" => "PVEAPIToken=" . env('PMX_TOKEN_ID') . "=" . env('PMX_TOKEN')
         ];
 
-        $auth_data = Session::get('data');
         $client = new \GuzzleHttp\Client([
             'verify' => false
         ]);

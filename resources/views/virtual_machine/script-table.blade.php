@@ -16,7 +16,8 @@
                     }
                 },
                 columns: [{
-                        data: 'name'
+                        data: 'name',
+                        width: '20%'
                     },
                     {
                         data: 'ip'
@@ -28,16 +29,22 @@
                         data: 'cpu'
                     },
                     {
-                        data: 'maxcpu'
+                        data: 'maxcpu',
+                        width: '5%',
+                        class: 'text-center'
                     },
                     {
-                        data: 'mem'
+                        data: 'mem',
+                        width: '15%',
+                        class: 'text-center'
                     },
                     {
                         data: 'maxmem'
                     },
                     {
-                        data: 'maxdisk'
+                        data: 'maxdisk',
+                        width: '15%',
+                        class: 'text-center'
                     },
                     {
                         data: 'status'
@@ -60,6 +67,8 @@
                     {
                         targets:3,
                         data:'cpu',
+                        width: '10%',
+                        class: 'text-center',
                         render: function(data, type, full, meta){
                             return `${data.toFixed(2)} %`
                         }
@@ -139,7 +148,7 @@
                     }
                 ],
                 order: [
-                    [1, 'desc']
+                    [0, 'asc']
                 ],
                 dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 select: {
