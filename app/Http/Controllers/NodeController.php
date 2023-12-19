@@ -6,6 +6,7 @@ use App\Library\PMXConnect;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Contracts\DataTable;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Cache;
 
 class NodeController extends Controller
 {
@@ -19,39 +20,45 @@ class NodeController extends Controller
     }
 
     public function dt(){
-        $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/cluster/status', 'GET');
+        $seconds = env('CACHE_LIFETIME');
+        $data = Cache::remember('nodes', $seconds,  function () {
+            $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/cluster/status', 'GET');
 
-        $data = array();
+            $data = array();
 
-        if($response->getStatusCode() == 200){
-            $clusters = json_decode($response->getBody(), true);
+            if($response->getStatusCode() == 200){
+                $clusters = json_decode($response->getBody(), true);
 
-            foreach ($clusters['data'] as $key => $cluster) {
-                if($cluster['type'] == 'node'){
+                foreach ($clusters['data'] as $key => $cluster) {
+                    if($cluster['type'] == 'node'){
 
-                    $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/nodes/'.$cluster['name'].'/status', 'GET');
+                        $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/nodes/'.$cluster['name'].'/status', 'GET');
 
-                    if($response->getStatusCode() == 200){
-                        $status = json_decode($response->getBody(), true);
+                        if($response->getStatusCode() == 200){
+                            $status = json_decode($response->getBody(), true);
 
-                        $_data = array(
-                            'name' => $cluster['name'],
-                            'ip' => $cluster['ip'],
-                            'uptime' => gmdate("H:i:s", $status['data']['uptime']),
-                            'maxmem' => $status['data']['memory']['total'],
-                            'mem' => $status['data']['memory']['used'],
-                            'cpu' => $status['data']['cpu'],
-                            'maxcpu' => $status['data']['cpuinfo']['cpus'],
-                            'status' => $cluster['online'],
-                            'maxdisk' => $status['data']['rootfs']['total']
-                        );
 
-                        array_push($data,$_data);
+
+                            $_data = array(
+                                'name' => $cluster['name'],
+                                'ip' => $cluster['ip'],
+                                'uptime' => gmdate("H:i:s", $status['data']['uptime']),
+                                'maxmem' => $status['data']['memory']['total'],
+                                'mem' => $status['data']['memory']['used'],
+                                'cpu' => $status['data']['cpu'],
+                                'maxcpu' => $status['data']['cpuinfo']['cpus'],
+                                'status' => $cluster['online'],
+                                'maxdisk' => $status['data']['rootfs']['total']
+                            );
+
+                            array_push($data,$_data);
+                        }
                     }
                 }
             }
-        }
 
+            return $data;
+        });
         return DataTables::of($data)->addIndexColumn()->make(true);
     }
 
