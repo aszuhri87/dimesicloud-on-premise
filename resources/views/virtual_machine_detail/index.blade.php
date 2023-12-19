@@ -40,12 +40,12 @@
             translate: -50% 5px;
             white-space: nowrap;
         }
-/*
+
         a[disabled] {
             opacity: .4;
             cursor: default !important;
             pointer-events: none;
-        } */
+        }
     </style>
 @endpush
 
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="dropdown d-flex justify-content-end">
                                         <div class="pe-2 no-ws">
-                                            <a href="{{env('CONSOLE_URL')}}/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" title="Console" class="btn btn-primary console btn-running p-0" style="width:38px; height:38px;">
+                                            <a href="{{env('CONSOLE_URL')}}/?console=kvm&xtermjs=1&vmid={{ Request::segment(3) }}&node={{ Request::segment(2) }}" title="Console" class="btn btn-primary console btn-stopped p-0" style="width:38px; height:38px;">
                                                 <i class="tf-icons ti ti-terminal-2 ti-xs mx-auto"></i>
                                             </a>
                                         </div>
@@ -88,7 +88,7 @@
                                             <ul class="dropdown-menu dropdown-menu-end">
                                                 <li>
                                                     <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(2) }}/start"
-                                                        class="dropdown-item d-flex align-items-center btn-start">
+                                                        class="dropdown-item d-flex align-items-center btn-start btn-running">
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-player-play"></span> Start
                                                         </p>
@@ -96,7 +96,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(2) }}/shutdown"
-                                                        class="dropdown-item d-flex align-items-center btn-shutdown">
+                                                        class="dropdown-item d-flex align-items-center btn-shutdown btn-stopped">
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-power"></span> Shutdown
                                                         </p>
@@ -104,7 +104,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(2) }}/reboot"
-                                                        class="dropdown-item d-flex align-items-center btn-restart">
+                                                        class="dropdown-item d-flex align-items-center btn-restart btn-stopped">
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Reboot
                                                         </p>
@@ -112,7 +112,7 @@
                                                 </li>
                                                 <li>
                                                     <a href="{{ url('power') }}/{{ Request::segment(3) }}/{{ Request::segment(3) }}/force-shutdown"
-                                                        class="dropdown-item d-flex align-items-center btn-shutdown">
+                                                        class="dropdown-item d-flex align-items-center btn-shutdown btn-stopped">
                                                         <p class="no-ws">
                                                             <span class="tf-icons ti-xs ti ti-recharging"></span> Force Shutdown
                                                         </p>

@@ -1,6 +1,7 @@
 <script>
     var top_vm_cpu_table = null;
     var top_vm_memory_table = null;
+    var top_disk_wearout_table = null;
 
 
     const cpuUsageChart = (data) => {
@@ -273,6 +274,61 @@
         });
     }
 
+    const topDiskWearoutTable = () => {
+        top_disk_wearout_table = $('#top-disk-wearout-table').DataTable({
+                ajax: {
+                    type: 'GET',
+                    url: `{{ url('dashboard/disk-wearout') }}`,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                },
+                searching: false,
+                lengthChange: false,
+                columns: [
+                    {
+                        data: 'node'
+                    },
+                    {
+                        data: 'devpath'
+                    },
+                    {
+                        data: 'used'
+                    },
+                    {
+                        data: 'model'
+                    },
+                    {
+                        data: 'serial'
+                    },
+                    {
+                        data: 'size'
+                    },
+                    {
+                        data: 'wearout',
+                        class: 'text-center'
+                    },
+                ],
+                columnDefs: [
+                    {
+                        targets:5,
+                        data:'used',
+                        render: function(data, type, full, meta){
+                            return bytesToSize(data)
+                        }
+                    },
+                ],
+                order: [
+                    [0, 'asc']
+                ],
+                dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+                select: {
+                    // Select style
+                    style: 'multi'
+                }
+            });
+    }
+
     const widgetNode = (data) => {
         $(".total-node-count").text(data.total);
         $("#running-node-count").text(data.running);
@@ -317,6 +373,7 @@
         // ramUsageChart();
         // diskUsageChart();
         topVmCpuTable();
-        topVmMemoryTable()
+        topVmMemoryTable();
+        topDiskWearoutTable();
     })
 </script>

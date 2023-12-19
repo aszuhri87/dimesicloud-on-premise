@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Library\PMXConnect;
+use Illuminate\Support\Facades\Cache;
 use Session;
+use Yajra\DataTables\Facades\DataTables;
 
 class DashboardController extends Controller
 {
@@ -132,5 +134,96 @@ class DashboardController extends Controller
 			], 500);
 		}
 	}
+
+
+    public function top_disk_weareout()
+    {
+        $seconds = env('CACHE_LIFETIME');
+        $nodes = Cache::remember('nodes', $seconds,  function () {
+            $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/cluster/status', 'GET');
+
+            $data = array();
+
+            if($response->getStatusCode() == 200){
+                $clusters = json_decode($response->getBody(), true);
+
+                foreach ($clusters['data'] as $key => $cluster) {
+                    if($cluster['type'] == 'node'){
+
+                        $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/nodes/'.$cluster['name'].'/status', 'GET');
+
+                        if($response->getStatusCode() == 200){
+                            $status = json_decode($response->getBody(), true);
+
+
+
+                            $_data = array(
+                                'name' => $cluster['name'],
+                                'ip' => $cluster['ip'],
+                                'uptime' => gmdate("H:i:s", $status['data']['uptime']),
+                                'maxmem' => $status['data']['memory']['total'],
+                                'mem' => $status['data']['memory']['used'],
+                                'cpu' => $status['data']['cpu'],
+                                'maxcpu' => $status['data']['cpuinfo']['cpus'],
+                                'status' => $cluster['online'],
+                                'maxdisk' => $status['data']['rootfs']['total']
+                            );
+
+                            array_push($data,$_data);
+                        }
+                    }
+                }
+            }
+
+            return $data;
+        });
+
+        $data = array();
+        foreach ($nodes as $key => $node) {
+            $response = PMXConnect::connection(env('PMX_HOST') . '/api2/json/nodes/'.$node['name'].'/disks/list', 'GET');
+
+            if($response->getStatusCode() == 200){
+                $response = json_decode($response->getBody(), true);
+
+                $resource = $response['data'];
+
+                foreach($resource as $r){
+                    $wearout_raw = $r['wearout'];
+
+                    if(is_numeric($wearout_raw) == 1){
+                        $wearout = (100 - (int)$wearout_raw);
+
+                        if($wearout > 80){
+                            $_data = [
+                                "node" => $node['name'],
+                                "model" => $r['model'],
+                                "used" => $r['used'],
+                                "gpt" => $r['gpt'],
+                                "type" => $r['type'],
+                                "devpath" => $r['devpath'],
+                                "serial" => $r['serial'],
+                                "osdid-list" =>['osdid-list'],
+                                "health" => $r['health'],
+                                "wwn" => $r['wwn'],
+                                "wearout" => $wearout.' %',
+                                "osdid" => $r['osdid'],
+                                "vendor" => $r['vendor'],
+                                "by_id_link" => $r['by_id_link'],
+                                "size" => $r['size'],
+                                "rpm" => $r['rpm']
+                            ];
+
+                            array_push($data, $_data);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return DataTables::of($data)->addIndexColumn()->make(true);
+
+
+    }
 
 }
