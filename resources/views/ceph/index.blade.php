@@ -12,7 +12,7 @@
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div class="card-title mb-0">
                                 <small>Cluster Status</small>
-                                <p id="health" class="text-success text-bold"></p>
+                                <h5 id="health" class="text-success"></h5>
                             </div>
                             <div class="card-icon">
                                 <span class="badge bg-label-primary rounded-pill p-2">
