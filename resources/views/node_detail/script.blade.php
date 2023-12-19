@@ -300,13 +300,14 @@
                         parentHeightOffset: 0,
                         toolbar: {
                             show: false
-                        }
+                        },
+                        stacked: true
                     },
                     dataLabels: {
                         enabled: false
                     },
                     stroke: {
-                        show: false,
+                        show: true,
                         curve: 'straight'
                     },
                     legend: {
@@ -449,13 +450,14 @@
                         parentHeightOffset: 0,
                         toolbar: {
                             show: false
-                        }
+                        },
+                        stacked: true
                     },
                     dataLabels: {
                         enabled: false
                     },
                     stroke: {
-                        show: false,
+                        show: true,
                         curve: 'straight'
                     },
                     legend: {

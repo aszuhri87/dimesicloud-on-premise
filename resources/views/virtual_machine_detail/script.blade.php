@@ -269,34 +269,6 @@
 
         },
         networkLineChart = (list_series_netin, list_series_netout, list_categories) => {
-            let cardColor, headingColor, labelColor, borderColor, legendColor;
-
-            cardColor = '#4B465C';
-            headingColor = '#4B465C';
-            labelColor = '#4B465C';
-            legendColor = '#4B465C';
-            borderColor = '#DBDADE';
-
-
-            // Color constant
-            const chartColors = {
-              column: {
-                series1: '#826af9',
-                series2: '#d2b0ff',
-                bg: '#f8d3ff'
-              },
-              donut: {
-                series1: '#fee802',
-                series2: '#3fd0bd',
-                series3: '#826bf8',
-                series4: '#2b9bf4'
-              },
-              area: {
-                series1: '#29dac7',
-                series2: '#60f2ca',
-                series3: '#a5f8cd'
-              }
-            };
             var options = {
                     chart: {
                         height: 400,
@@ -304,13 +276,14 @@
                         parentHeightOffset: 0,
                         toolbar: {
                             show: false
-                        }
+                        },
+                        stacked: true
                     },
                     dataLabels: {
                         enabled: false
                     },
                     stroke: {
-                        show: false,
+                        show: true,
                         curve: 'straight'
                     },
                     legend: {
@@ -330,7 +303,7 @@
                             }
                         }
                     },
-                    colors: ['#60F2CA', '#A4F8CD'],
+                    colors: ['#A4F8CD', '#60F2CA'],
                     series: [{
                             name: 'Upload',
                             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -418,34 +391,6 @@
             })
         },
         diskLineChart = (list_series_diskwrite, list_series_diskread, list_categories) => {
-            let cardColor, headingColor, labelColor, borderColor, legendColor;
-
-            cardColor = '#4B465C';
-            headingColor = '#4B465C';
-            labelColor = '#4B465C';
-            legendColor = '#4B465C';
-            borderColor = '#DBDADE';
-
-
-            // Color constant
-            const chartColors = {
-              column: {
-                series1: '#826af9',
-                series2: '#d2b0ff',
-                bg: '#f8d3ff'
-              },
-              donut: {
-                series1: '#fee802',
-                series2: '#3fd0bd',
-                series3: '#826bf8',
-                series4: '#2b9bf4'
-              },
-              area: {
-                series1: '#29dac7',
-                series2: '#60f2ca',
-                series3: '#a5f8cd'
-              }
-            };
             var options = {
                     chart: {
                         height: 400,
@@ -453,13 +398,14 @@
                         parentHeightOffset: 0,
                         toolbar: {
                             show: false
-                        }
+                        },
+                        stacked: true
                     },
                     dataLabels: {
                         enabled: false
                     },
                     stroke: {
-                        show: false,
+                        show: true,
                         curve: 'straight'
                     },
                     legend: {
@@ -479,7 +425,7 @@
                             }
                         }
                     },
-                    colors: ['#60F2CA', '#A4F8CD'],
+                    colors: ['#A4F8CD', '#60F2CA'],
                     series: [{
                             name: 'Upload',
                             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

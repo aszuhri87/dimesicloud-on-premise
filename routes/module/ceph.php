@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CEPHController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['auth-middleware']], function () {
-    Route::get('dashboard/statistic-resources', [DashboardController::class, 'statistic_resources']);
-    Route::get('dashboard/index', [DashboardController::class, 'index']);
+    Route::get('ceph', [CEPHController::class, 'index']);
+    Route::get('ceph/data', [CEPHController::class, 'get']);
 });

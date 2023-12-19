@@ -14,6 +14,8 @@
             Node
         @elseif (strpos(Request::url(), 'dashboard'))
             Dashboard
+        @elseif (strpos(Request::url(), 'ceph'))
+            CEPH
         @else
 
         @endif

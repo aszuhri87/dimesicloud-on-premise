@@ -33,5 +33,6 @@ include base_path('routes/module/virtual_machine.php');
 include base_path('routes/module/power.php');
 include base_path('routes/module/alert.php');
 include base_path('routes/module/node.php');
+include base_path('routes/module/ceph.php');
 
 

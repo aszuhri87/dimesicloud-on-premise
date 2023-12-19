@@ -3,179 +3,298 @@
 @section('content')
     <div class="content-wrapper">
         <!-- Content -->
-
-        <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="container-fluid flex-grow-1 container-p-y">
+            <h6>Status</h6>
             <div class="row">
-                <!-- Sales last year -->
+                <!-- Cards with few info -->
                 <div class="col-lg-3 col-sm-6 mb-4">
                     <div class="card h-100">
-                        <div class="card-body pb-0">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>Cluster Status</small>
+                                <p id="health" class="text-success text-bold"></p>
+                            </div>
                             <div class="card-icon">
                                 <span class="badge bg-label-primary rounded-pill p-2">
-                                    <i class="ti ti-users ti-sm"></i>
+                                    <i class="ti ti-cpu ti-sm"></i>
                                 </span>
                             </div>
-                            <h5 class="card-title mb-0 mt-2">92.6k</h5>
-                            <small>Subscribers Gained</small>
                         </div>
-                        <div id="sas"></div>
                     </div>
                 </div>
-
-                <!-- Quarterly Sales -->
                 <div class="col-lg-3 col-sm-6 mb-4">
                     <div class="card h-100">
-                        <div class="card-body pb-0">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>Managers</small>
+                                <h5 id="managers_active" class="mb-0 me-2"></h5>
+                                <h5 id="managers_standby" class="mb-0 me-2"></h5>
+
+                            </div>
                             <div class="card-icon">
-                                <span class="badge bg-label-danger rounded-pill p-2">
-                                    <i class="ti ti-shopping-cart ti-sm"></i>
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                    <i class="ti ti-cpu ti-sm"></i>
                                 </span>
                             </div>
-                            <h5 class="card-title mb-0 mt-2">36.5%</h5>
-                            <small>Quarterly Sales</small>
                         </div>
-                        <div id="quarterlySales"></div>
                     </div>
                 </div>
-
-                <!-- Order Received -->
-                <div class="col-lg-3 col-sm-6 mb-4">
+                {{-- <div class="col-lg-3 col-sm-6 mb-4">
                     <div class="card h-100">
-                        <div class="card-body pb-0">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>Hosts</small>
+                                <h5 class="mb-0 me-2">1.24gb</h5>
+                            </div>
                             <div class="card-icon">
-                                <span class="badge bg-label-warning rounded-pill p-2">
-                                    <i class="ti ti-package ti-sm"></i>
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                    <i class="ti ti-cpu ti-sm"></i>
                                 </span>
                             </div>
-                            <h5 class="card-title mb-0 mt-2">97.5k</h5>
-                            <small>Order Received</small>
                         </div>
-                        <div id="orderReceived"></div>
+                    </div>
+                </div> --}}
+                <div class="col-lg-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>Monitors</small>
+                                <h5 id="monitors" class="mb-0 me-2"></h5>
+                            </div>
+                            <div class="card-icon">
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                    <i class="ti ti-cpu ti-sm"></i>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Revenue Generated -->
                 <div class="col-lg-3 col-sm-6 mb-4">
                     <div class="card h-100">
-                        <div class="card-body pb-0">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>OSDs</small>
+                                <h5 id="osds" class="mb-0 me-2"></h5>
+                            </div>
                             <div class="card-icon">
-                                <span class="badge bg-label-success rounded-pill p-2">
-                                    <i class="ti ti-credit-card ti-sm"></i>
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                   <i class="ti ti-cpu ti-sm"></i>
                                 </span>
                             </div>
-                            <h5 class="card-title mb-0 mt-2">97.5k</h5>
-                            <small>Revenue Generated</small>
                         </div>
-                        <div id="revenueGenerated"></div>
+                    </div>
+                </div>
+            </div>
+            {{-- <div class="row">
+                <!-- Cards with few info -->
+                <div class="col-lg-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>Managers</small>
+                                <h5 id="managers_active" class="mb-0 me-2"></h5>
+                                <h5 id="managers_standby" class="mb-0 me-2"></h5>
+
+                            </div>
+                            <div class="card-icon">
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                    <i class="ti ti-cpu ti-sm"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>Object Gateways</small>
+                                <h5 class="mb-0 me-2">-</h5>
+                            </div>
+                            <div class="card-icon">
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                    <i class="ti ti-cpu ti-sm"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>Metadata Servers</small>
+                                <h5 class="mb-0 me-2">-</h5>
+                            </div>
+                            <div class="card-icon">
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                    <i class="ti ti-cpu ti-sm"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>iSCSI Gateways</small>
+                                <h5 class="mb-0 me-2">-</h5>
+                            </div>
+                            <div class="card-icon">
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                   <i class="ti ti-cpu ti-sm"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+
+            <h6>Capacity</h6>
+            <div class="row">
+                <!-- Donut Chart -->
+                <div class="col-md-4 col-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div>
+                                <h5 class="card-title mb-0">Raw Capacity</h5>
+                                <small class="text-muted">Spending on various categories</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="rawChart"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Donut Chart -->
+                <div class="col-md-4 col-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div>
+                                <h5 class="card-title mb-0">Objects</h5>
+                                <small class="text-muted">Spending on various categories</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="objectChart"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Donut Chart -->
+                <div class="col-md-4 col-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div>
+                                <h5 class="card-title mb-0">PG Status</h5>
+                                <small class="text-muted">Spending on various categories</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="pgChart"></div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <!-- Expenses -->
-                <div class="col-xl-2 col-md-4 col-6 mb-4">
+                <!-- Cards with few info -->
+                <div class="col-lg-6 col-sm-6 mb-4">
                     <div class="card h-100">
-                        <div class="card-header pb-0">
-                            <h5 class="card-title mb-0">82.5k</h5>
-                            <small class="text-muted">Expenses 1</small>
-                        </div>
-                        <div class="card-body">
-                            <div id="expensesChart"></div>
-                            <div class="mt-3 text-center">
-                                <small class="text-muted mt-3">$21k Expenses more than last month</small>
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>Pools</small>
+                                <h5 id="pools" class="mb-0 me-2"></h5>
+                            </div>
+                            <div class="card-icon">
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                    <i class="ti ti-cpu ti-sm"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Expenses -->
-                <div class="col-xl-2 col-md-4 col-6 mb-4">
+                <div class="col-lg-6 col-sm-6 mb-4">
                     <div class="card h-100">
-                        <div class="card-header pb-0">
-                            <h5 class="card-title mb-0">82.5k</h5>
-                            <small class="text-muted">Expenses 2</small>
-                        </div>
-                        <div class="card-body">
-                            <div id="expensesChart2"></div>
-                            <div class="mt-3 text-center">
-                                <small class="text-muted mt-3">$21k Expenses more than last month</small>
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>PGs per OSD</small>
+                                <h5 id="pg_per_osd" class="mb-0 me-2">1.24gb</h5>
+                            </div>
+                            <div class="card-icon">
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                    <i class="ti ti-cpu ti-sm"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Expenses -->
-                <div class="col-xl-2 col-md-4 col-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-header pb-0">
-                            <h5 class="card-title mb-0">82.5k</h5>
-                            <small class="text-muted">Expenses 3</small>
-                        </div>
-                        <div class="card-body">
-                            <div id="expensesChart3"></div>
-                            <div class="mt-3 text-center">
-                                <small class="text-muted mt-3">$21k Expenses more than last month</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Orders last week -->
-                <div class="col-xl-2 col-md-4 col-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-header pb-3">
-                            <h5 class="card-title mb-0">Order</h5>
-                            <small class="text-muted">Last week</small>
-                        </div>
-                        <div class="card-body">
-                            <div id="ordersLastWeek"></div>
-                            <div class="d-flex justify-content-between align-items-center gap-3">
-                                <h4 class="mb-0">124k</h4>
-                                <small class="text-success">+12.6%</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sales last year -->
-                <div class="col-xl-2 col-md-4 col-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-header pb-0">
-                            <h5 class="card-title mb-0">Sales</h5>
-                            <small class="text-muted">Last Year</small>
-                        </div>
-                        <div id="salesLastYear"></div>
-                        <div class="card-body pt-0">
-                            <div class="d-flex justify-content-between align-items-center mt-3 gap-3">
-                                <h4 class="mb-0">175k</h4>
-                                <small class="text-danger">-16.2%</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Profit last month -->
-                <div class="col-xl-2 col-md-4 col-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-header pb-0">
-                            <h5 class="card-title mb-0">Profit</h5>
-                            <small class="text-muted">Last Month</small>
-                        </div>
-                        <div class="card-body">
-                            <div id="profitLastMonth"></div>
-                            <div class="d-flex justify-content-between align-items-center mt-3 gap-3">
-                                <h4 class="mb-0">624k</h4>
-                                <small class="text-success">+8.24%</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+
+            {{-- <h6>Performance</h6>
+            <div class="row">
+                <!-- Donut Chart -->
+                <div class="col-md-4 col-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div>
+                                <h5 class="card-title mb-0">Client Read/Write</h5>
+                                <small class="text-muted">Spending on various categories</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="clientRwChart"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Donut Chart -->
+                <div class="col-md-4 col-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <div>
+                                <h5 class="card-title mb-0">Client Throughput</h5>
+                                <small class="text-muted">Spending on various categories</small>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="clientThroughputChart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 mb-4">
+                    <div class="card h-25">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>Object Gateways</small>
+                                <h5 class="mb-0 me-2">-</h5>
+                            </div>
+                            <div class="card-icon">
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                    <i class="ti ti-cpu ti-sm"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-6 mb-4">
+                    <div class="card h-25">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="card-title mb-0">
+                                <small>Object Gateways</small>
+                                <h5 class="mb-0 me-2">-</h5>
+                            </div>
+                            <div class="card-icon">
+                                <span class="badge bg-label-primary rounded-pill p-2">
+                                    <i class="ti ti-cpu ti-sm"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
         </div>
     </div>
 @endsection
 
 @push('script')
-    @include('dashboard.script')
-    @include('dashboard.script-table')
+    @include('ceph.script')
 @endpush
