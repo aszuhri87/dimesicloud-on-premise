@@ -792,7 +792,7 @@
                 pgChart(JSON.parse(data.pg_category), JSON.parse(data.pg_count));
                 rawChart(Math.ceil(raw_numb), parseInt(raw_used), Math.ceil(raw_avail));
                 objectChart(parseInt(data.num_object));
-                console.log(parseInt(data.num_object));
+
                 $('#health').text(data.health);
                 $('#managers_active').text(data.mgr_active_total + ' Active ');
                 $('#managers_standby').text(data.mgr_standbys_total + ' Standby')
@@ -812,9 +812,7 @@
     $(document).ready(function() {
         getData();
         setInterval(getData, 15000);
-        // cpuUsageChart();
-        // ramUsageChart();
-        // diskUsageChart();
+
         clientThroughputChart();
         pgChart()
         rawChart()

@@ -12,24 +12,9 @@ class CEPHController extends Controller
     }
 
     public function get(){
-        // try {
+        try {
             $response = PMXConnect::connection(env('PMX_HOST').'/api2/json/cluster/ceph/status', 'GET');
             $response = json_decode($response->getBody(), true)['data'];
-
-            $storage = PMXConnect::connection(env('PMX_HOST').'/api2/json/cluster/resources', 'GET');
-            $storage = json_decode($storage->getBody(), true)['data'];
-
-            // $raw = 0;
-
-            // foreach($storage as $s){
-            //     if($s['type'] == "storage"){
-            //         if($s['storage'] == "ceph_storage"){
-            //             $raw += $s['maxdisk'];
-            //         }
-            //     }
-            // }
-
-            // dd($response);
 
             $pg_category = array();
             $pg_count = array();
@@ -59,17 +44,15 @@ class CEPHController extends Controller
                 'num_object' => $response['pgmap']['num_objects']
             ];
 
-            // dd($data);
-
             return response()->json([
                 'data' => $data,
                 'message' => 'success'
             ], 200);
-        // } catch (\Throwable $th) {
-        //     return response()->json([
-        //         'message' => 'Server Error'
-        //     ], 500);
-        // }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Server Error'
+            ], 500);
+        }
     }
 
 }
