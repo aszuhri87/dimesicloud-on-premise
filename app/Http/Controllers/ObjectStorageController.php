@@ -24,9 +24,9 @@ class ObjectStorageController extends Controller
         $credentials = new Credentials(env('AWS_ACCESS_KEY_ID'), env('AWS_SECRET_ACCESS_KEY'));
         $config = array(
             'region'  => 'us-east-1',
-            'version' => 'latest',
+            // 'version' => 'latest',
             'credentials' => $credentials,
-            'base_url' => env('AWS_HOST'),
+            'endpoint' => env('AWS_HOST'),
             // 'command.params' => ['PathStyle' => true]
         );
 
@@ -40,7 +40,7 @@ class ObjectStorageController extends Controller
 
         $s3 = new S3Client($config);
 
-        dd($s3->listBucketsAsync());
+        dd($s3->listBuckets());
 
         // dd(Storage::disk('s3'));
 
