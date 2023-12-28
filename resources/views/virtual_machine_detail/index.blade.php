@@ -209,7 +209,6 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
                                         <h5 class="card-title mb-0">Network Traffic</h5>
-                                        <small class="text-muted">Commercial networks</small>
                                     </div>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-2 btn-label-secondary mt-4"
@@ -271,7 +270,6 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
                                         <h5 class="card-title mb-0">Disk IO</h5>
-                                        <small class="text-muted">Commercial networks</small>
                                     </div>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-2 btn-label-secondary mt-4"

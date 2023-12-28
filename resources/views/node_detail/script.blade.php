@@ -46,7 +46,7 @@
 
                 Cookies.set('PVEAuthCookie', data_sess['ticket'], {domain: '.dimensi.com'})
                 window.open($(this).attr('href'), "_blank", "location=yes")
-            })
+            });
 
             $(document).on('click', '.btn-console', function(event) {
                 event.preventDefault();
@@ -265,34 +265,7 @@
 
         },
         networkLineChart = (list_series_netin, list_series_netout, list_categories) => {
-            let cardColor, headingColor, labelColor, borderColor, legendColor;
 
-            cardColor = '#4B465C';
-            headingColor = '#4B465C';
-            labelColor = '#4B465C';
-            legendColor = '#4B465C';
-            borderColor = '#DBDADE';
-
-
-            // Color constant
-            const chartColors = {
-              column: {
-                series1: '#826af9',
-                series2: '#d2b0ff',
-                bg: '#f8d3ff'
-              },
-              donut: {
-                series1: '#fee802',
-                series2: '#3fd0bd',
-                series3: '#826bf8',
-                series4: '#2b9bf4'
-              },
-              area: {
-                series1: '#29dac7',
-                series2: '#60f2ca',
-                series3: '#a5f8cd'
-              }
-            };
             var options = {
                     chart: {
                         height: 400,
@@ -308,7 +281,12 @@
                     },
                     stroke: {
                         show: true,
+<<<<<<< Updated upstream
                         curve: 'straight'
+=======
+                        curve: 'straight',
+                        width: 1.5
+>>>>>>> Stashed changes
                     },
                     legend: {
                         show: true,
@@ -327,7 +305,7 @@
                             }
                         }
                     },
-                    colors: ['#60F2CA', '#A4F8CD'],
+                    colors: ['#0073C0', '#60f2ca'],
                     series: [{
                             name: 'Upload',
                             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -376,8 +354,12 @@
                         }
                     },
                     fill: {
-                        opacity: 1,
-                        type: 'solid'
+                        type: ['solid', 'gradient'],
+                        gradient: {
+                            shared: 'dark',
+                            opacityFrom: 0.7,
+                            opacityTo: 0.9,
+                        }
                     },
                     tooltip: {
                         shared: false
@@ -415,34 +397,6 @@
             })
         },
         cpuLineChart = (list_series_cpu, list_series_io, list_categories) => {
-            let cardColor, headingColor, labelColor, borderColor, legendColor;
-
-            cardColor = '#4B465C';
-            headingColor = '#4B465C';
-            labelColor = '#4B465C';
-            legendColor = '#4B465C';
-            borderColor = '#DBDADE';
-
-
-            // Color constant
-            const chartColors = {
-              column: {
-                series1: '#826af9',
-                series2: '#d2b0ff',
-                bg: '#f8d3ff'
-              },
-              donut: {
-                series1: '#fee802',
-                series2: '#3fd0bd',
-                series3: '#826bf8',
-                series4: '#2b9bf4'
-              },
-              area: {
-                series1: '#29dac7',
-                series2: '#60f2ca',
-                series3: '#a5f8cd'
-              }
-            };
             var options = {
                     chart: {
                         height: 400,
@@ -458,7 +412,8 @@
                     },
                     stroke: {
                         show: true,
-                        curve: 'straight'
+                        curve: 'straight',
+                        width: 1.5
                     },
                     legend: {
                         show: true,
@@ -477,7 +432,7 @@
                             }
                         }
                     },
-                    colors: ['#60F2CA', '#A4F8CD'],
+                    colors: ['#0073C0', '#60f2ca'],
                     series: [{
                             name: 'Upload',
                             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -526,8 +481,12 @@
                         }
                     },
                     fill: {
-                        opacity: 1,
-                        type: 'solid'
+                        type: ['solid', 'gradient'],
+                        gradient: {
+                            shared: 'dark',
+                            opacityFrom: 0.7,
+                            opacityTo: 0.9,
+                        }
                     },
                     tooltip: {
                         shared: false

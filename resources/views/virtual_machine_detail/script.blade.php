@@ -284,7 +284,8 @@
                     },
                     stroke: {
                         show: true,
-                        curve: 'straight'
+                        curve: 'straight',
+                        width: 1.5
                     },
                     legend: {
                         show: true,
@@ -303,7 +304,7 @@
                             }
                         }
                     },
-                    colors: ['#A4F8CD', '#60F2CA'],
+                    colors: ['#0073C0', '#60f2ca'],
                     series: [{
                             name: 'Upload',
                             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -352,8 +353,12 @@
                         }
                     },
                     fill: {
-                        opacity: 1,
-                        type: 'solid'
+                        type: ['solid', 'gradient'],
+                        gradient: {
+                            shared: 'dark',
+                            opacityFrom: 0.7,
+                            opacityTo: 0.9,
+                        }
                     },
                     tooltip: {
                         shared: false
@@ -406,7 +411,8 @@
                     },
                     stroke: {
                         show: true,
-                        curve: 'straight'
+                        curve: 'straight',
+                        width: 1.5
                     },
                     legend: {
                         show: true,
@@ -425,7 +431,7 @@
                             }
                         }
                     },
-                    colors: ['#A4F8CD', '#60F2CA'],
+                    colors: ['#0073C0', '#60f2ca'],
                     series: [{
                             name: 'Upload',
                             data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -474,8 +480,12 @@
                         }
                     },
                     fill: {
-                        opacity: 1,
-                        type: 'solid'
+                        type: ['solid', 'gradient'],
+                        gradient: {
+                            shared: 'dark',
+                            opacityFrom: 0.7,
+                            opacityTo: 0.9,
+                        }
                     },
                     tooltip: {
                         shared: false

@@ -163,7 +163,6 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
                                         <h5 class="card-title mb-0">Network Traffic</h5>
-                                        <small class="text-muted">Commercial networks</small>
                                     </div>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-2 btn-label-secondary mt-4"
@@ -225,7 +224,6 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <div>
                                         <h5 class="card-title mb-0">CPU Usage</h5>
-                                        <small class="text-muted">Graph for cpu usage </small>
                                     </div>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-2 btn-label-secondary mt-4"
@@ -287,7 +285,6 @@
                         <div class="card p-4" style="border-radius: 5px;">
                             <div class="mb-4">
                                 <h5 class="card-title mb-0">Disk Wearout</h5>
-                                <small class="text-muted mb-4">List of Disk</small>
                             </div>
                             <div class="card-datatable mt-2">
                                 <table id="init-table" class="table table-sm border"
