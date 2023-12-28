@@ -39,11 +39,17 @@
           <div data-i18n="Management Alert">Management Alert</div>
         </a>
       </li>
-      {{-- <li class="menu-item @if (strpos(Request::url(), 'object-storage')) active @endif">
+      <li class="menu-item @if (strpos(Request::url(), 'object-storage')) active @endif">
         <a href="/object-storage" class="menu-link">
           <i class="menu-icon tf-icons ti ti-database"></i>
           <div data-i18n="Object Storage">Object Storage</div>
         </a>
-      </li> --}}
+      </li>
+      <li class="menu-item @if (strpos(Request::url(), 'management-access')) active @endif">
+        <a href="/management-access" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-user-cog"></i>
+          <div data-i18n="Management Access">Management Access</div>
+        </a>
+      </li>
     </ul>
   </aside>

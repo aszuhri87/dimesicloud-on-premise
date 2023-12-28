@@ -176,6 +176,6 @@
 @endsection
 
 @push('script')
-    @include('dashboard.script')
-    @include('dashboard.script-table')
+    @include('object_storage.script')
+    {{-- @include('dashboard.script-table') --}}
 @endpush

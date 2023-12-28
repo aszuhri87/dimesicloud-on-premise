@@ -16,6 +16,8 @@
             Dashboard
         @elseif (strpos(Request::url(), 'ceph'))
             CEPH
+        @elseif (strpos(Request::url(), 'object-storage'))
+            Object Storage
         @else
 
         @endif

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Library\Influx;
 use App\Library\PMXConnect;
+use App\Models\AccessManager;
 use Illuminate\Http\Request;
 use GuzzleHttp\Exception\ClientException;
 use Session;
@@ -320,5 +321,46 @@ class MonitoringVMController extends Controller
                 "message" => 'Internal Server Error'
             ], 500);
         }
+    }
+
+    public function user_list($node, $vmid, $type){
+        $response = PMXConnect::connection(env('PMX_HOST').'/api2/json/nodes/'.$node.'/'.$type.'/'.$vmid.'/config', 'GET');
+
+        $response = json_decode($response->getBody(), true)['data'];
+
+        $ssh = explode(PHP_EOL, urldecode($response['sshkeys']));
+        $data = array();
+        $result = array();
+        $_result = array();
+
+        foreach($ssh as $s){
+            $name = null;
+            $raw = explode(" ",$s);
+            if(array_key_exists(2, $raw)){
+                if(explode(" ",$s)[2] != " " || explode(" ",$s)[2] != null){
+                    $name = explode(" ",$s)[2];
+                } else {
+                    $name = "-";
+                }
+            } else {
+                $name = "-";
+            }
+
+            if($s != ""){
+                $access = AccessManager::where('sshkey', $s)->first();
+                if($access != null){
+                    $_data = [
+                        'name' =>  $access->name,
+                        'sshkey' => $s
+                    ];
+                    array_push($data, $_data);
+                }
+            }
+
+        }
+
+
+        return DataTables::of($data)->addIndexColumn()->make(true);
+
     }
 }

@@ -46,6 +46,15 @@
             cursor: default !important;
             pointer-events: none;
         }
+        .td-text{
+            width: 600px;
+        }
+        .truncate {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 600px;
+        }
     </style>
 @endpush
 
@@ -149,10 +158,27 @@
             </div>
             <hr>
 
+            <ul class="nav nav-pills mb-3" role="tablist">
+                <li class="nav-item">
+                    <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
+                        data-bs-target="#pill-graph" aria-controls="pill-graph"
+                        aria-selected="true">
+                        <i class="tf-icons ti ti-chart-histogram ti-xs me-1"></i> Graph
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-link btn-user" role="tab" data-bs-toggle="tab"
+                        data-bs-target="#pill-users" aria-controls="pill-users"
+                        aria-selected="false">
+                        <i class="tf-icons ti ti-users ti-xs me-1"></i> Users
+                    </button>
+                </li>
+            </ul>
+
             <div class="nav-align-top mb-4 mt-4">
                 <div class="tab-content"
                     style="background-color: transparent !important; border-color: transparent !important; box-shadow: none !important; margin:0 !important; padding:0 !important;">
-                    <div class="tab-pane fade show active" id="navs-pills-justified-home" role="tabpanel">
+                    <div class="tab-pane fade show active" id="pill-graph" role="tabpanel">
                         <div class="row mb-4">
                             <div class="col-md-4 mb-2">
                                 <div class="card">
@@ -328,7 +354,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="navs-pills-justified-profile" role="tabpanel">
+                    <div class="tab-pane fade" id="pill-users" role="tabpanel">
+                        <div class="card p-4" style="border-radius: 5px;">
+                            <div class="d-flex justify-content-between">
+                                {{-- <div>
+                                    <button class="btn btn-primary btn-sm mb-3" data-bs-toggle="modal" data-bs-target="#modalCenter"> + Add</button>
+                                </div> --}}
+                            </div>
+                            <div class="card-datatable mt-2 user-list">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -336,8 +372,10 @@
             <!-- /Line Area Chart -->
             <div class="content-backdrop fade"></div>
         </div>
+        @include('virtual_machine_detail.modal')
     @endsection
 
     @push('script')
         @include('virtual_machine_detail.script')
+        @include('virtual_machine_detail.script-table')
     @endpush
