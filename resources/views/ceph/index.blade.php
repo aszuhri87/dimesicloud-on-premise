@@ -218,7 +218,7 @@
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div class="card-title mb-0">
                                 <small>PGs per OSD</small>
-                                <h5 id="pg_per_osd" class="mb-0 me-2">1.24gb</h5>
+                                <h5 id="pg_per_osd" class="mb-0 me-2">-</h5>
                             </div>
                             <div class="card-icon">
                                 <span class="badge bg-label-primary rounded-pill p-2">

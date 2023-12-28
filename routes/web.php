@@ -34,5 +34,8 @@ include base_path('routes/module/power.php');
 include base_path('routes/module/alert.php');
 include base_path('routes/module/node.php');
 include base_path('routes/module/ceph.php');
+include base_path('routes/module/object_storage.php');
+include base_path('routes/module/management_access.php');
+
 
 

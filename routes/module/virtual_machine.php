@@ -14,4 +14,6 @@ Route::group(['middleware' => ['auth-middleware']], function () {
     Route::get('/virtual-machine-network/{node}/{vmid}/{type}',[MonitoringVMController::class, 'network']);
     Route::get('/virtual-machine-series/{node}/{vmid}/{unit}/{type}/{node_type}',[MonitoringVMController::class, 'series']);
     Route::get('/virtual-machine-series-disk/{node}/{vmid}/{unit}/{type}/{node_type}',[MonitoringVMController::class, 'series_disk']);
+    Route::post('/virtual-machine-users/{node}/{vmid}/{type}/dt', [MonitoringVMController::class, 'user_list']);
+
 });
