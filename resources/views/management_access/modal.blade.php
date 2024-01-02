@@ -18,7 +18,7 @@
                                             <input name="name" class="form-control" type="text" id="name" placeholder="Enter SSH key name ..."/>
                                             <br>
                                             <label for="sshkey" class="form-label">SSH Key</label>
-                                            <input name="sshkey" class="form-control" type="text" id="sshkey" placeholder="Enter SSH key ..."/>
+                                            <textarea name="sshkey" class="form-control" type="text" id="sshkey" placeholder="Enter SSH key ..." cols="30" rows="7"></textarea>
                                     </div>
                                 </div>
                             </div>

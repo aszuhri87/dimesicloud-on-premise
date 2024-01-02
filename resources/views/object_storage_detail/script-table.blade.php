@@ -6,11 +6,13 @@
             initTable();
         });
 
+        var bucket = '{{ Request::segment(2) }}';
+
         const initTable = () => {
             init_table = $('#init-table').DataTable({
                 ajax: {
                     type: 'POST',
-                    url: "{{ url('object-storage/dt') }}",
+                    url: `{{ url('object-storage/${ bucket }/dt') }}`,
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     }
@@ -21,11 +23,16 @@
                         width: '5%'
                     },
                     {
-                        data: 'name'
+                        data: 'name',
+                        width: '55%'
                     },
                     {
-                        data: 'updated_at',
-                        width: '20%'
+                        data: 'size',
+                        width: '10%'
+                    },
+                    {
+                        data: 'last_modified',
+                        width: '15%'
                     },
                     {
                         defaultContent: '',
@@ -51,10 +58,17 @@
                         data: "vmid",
                         render: function(data, type, full, meta) {
                             return `
-					        	<a href="{{ url('object-storage') }}/${full['name']}/detail" class="d-flex mt-3">
+					        	<a href="{{ url('object-storage') }}/${full['name']}" class="d-flex mt-3">
                                     <span class="tf-icons ti ti-folders text-primary"></span> <p class="text-dark mx-1"> ${ full['name']} </p>
 					        	</a>
 					        `
+                        }
+                    },
+                    {
+                        targets: 2,
+                        data: 'size',
+                        render: function(data, type, full, meta) {
+                            return bytesToSize(data);
                         }
                     },
                     {

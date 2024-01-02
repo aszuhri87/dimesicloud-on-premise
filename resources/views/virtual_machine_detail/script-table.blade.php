@@ -96,7 +96,7 @@
                 dom: '<"row"<"col-sm-6 col-md-6 col-lg-6"l><"col-xs-3 col-md-3 col-lg-3 text-center"B><"col-xs-3 col-md-3 col-lg-3 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 buttons: [{
                   text: '+ Create SSH Key',
-                  className: 'btn btn-primary mt-3',
+                  className: 'btn btn-primary mt-2',
                   action: function(e, dt, node, config) {
                     showModal('modalCenter')
                   }

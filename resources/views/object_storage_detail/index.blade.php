@@ -20,7 +20,7 @@
                             <tr>
                                 <th width="5%"></th>
                                 <th style="font-size: 8pt;">Object Storage</th>
-                                {{-- <th style="font-size: 8pt;">Size</th>--}}
+                                <th style="font-size: 8pt;">Size</th>
                                 <th style="font-size: 8pt;">Last Update</th>
                                 <th style="font-size: 8pt;">Action</th>
                             </tr>
@@ -34,6 +34,6 @@
 @endsection
 
 @push('script')
-    @include('object_storage.script')
-    @include('object_storage.script-table')
+    @include('object_storage_detail.script')
+    @include('object_storage_detail.script-table')
 @endpush

@@ -17,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth-middleware']], function () {
     Route::get('object-storage', [ObjectStorageController::class, 'index']);
-    // Route::post('object-storage/{node}/{vmid}/{type}/dt', [ObjectStorageController::class, 'get']);
+    Route::post('object-storage/dt', [ObjectStorageController::class, 'dt']);
+    Route::post('object-storage/{bucket}/dt', [ObjectStorageController::class, 'detail']);
+    Route::get('object-storage/{bucket}/detail', [ObjectStorageController::class, 'detail_list']);
 });
