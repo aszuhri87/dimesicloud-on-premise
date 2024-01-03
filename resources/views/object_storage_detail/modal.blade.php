@@ -14,14 +14,14 @@
                             <div class="form-row">
                                 <div class="col-md-12">
                                     <div class="position-relative form-group">
-                                        <label for="details" class="">Object Files</label>
+                                        <label for="details" class=""> </label>
                                         <div class="dz-message needsclick">
                                             Drop Files or Click to Upload
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-3">
+                            {{-- <div class="mt-3">
                                 <label class="switch">
                                     <input type="checkbox" class="switch-input" name="type" />
                                     <span class="switch-toggle-slider">
@@ -30,7 +30,7 @@
                                     </span>
                                     <span class="switch-label">Private</span>
                                 </label>
-                            </div>
+                            </div> --}}
                         </form>
                         <div class="mb-3 form-place">
                         </div>
@@ -58,14 +58,13 @@
                     </div>
                     <div class="modal-body">
                         <h2 class="text-center">Share project</h2>
-                        {{-- <p class="text-center mb-4">Create new alert for notifications</p> --}}
                         <form name="form-submit" class="form-share" method="POST" id="form-share"
                             enctype="multipart/form-data">
                             @csrf
                             <label for="timeout"> Set Timeout</label>
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <input type="number" class="form-control mb-2" name="timeout" id="timeout">
+                                    <input type="number" class="form-control mb-2" name="timeout" id="timeout" placeholder="0">
                                 </div>
                                 <div class="col-6">
                                     <select name="time" id="time" class="form-control">
