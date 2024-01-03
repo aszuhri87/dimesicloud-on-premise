@@ -58,7 +58,7 @@
                         data: "vmid",
                         render: function(data, type, full, meta) {
                             return `
-					        	<a href="{{ url('object-storage') }}/${full['name']}" class="d-flex mt-3">
+					        	<a href="{{ url('object-storage/${bucket}/${data}/show-object') }}" class="d-flex mt-3">
                                     <span class="tf-icons ti ti-folders text-primary"></span> <p class="text-dark mx-1"> ${ full['name']} </p>
 					        	</a>
 					        `
@@ -76,9 +76,8 @@
                         searchable: false,
                         orderable: false,
                         className: "text-center",
-                        data: "vmid",
+                        data: "name",
                         render: function(data, type, full, meta) {
-                            let is_running = full['status'] === 'running';
                             return `
                                 <div class="">
                                     <button type="button" class="btn dropdown-toggle hide-arrow p-0"
@@ -86,27 +85,29 @@
                                         <span class="tf-icons ti-xs ti ti-dots-vertical text-center"></span>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
+                                        {{--
                                         <li>
                                             <a href=""
-                                                class="dropdown-item d-flex align-items-center btn-start btn-running">
+                                                class="dropdown-item d-flex align-items-center btn-privacy btn-running">
                                                 <p class="no-ws">
-                                                    <span class="tf-icons ti-xs ti ti-player-play"></span> Rename
+                                                    <span class="tf-icons ti-xs ti ti-player-play"></span> Change Privacy
+                                                </p>
+                                            </a>
+                                        </li>
+                                        --}}
+                                        <li>
+                                            <a href="{{ url('object-storage/${bucket}/${data}/share-object') }}"
+                                                class="dropdown-item d-flex align-items-center btn-share btn-stopped">
+                                                <p class="no-ws">
+                                                    <span class="tf-icons ti-xs ti ti-share mb-1"></span> Share
                                                 </p>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href=""
-                                                class="dropdown-item d-flex align-items-center btn-shutdown btn-stopped">
+                                            <a href="{{ url('object-storage/${bucket}/${data}/delete-object') }}"
+                                                class="dropdown-item d-flex align-items-center btn-delete btn-stopped">
                                                 <p class="no-ws">
-                                                    <span class="tf-icons ti-xs ti ti-power"></span> Edit
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href=""
-                                                class="dropdown-item d-flex align-items-center btn-restart btn-stopped">
-                                                <p class="no-ws">
-                                                    <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Delete
+                                                    <span class="tf-icons ti ti-xs ti-trash-x text-danger mb-1"></span> Delete
                                                 </p>
                                             </a>
                                         </li>
@@ -121,7 +122,7 @@
                 ],
                 dom: '<"row"<"col-sm-6 col-md-6 col-lg-6"l><"col-xs-3 col-md-3 col-lg-3 text-center"B><"col-xs-3 col-md-3 col-lg-3 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 buttons: [{
-                  text: '+ Create Bucket',
+                  text: '+ Create Object',
                   className: 'btn btn-primary mt-3',
                   action: function(e, dt, node, config) {
                     showModal('modalCenter')

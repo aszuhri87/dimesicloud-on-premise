@@ -62,7 +62,7 @@
                         searchable: false,
                         orderable: false,
                         className: "text-center",
-                        data: "vmid",
+                        data: "name",
                         render: function(data, type, full, meta) {
                             let is_running = full['status'] === 'running';
                             return `
@@ -73,26 +73,10 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
-                                            <a href=""
-                                                class="dropdown-item d-flex align-items-center btn-start btn-running">
+                                            <a href="{{ url('object-storage/${data}/delete') }}"
+                                                class="dropdown-item d-flex align-items-center btn-delete btn-stopped">
                                                 <p class="no-ws">
-                                                    <span class="tf-icons ti-xs ti ti-player-play"></span> Rename
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href=""
-                                                class="dropdown-item d-flex align-items-center btn-shutdown btn-stopped">
-                                                <p class="no-ws">
-                                                    <span class="tf-icons ti-xs ti ti-power"></span> Edit
-                                                </p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href=""
-                                                class="dropdown-item d-flex align-items-center btn-restart btn-stopped">
-                                                <p class="no-ws">
-                                                    <span class="tf-icons ti-xs ti ti-refresh-dot"></span> Delete
+                                                    <span class="tf-icons ti ti-xs ti-trash-x text-danger mb-1"></span> Delete
                                                 </p>
                                             </a>
                                         </li>

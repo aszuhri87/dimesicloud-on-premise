@@ -31,6 +31,8 @@
             <div class="content-backdrop fade"></div>
         </div>
     </div>
+
+    @include('object_storage.modal')
 @endsection
 
 @push('script')

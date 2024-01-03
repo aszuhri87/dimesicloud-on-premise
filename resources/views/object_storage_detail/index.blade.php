@@ -14,6 +14,13 @@
         <!-- Content -->
         <div class="flex-grow-1 container-p-y container-fluid">
             <div class="card" style="background: transparent; border-radius: 5px; box-shadow: none;">
+                <a href="{{ url('object-storage') }}"
+                class="d-flex align-items-left btn-running mb-1">
+                <span class="tf-icons ti ti-sm ti-chevron-left"></span>
+                    <p class="no-ws">
+                        Back
+                    </p>
+                </a>
                 <div class="card-datatable">
                     <table id="init-table" class="table table-sm border" style="font-size: 10pt; border-collapse: separate !important; border-radius: 10px; max-width: 500px important!; width: 500px important!;">
                         <thead>
@@ -31,6 +38,8 @@
             <div class="content-backdrop fade"></div>
         </div>
     </div>
+
+    @include('object_storage_detail.modal')
 @endsection
 
 @push('script')
