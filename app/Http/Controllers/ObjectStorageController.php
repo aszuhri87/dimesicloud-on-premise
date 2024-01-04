@@ -45,17 +45,19 @@ class ObjectStorageController extends Controller
         $data = array();
         $buckets = $list_buckets->toArray()['Buckets'];
 
-        foreach($buckets as $b){
-            $time = strtotime(strval($b['CreationDate']));
+        if($buckets){
+            foreach($buckets as $b){
+                $time = strtotime(strval($b['CreationDate']));
 
-            $date = date('d/m/Y',$time);
+                $date = date('d/m/Y',$time);
 
-            $_data = ([
-                'name' => $b['Name'],
-                'updated_at' => $date
-            ]);
+                $_data = ([
+                    'name' => $b['Name'],
+                    'updated_at' => $date
+                ]);
 
-            array_push($data, $_data);
+                array_push($data, $_data);
+            }
         }
 
         return DataTables::of($data)->addIndexColumn()->make(true);
@@ -73,21 +75,23 @@ class ObjectStorageController extends Controller
         $data = array();
         $res = array();
 
+        if ($results['Contents']){
+            foreach ($results['Contents'] as $object) {
+                $time = strtotime(strval($object['LastModified']));
 
-        foreach ($results['Contents'] as $object) {
-            $time = strtotime(strval($object['LastModified']));
+                $date = date('d/m/Y',$time);
 
-            $date = date('d/m/Y',$time);
+                $res = ([
+                   'name' => $object['Key'] . PHP_EOL,
+                   'last_modified' => $date,
+                   'size' => $object['Size'],
+                //    'acl' => $acl
+                ]);
 
-            $res = ([
-               'name' => $object['Key'] . PHP_EOL,
-               'last_modified' => $date,
-               'size' => $object['Size'],
-            //    'acl' => $acl
-            ]);
-
-            array_push($data, $res);
+                array_push($data, $res);
+            }
         }
+
 
         return DataTables::of($data)->addIndexColumn()->make(true);
     }

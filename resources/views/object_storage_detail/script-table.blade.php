@@ -45,17 +45,19 @@
                       targets: 0,
                       searchable: false,
                       orderable: false,
-                      render: function () {
-                        return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+                      render: function (data, type, full, meta) {
+                        return `<input type="checkbox" class="dt-checkboxes form-check-input" value="${full['name']}">`;
                       },
                       checkboxes: {
                         selectRow: true,
-                        selectAllRender: '<input type="checkbox" class="form-check-input">'
+                        selectAllRender:  function (data, type, full, meta){
+                            return `<input type="checkbox" class="select-all form-check-input" value="[${data}]">`;
+                        }
+
                       }
                     },
                     {
                         targets: 1,
-                        data: "vmid",
                         render: function(data, type, full, meta) {
                             return `
 					        	<a href="{{ url('object-storage/${bucket}/${data}/show-object') }}" class="d-flex mt-3">
@@ -133,6 +135,23 @@
                     style: 'multi'
                 }
             });
+
+            // init_table.on('click', '.select-all', function (e) {
+
+            //     init_table.rows().iterator('row', function(context, index){
+            //         var node = $(this.row(index).data());
+            //         console.log(node[0].name);
+            //     });
+
+            //     init_table.button().add( 0, {
+            //         text: '<span class="tf-icons ti ti-sm ti-trash-x text-white mb-1"></span>',
+            //         className: 'btn btn-sm btn-danger mt-3',
+            //         action: function ( e, dt, button, config ) {
+            //             dt.ajax.reload();
+            //         },
+            //         // text: 'Reload table'
+            //     } );
+            // });
         }
     }();
 </script>
