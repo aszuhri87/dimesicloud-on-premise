@@ -126,7 +126,7 @@
                 order: [
                     [0, 'asc']
                 ],
-                dom: '<"row"<"col-sm-6 col-md-3 col-lg-3"l><"col-xs-3 col-md-6 col-lg-6 button-gr text-center text-md-end"B><"col-xs-3 col-md-3 col-lg-3 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+                dom: '<"row"<"col-sm-6 col-md-3 col-lg-3"l><"col-xs-3 col-md-6 col-lg-6 button-gr text-center text-md-end text-lg-end"B><"col-xs-3 col-md-3 col-lg-3 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 buttons: [{
                   text: '+ Create Object',
                   className: 'btn btn-primary mt-3 btn-create-object',
