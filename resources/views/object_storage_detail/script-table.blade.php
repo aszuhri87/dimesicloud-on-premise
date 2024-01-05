@@ -2,6 +2,10 @@
     var vmTable = function() {
         var init_table;
 
+        var keyname = [];
+        var select_all = false;
+        var length = 0;
+
         $(document).ready(function() {
             initTable();
         });
@@ -122,10 +126,10 @@
                 order: [
                     [0, 'asc']
                 ],
-                dom: '<"row"<"col-sm-6 col-md-6 col-lg-6"l><"col-xs-3 col-md-3 col-lg-3 text-center"B><"col-xs-3 col-md-3 col-lg-3 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+                dom: '<"row"<"col-sm-6 col-md-3 col-lg-3"l><"col-xs-3 col-md-6 col-lg-6 button-gr text-center text-md-end"B><"col-xs-3 col-md-3 col-lg-3 d-flex justify-content-center justify-content-md-end"f>><"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 buttons: [{
                   text: '+ Create Object',
-                  className: 'btn btn-primary mt-3',
+                  className: 'btn btn-primary mt-3 btn-create-object',
                   action: function(e, dt, node, config) {
                     showModal('modalCenter')
                   }
@@ -136,22 +140,131 @@
                 }
             });
 
-            // init_table.on('click', '.select-all', function (e) {
 
-            //     init_table.rows().iterator('row', function(context, index){
-            //         var node = $(this.row(index).data());
-            //         console.log(node[0].name);
-            //     });
+            init_table.on('click', '.select-all', function (e) {
+                var keyname = [];
+                if($(this).is(":checked") == true){
+                    var ex = init_table.rows().iterator('row', function(context, index){
+                        key = $(this.row(index).data());
+                        keyname.push(key.toArray()[0].name)
+                    });
 
-            //     init_table.button().add( 0, {
-            //         text: '<span class="tf-icons ti ti-sm ti-trash-x text-white mb-1"></span>',
-            //         className: 'btn btn-sm btn-danger mt-3',
-            //         action: function ( e, dt, button, config ) {
-            //             dt.ajax.reload();
-            //         },
-            //         // text: 'Reload table'
-            //     } );
-            // });
+                    init_table.button().add(0, {
+                        text: '<span class="tf-icons ti ti-sm ti-trash-x text-white mb-1"></span>',
+                        className: 'btn btn-sm btn-danger mt-3 btn-delete-all',
+                        action: function (e, dt, button, config ) {
+                            e.preventDefault();
+
+                            var url = `/object-storage/${bucket}/${keyname}/delete-all-object`;
+
+                            Swal.fire({
+                                title: 'Delete?',
+                                text: "Are you sure removing this data? this action can't be undone!",
+                                icon: 'question',
+                                customClass: {
+                                    confirmButton: 'btn',
+                                    cancelButton: 'btn btn-label-secondary',
+                                    confirmButtonColor: '#0073C0',
+                                },
+                                showCloseButton: true,
+                                showCancelButton: true,
+                                confirmButtonText: "Confirm",
+                                buttonsStyling: true
+                            }).then(function (result) {
+                                if (result.value) {
+                                    $.ajax({
+                                        url: url,
+                                        type: 'GET',
+                                        dataType: 'json',
+                                    })
+                                    .done(function(res, xhr, meta) {
+                                        toastr.success(res.message, 'Success')
+
+                                        $('#init-table').DataTable().ajax.reload();
+                                    })
+                                    .fail(function(res, error) {
+                                        toastr.error(res.responseJSON.message, 'Gagal')
+                                    })
+                                    .always(function() { });
+                                }
+                            });
+                        },
+                    } );
+                } else {
+                    init_table.buttons('.btn-delete-all').remove()
+                }
+            });
+
+            init_table.on('click', '.dt-checkboxes', function (e) {
+                e.preventDefault()
+                var key = $(this).val()
+
+                if($(this).is(':checked') == true){
+                    keyname.push(key);
+                } else {
+                    keyname = keyname.filter(function( obj ) {
+                      return obj !== key;
+                    });
+                }
+
+                if(keyname.length > 1){
+                    $('.select-all').prop("checked", true)
+                } else {
+                    $('.select-all').prop("checked", false)
+                }
+
+                if(!$(".btn-delete-all")[0] && $('.select-all').is(":checked") == true){
+                        init_table.button().add(0, {
+                            text: '<span class="tf-icons ti ti-sm ti-trash-x text-white mb-1"></span>',
+                            className: 'btn btn-sm btn-danger mt-3 btn-delete-all',
+                            action: function (e, dt, button, config) {
+                                e.preventDefault();
+
+                                var url = `/object-storage/${bucket}/${keyname}/delete-all-object`;
+
+                                Swal.fire({
+                                    title: 'Delete?',
+                                    text: "Are you sure removing this data? this action can't be undone!",
+                                    icon: 'question',
+                                    customClass: {
+                                        confirmButton: 'btn',
+                                        cancelButton: 'btn btn-label-secondary',
+                                        confirmButtonColor: '#0073C0',
+                                    },
+                                    showCloseButton: true,
+                                    showCancelButton: true,
+                                    confirmButtonText: "Confirm",
+                                    buttonsStyling: true
+                                }).then(function (result) {
+                                    if (result.value) {
+                                        $.ajax({
+                                            url: url,
+                                            type: 'GET',
+                                            dataType: 'json',
+                                        })
+                                        .done(function(res, xhr, meta) {
+                                            toastr.success(res.message, 'Success')
+
+                                            $('#init-table').DataTable().ajax.reload();
+                                            keyname = []
+                                        })
+                                        .fail(function(res, error) {
+                                            toastr.error(res.responseJSON.message, 'Gagal')
+                                        })
+                                        .always(function() { });
+                                    }
+                                });
+                            },
+                        });
+
+                } else {
+                    if($('.select-all').is(":checked") == false ){
+                        init_table.buttons('.btn-delete-all').remove()
+                    }
+                }
+
+            });
+
         }
     }();
 </script>

@@ -6,6 +6,19 @@
             margin: 0;
             white-space: nowrap;
         }
+        .btn-delete-all{
+            width: 42px;
+            border-radius: 6px;
+            margin-inline-end: 2px;
+        }
+
+        .btn-create-object{
+            margin-inline-end: 30px;
+        }
+
+        /* .button-gr{
+            padding-right: 10px;
+        } */
     </style>
 @endpush
 

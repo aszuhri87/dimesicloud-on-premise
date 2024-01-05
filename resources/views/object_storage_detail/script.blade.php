@@ -17,12 +17,6 @@
         </div>
         </div>`;
 
-        // $(document).on('click', 'input', function(e){
-        //     e.preventDefault();
-
-        //     console.log($(this).val());
-        // })
-
         $('.btn-save-object').on('click', function(e){
             e.preventDefault();
             e.stopPropagation();

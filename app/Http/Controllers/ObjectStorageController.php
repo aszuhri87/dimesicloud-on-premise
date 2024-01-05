@@ -266,4 +266,55 @@ class ObjectStorageController extends Controller
 
             return \Redirect::to($plain_url);
     }
+
+    public function delete_all_object($bucket, $key = array()){
+        try {
+            if ($key){
+                $keys = explode(",", $key);
+                foreach($keys as $k){
+                    $s3 = S3Connect::client();
+
+                    $result = $s3->deleteObject([
+                        'Bucket' => $bucket,
+                        'Key' => $k
+                    ]);
+                }
+            }
+
+            return response()->json([
+                'code' => 200,
+                'message' => 'Success',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'code' => 500,
+                'message' => 'error',
+            ], 500);
+        }
+    }
+
+    public function delete_all_bucket($bucket){
+        try {
+            if ($bucket){
+                $buckets = explode(",", $bucket);
+                foreach($buckets as $b){
+                    $s3 = S3Connect::client();
+
+                    $result = $s3->deleteBucket([
+                        'Bucket' => $b,
+                    ]);
+                }
+            }
+
+            return response()->json([
+                'code' => 200,
+                'message' => 'Success',
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'code' => 500,
+                'message' => 'error',
+            ], 500);
+        }
+    }
 }

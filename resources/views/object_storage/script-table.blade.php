@@ -38,12 +38,15 @@
                       targets: 0,
                       searchable: false,
                       orderable: false,
-                      render: function () {
-                        return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+                      render: function (data, type, full, meta) {
+                        return `<input type="checkbox" class="dt-checkboxes form-check-input" value="${full['name']}">`;
                       },
                       checkboxes: {
                         selectRow: true,
-                        selectAllRender: '<input type="checkbox" class="form-check-input">'
+                        selectAllRender:  function (data, type, full, meta){
+                            return `<input type="checkbox" class="select-all form-check-input" value="[${data}]">`;
+                        }
+
                       }
                     },
                     {

@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth-middleware']], function () {
     Route::get('object-storage/{bucket}/{key}/delete-object', [ObjectStorageController::class, 'delete_object']);
     Route::get('object-storage/{bucket}/{key}/share-object', [ObjectStorageController::class, 'share_object']);
     Route::get('object-storage/{bucket}/{key}/show-object', [ObjectStorageController::class, 'show_object']);
-
+    Route::get('object-storage/{bucket}/{key}/delete-all-object', [ObjectStorageController::class, 'delete_all_object']);
+    Route::get('object-storage/{bucket}/delete-all-bucket', [ObjectStorageController::class, 'delete_all_bucket']);
 
 });
