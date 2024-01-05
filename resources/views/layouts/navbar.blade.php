@@ -18,6 +18,8 @@
             CEPH
         @elseif (strpos(Request::url(), 'object-storage'))
             Object Storage
+        @elseif (strpos(Request::url(), 'management-access'))
+            Management Access
         @else
 
         @endif
