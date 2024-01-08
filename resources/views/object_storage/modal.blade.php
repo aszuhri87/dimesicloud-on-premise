@@ -16,9 +16,6 @@
                                     <div class="col-md mb-md-0 mb-2">
                                             <label for="name" class="form-label">Bucket Name</label>
                                             <input name="name" class="form-control" type="text" id="name" placeholder="Enter bucket name ..."/>
-                                            <br>
-                                            {{-- <label for="sshkey" class="form-label">SSH Key</label>
-                                            <textarea name="sshkey" class="form-control" type="text" id="sshkey" placeholder="Enter SSH key ..." cols="30" rows="7"></textarea> --}}
                                     </div>
                                 </div>
                             </div>
