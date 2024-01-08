@@ -335,7 +335,7 @@ class ObjectStorageController extends Controller
         } catch (\Throwable $th) {
             return response()->json([
                 'code' => 404,
-                'message' => 'Invalid bucket name!',
+                'message' => 'Not Found!',
             ], 404);
         }
     }
