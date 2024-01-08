@@ -62,7 +62,8 @@
             $('.form-share').attr('method','GET');
 
             $(document).on('hide.bs.modal','#modalShare', function(event){
-                location.reload();
+                $('input').val()
+                $('#url-place').remove()
             });
 
             $(document).on('click', '.btn-copy-url', function(e) {
@@ -115,8 +116,8 @@
                 })
                .done(function(res, xhr, meta) {
                     $('.generated-link').html(`
+                        <div id="url-place">
                         <hr>
-                        <div>
                         <label for="presigned_url"> Url</label>
                         <textarea class="form-control mb-2" name="presigned_url" id="presigned_url" cols="50" rows="10">${res.data.presigned_url}</textarea>
                         <a href="#" data-url="${res.data.presigned_url}" class="btn btn-sm btn-label-primary btn-icon p-1 btn-copy-presigned" title="Copy URL">
