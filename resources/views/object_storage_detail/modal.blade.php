@@ -57,7 +57,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <h2 class="text-center">Share project</h2>
+                        <h2 class="text-center">Share Object</h2>
                         <form name="form-submit" class="form-share" method="POST" id="form-share"
                             enctype="multipart/form-data">
                             @csrf
