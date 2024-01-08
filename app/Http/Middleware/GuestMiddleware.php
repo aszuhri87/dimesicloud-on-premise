@@ -17,7 +17,7 @@ class GuestMiddleware
     public function handle($request, Closure $next)
     {
         if(Session::get('login')){
-            return redirect('/dashboard');
+            return redirect('/dashboard/index');
         }else{
             return $next($request);
         }
