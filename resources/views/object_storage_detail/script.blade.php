@@ -67,7 +67,7 @@
 
             $(document).on('click', '.btn-copy-url', function(e) {
                 e.preventDefault()
-                var textToCopy = $(this).attr('data-ssh');
+                var textToCopy = $(this).attr('data-url');
 
                 if (textToCopy != null || textToCopy != " " || textToCopy != ""){
                     toastr.success("URL Copied");
@@ -84,9 +84,7 @@
 
         $(document).on('click', '.btn-copy-presigned', function(e) {
                 e.preventDefault()
-                var textToCopy = $(this).attr('data-ssh');
-
-                console.log(textToCopy);
+                var textToCopy = $(this).attr('data-url');
 
                 var tempTextarea = $('<textarea>');
                     $('#modalShare').append(tempTextarea);
@@ -121,7 +119,7 @@
                         <div>
                         <label for="presigned_url"> Url</label>
                         <textarea class="form-control mb-2" name="presigned_url" id="presigned_url" cols="50" rows="10">${res.data.presigned_url}</textarea>
-                        <a href="#" data-ssh="${res.data.presigned_url}" class="btn btn-sm btn-label-primary btn-icon p-1 btn-copy-presigned" title="Copy URL">
+                        <a href="#" data-url="${res.data.presigned_url}" class="btn btn-sm btn-label-primary btn-icon p-1 btn-copy-presigned" title="Copy URL">
                             <span class="svg-icon svg-icon-md power-btn-action">
                                 <i class="menu-icon tf-icons ti ti-xs ti-copy text-primary m-2" ></i>
                             </span>
