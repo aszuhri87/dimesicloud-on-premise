@@ -322,10 +322,9 @@ class ObjectStorageController extends Controller
         try {
             $s3 = S3Connect::client();
 
-            $result = $s3->getBucketAcl([
+            $result = $s3->headBucket([
                 'Bucket' => $bucket,
             ]);
-
 
             return response()->json([
                 'code' => 200,
