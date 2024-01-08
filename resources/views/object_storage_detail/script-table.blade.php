@@ -207,7 +207,7 @@
                     });
                 }
 
-                if(keyname.length > 1){
+                if(keyname.length > 0){
                     $('.select-all').prop("checked", true)
                 } else {
                     $('.select-all').prop("checked", false)

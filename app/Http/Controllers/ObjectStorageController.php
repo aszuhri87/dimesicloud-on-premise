@@ -317,4 +317,26 @@ class ObjectStorageController extends Controller
             ], 500);
         }
     }
+
+    public function confirm_delete($bucket){
+        try {
+            $s3 = S3Connect::client();
+
+            $result = $s3->getBucketAcl([
+                'Bucket' => $bucket,
+            ]);
+
+
+            return response()->json([
+                'code' => 200,
+                'message' => 'Success',
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'code' => 404,
+                'message' => 'Invalid bucket name!',
+            ], 404);
+        }
+    }
 }
