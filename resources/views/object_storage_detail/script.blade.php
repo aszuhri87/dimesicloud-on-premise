@@ -142,7 +142,7 @@
                Swal.fire({
                    title: 'Delete?',
                    text: "Are you sure removing this data? this action can't be undone!",
-                   icon: 'question',
+                   icon: 'warning',
                    customClass: {
                        confirmButton: 'btn',
                        cancelButton: 'btn btn-label-secondary',

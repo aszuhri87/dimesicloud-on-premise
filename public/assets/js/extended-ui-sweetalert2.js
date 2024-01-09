@@ -326,7 +326,7 @@
       Swal.fire({
         title: 'Question!',
         text: ' You clicked the button!',
-        icon: 'question',
+        icon: 'warning',
         customClass: {
           confirmButton: 'btn btn-primary'
         },

@@ -2,7 +2,6 @@
     var vmTable = function() {
         var init_table;
 
-        var keyname = [];
         var select_all = false;
         var length = 0;
 
@@ -140,14 +139,83 @@
                 }
             });
 
+            init_table.on('click', '.dt-checkboxes', function (e) {
+                e.preventDefault()
+                var keyname = [];
+                var key = $(this).val()
+
+                if($(this).is(':checked') == true){
+                    keyname.push(key);
+                } else {
+                    keyname = keyname.filter(function( obj ) {
+                      return obj !== key;
+                    });
+                }
+
+                if(!$(".btn-delete-all")[0]){
+                        init_table.button().add(0, {
+                            text: '<span class="tf-icons ti ti-sm ti-trash-x text-white mb-1"></span>',
+                            className: 'btn btn-sm btn-danger mt-3 btn-delete-all',
+                            action: function (e, dt, button, config) {
+                                e.preventDefault();
+
+                                var url = `/object-storage/${bucket}/${keyname}/delete-all-object`;
+
+                                Swal.fire({
+                                    title: 'Delete?',
+                                    text: "Are you sure removing this data? this action can't be undone!",
+                                    icon: 'warning',
+                                    customClass: {
+                                        confirmButton: 'btn',
+                                        cancelButton: 'btn btn-label-secondary',
+                                        confirmButtonColor: '#0073C0',
+                                    },
+                                    showCloseButton: true,
+                                    showCancelButton: true,
+                                    confirmButtonText: "Confirm",
+                                    buttonsStyling: true
+                                }).then(function (result) {
+                                    if (result.value) {
+                                        $.ajax({
+                                            url: url,
+                                            type: 'GET',
+                                            dataType: 'json',
+                                        })
+                                        .done(function(res, xhr, meta) {
+                                            toastr.success(res.message, 'Success')
+
+                                            $('#init-table').DataTable().ajax.reload();
+                                            keyname = []
+                                        })
+                                        .fail(function(res, error) {
+                                            toastr.error(res.responseJSON.message, 'Gagal')
+                                        })
+                                        .always(function() { });
+                                    }
+                                });
+                            },
+                        });
+
+
+                        $('.select-all').prop("checked", true)
+
+                } else {
+                    if($('.select-all').is(":checked") == false ){
+                        init_table.buttons('.btn-delete-all').remove()
+                    }
+                }
+
+            });
 
             init_table.on('click', '.select-all', function (e) {
                 var keyname = [];
-                if($(this).is(":checked") == true){
+                if($(this).is(":checked") == true && !$(".btn-delete-all")[0]){
                     var ex = init_table.rows().iterator('row', function(context, index){
                         key = $(this.row(index).data());
                         keyname.push(key.toArray()[0].name)
                     });
+
+
 
                     init_table.button().add(0, {
                         text: '<span class="tf-icons ti ti-sm ti-trash-x text-white mb-1"></span>',
@@ -160,7 +228,7 @@
                             Swal.fire({
                                 title: 'Delete?',
                                 text: "Are you sure removing this data? this action can't be undone!",
-                                icon: 'question',
+                                icon: 'warning',
                                 customClass: {
                                     confirmButton: 'btn',
                                     cancelButton: 'btn btn-label-secondary',
@@ -195,75 +263,6 @@
                 }
             });
 
-            init_table.on('click', '.dt-checkboxes', function (e) {
-                e.preventDefault()
-                var key = $(this).val()
-
-                if($(this).is(':checked') == true){
-                    keyname.push(key);
-                } else {
-                    keyname = keyname.filter(function( obj ) {
-                      return obj !== key;
-                    });
-                }
-
-                if(keyname.length > 0){
-                    $('.select-all').prop("checked", true)
-                } else {
-                    $('.select-all').prop("checked", false)
-                }
-
-                if(!$(".btn-delete-all")[0] && $('.select-all').is(":checked") == true){
-                        init_table.button().add(0, {
-                            text: '<span class="tf-icons ti ti-sm ti-trash-x text-white mb-1"></span>',
-                            className: 'btn btn-sm btn-danger mt-3 btn-delete-all',
-                            action: function (e, dt, button, config) {
-                                e.preventDefault();
-
-                                var url = `/object-storage/${bucket}/${keyname}/delete-all-object`;
-
-                                Swal.fire({
-                                    title: 'Delete?',
-                                    text: "Are you sure removing this data? this action can't be undone!",
-                                    icon: 'question',
-                                    customClass: {
-                                        confirmButton: 'btn',
-                                        cancelButton: 'btn btn-label-secondary',
-                                        confirmButtonColor: '#0073C0',
-                                    },
-                                    showCloseButton: true,
-                                    showCancelButton: true,
-                                    confirmButtonText: "Confirm",
-                                    buttonsStyling: true
-                                }).then(function (result) {
-                                    if (result.value) {
-                                        $.ajax({
-                                            url: url,
-                                            type: 'GET',
-                                            dataType: 'json',
-                                        })
-                                        .done(function(res, xhr, meta) {
-                                            toastr.success(res.message, 'Success')
-
-                                            $('#init-table').DataTable().ajax.reload();
-                                            keyname = []
-                                        })
-                                        .fail(function(res, error) {
-                                            toastr.error(res.responseJSON.message, 'Gagal')
-                                        })
-                                        .always(function() { });
-                                    }
-                                });
-                            },
-                        });
-
-                } else {
-                    if($('.select-all').is(":checked") == false ){
-                        init_table.buttons('.btn-delete-all').remove()
-                    }
-                }
-
-            });
 
         }
     }();
