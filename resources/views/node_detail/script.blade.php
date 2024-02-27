@@ -281,12 +281,8 @@
                     },
                     stroke: {
                         show: true,
-<<<<<<< Updated upstream
-                        curve: 'straight'
-=======
                         curve: 'straight',
                         width: 1.5
->>>>>>> Stashed changes
                     },
                     legend: {
                         show: true,
